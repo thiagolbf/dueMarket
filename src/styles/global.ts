@@ -12,6 +12,8 @@ export const GlobalStyle = createGlobalStyle`
 
 :root {
 
+    font-size: 16px;
+    
     /*green pallet*/
     --green-800: #10796F;
 
@@ -24,6 +26,9 @@ export const GlobalStyle = createGlobalStyle`
     --grey-600: #333333;
     --grey-300: #828282;
     --grey-100: #E0E0E0;
+    --grey-50: #F2F2F2;
+    --grey-0: #F5F5F5;
+
 
     /*red pallet*/
 
