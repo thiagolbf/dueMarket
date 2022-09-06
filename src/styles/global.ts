@@ -21,7 +21,7 @@ export const GlobalStyle = createGlobalStyle`
     --blue-500: #416CA6;
     --blue-800: #283040;
 
-    /*grey pallet*/
+    /*grey pallet**/
     --grey-900: #0D0D0D;
     --grey-600: #333333;
     --grey-300: #828282;
