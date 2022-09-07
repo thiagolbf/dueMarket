@@ -14,7 +14,7 @@ Quando for usar este input no formulário, o modo como deve ser input é o segui
 export const InputForm = ({label,...rest}:InputFormProps) => {
 return(
     <InputFormStyle>
-        <input type="text" placeholder=" "/>
+        <input type="text" placeholder=" "  {...rest}/>
         <label >{label}</label>       
     </InputFormStyle>
 )
