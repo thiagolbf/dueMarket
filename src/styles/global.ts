@@ -38,6 +38,10 @@ export const GlobalStyle = createGlobalStyle`
     --sucess: #168821;
     --information: #155BCB;
 
+    /*drop-shadow pallet*/
+
+    --drop-shadow: rgba(0, 0, 0, 0.25);
+
      /*fonts*/
 
     --font-noto-sans:  'Noto Sans', sans-serif;
