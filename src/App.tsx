@@ -6,7 +6,6 @@ export const App = () => {
     <>
       <GlobalStyle />
       <RoutesComponent />
-      <div>TESTE</div>
     </>
   );
 };
