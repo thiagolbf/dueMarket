@@ -23,8 +23,17 @@ interface UserData {
 
 export const RegisterPage = () => {
   const schema = yup.object().shape({
+    name: yup.string().required("Campo obrigatório"),
+    userType: yup.string().required("Campo obrigatório"),
+    img: yup.string().required("Campo obrigatório"),
+    document: yup.string().required("Campo obrigatório"),
+    CEP: yup.string().required("Campo obrigatório"),
     email: yup.string().required("Campo obrigatório"),
     password: yup.string().required("Campo obrigatório"),
+    passwordConfirm: yup
+      .string()
+      .oneOf([yup.ref("password")], "Senha diferentes")
+      .required("Campo obrigatório"),
   });
 
   const {
