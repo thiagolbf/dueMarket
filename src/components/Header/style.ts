@@ -14,10 +14,9 @@ export const HeaderFix = createGlobalStyle`
 `
 
 export const Header = styled.header`
-    background-color: #10796F;
-    color: #f5f5f5;
+    background-color: var(--green-800);
+    color: var(--grey-0);
     padding: 30px;
-    box-sizing: border-box;
     display: flex;
     height: 105px;
     position: fixed;
@@ -40,7 +39,7 @@ export const Mobile = styled.div<MobileProps>`
     position: relative;
     cursor: pointer;
     span{
-        background-color: #f5f5f5;
+        background-color: var(--grey-0);
         height: 9px;
         width: 40px;
         position: absolute;
@@ -83,7 +82,7 @@ export const Mobile = styled.div<MobileProps>`
 
 export const Nav = styled.nav<MobileProps>`
     background-color: inherit;
-    height: ${props=>props.active ? 0 : '120px'};
+    height: ${props=>props.active ? 0 : '108px'};
     width: 100vw;
     overflow: hidden;
     position: fixed;
@@ -91,7 +90,7 @@ export const Nav = styled.nav<MobileProps>`
     left: 0;
     transition: all .5s;
     div{
-        box-shadow: rgb(0, 0, 0) 0px 5px 10px;
+        box-shadow: var(--drop-shadow) 0px 5px 10px;
         width: 100%;
         display: flex;
         justify-content: center;

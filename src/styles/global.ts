@@ -21,10 +21,11 @@ export const GlobalStyle = createGlobalStyle`
     --blue-500: #416CA6;
     --blue-800: #283040;
 
-    /*grey pallet*/
+    /*grey pallet**/
     --grey-900: #0D0D0D;
     --grey-600: #333333;
     --grey-300: #828282;
+    --grey-200: #D9D9D9;
     --grey-100: #E0E0E0;
     --grey-50: #F2F2F2;
     --grey-0: #F5F5F5;
@@ -36,6 +37,10 @@ export const GlobalStyle = createGlobalStyle`
     --warning: #FFCD07;
     --sucess: #168821;
     --information: #155BCB;
+
+    /*drop-shadow pallet*/
+
+    --drop-shadow: rgba(0, 0, 0, 0.25);
 
      /*fonts*/
 
