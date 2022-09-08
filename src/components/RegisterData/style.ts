@@ -15,7 +15,7 @@ export const RegisterData = styled.div<RegisterProps>`
     z-index: 50;
     display: block;
     padding: 20px 10px;
-    background-color: #e0e0e0;
+    background-color: var(--grey-100);
     transition: all .5s;
     >div:nth-child(1){
         display: flex;
@@ -23,13 +23,13 @@ export const RegisterData = styled.div<RegisterProps>`
         align-items: center;
         margin-bottom: 25px;
         h2{
-            font-size: 24px;
+            font-size: 1.5rem;
             font-family: bold;
         }
         button{
             height: 24px;
             cursor: pointer;
-            font-size: 24px;
+            font-size: 1.5rem;
             background-color: transparent;
             border: none;
         }
@@ -39,7 +39,7 @@ export const RegisterData = styled.div<RegisterProps>`
         flex-direction: column;
         gap: 20px;
         p{
-            font-size: 20px;
+            font-size: 1.25rem;
             font-weight: 600;
             text-align: center;
         }
@@ -50,9 +50,9 @@ export const RegisterData = styled.div<RegisterProps>`
         gap: 20px;
         input{
             height: 50px;
-            background-color: #f2f2f2;
+            background-color: var(--grey-50);
             border: 2px solid var(--grey-600);
-            font-size: 20px;
+            font-size: 1.25rem;
             border-radius: 10px;
             color: var(--grey-900);
 
@@ -67,10 +67,10 @@ export const RegisterData = styled.div<RegisterProps>`
             button{
                 background-color: var(--grey-300);
                 width: 49.5%;
-                font-size: 20px;
+                font-size: 1.25rem;
                 border-radius: 10px;
                 color: #f2f2f2;
-                box-shadow: 5px 5px 10px #0d0d0d70;
+                box-shadow: 5px 5px 10px var(--drop-shadow);
                 padding: 15px 0;
             }
             button:nth-child(1){
