@@ -12,6 +12,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   fSize16?: boolean;
   fSize18?: boolean;
   fInter?: boolean;
+  shadow?: boolean;
 }
 
 export const Button = ({
@@ -24,6 +25,7 @@ export const Button = ({
   fSize16 = false,
   fSize18 = false,
   fInter = false,
+  shadow = false,
   ...rest
 }: ButtonProps) => {
   return (
@@ -36,6 +38,7 @@ export const Button = ({
       fSize16={fSize16}
       fSize18={fSize18}
       fInter={fInter}
+      shadow={shadow}
       type="button"
       {...rest}
     >
