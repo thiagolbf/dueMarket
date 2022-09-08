@@ -1,3 +1,9 @@
+import { ListaDeCategoria } from "../../components/ListaDeCategoria";
+
+
+
 export const HomePage = () => {
-  return <div>HOME</div>;
+  return <div>
+    <ListaDeCategoria/>
+  </div>;
 };
