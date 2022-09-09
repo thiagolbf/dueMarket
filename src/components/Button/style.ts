@@ -9,6 +9,7 @@ interface ButtonProps {
   fSize16: boolean;
   fSize18: boolean;
   fInter: boolean;
+  shadow: boolean;
 }
 
 export const Container = styled.button<ButtonProps>`
@@ -65,6 +66,8 @@ export const Container = styled.button<ButtonProps>`
     props.fInter ? "var(--font-inter)" : "var(--font-noto-sans)"};
 
   border-radius: 5px;
+
+  box-shadow: ${(props) => (props.shadow ? "var(--drop-shadow)" : "none")};
 
   svg {
     display: ${(props) => (props.pencilButton ? "block" : "none")};
