@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 export const CartProduct = styled.section`
     width: 300px;
-    height: max-content;
     border: 2px solid var(--grey-300);
     border-radius: 10px;
+    background-color: var(--grey-100);
     transition: all .5s;
     &:hover{
         transform: scale(1.025);
@@ -17,7 +17,7 @@ export const CartProduct = styled.section`
         justify-content: center;
         align-items: center;
         position: relative;
-        background-color: var(--grey-100);
+        background-color: white;
         button{
             position: absolute;
             top: 5px;
