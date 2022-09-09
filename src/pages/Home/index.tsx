@@ -1,3 +1,8 @@
+import { InputForm } from "../../components/InputForm";
+
 export const HomePage = () => {
-  return <div>HOME</div>;
+  return <div>
+    
+    <InputForm  label="Nome" error={true} />
+  </div>;
 };
