@@ -1,26 +1,17 @@
 import styled from "styled-components";
 
+interface InputFormStyleProps {
+  error: boolean;
+}
 
-export const InputFormStyle = styled.div`
+export const InputFormStyle = styled.div<InputFormStyleProps>`
   height: 50px;
   width: 100%;
   position: relative;
   border-radius: 8px;
   background-color: #f2f2f2;
-
-
-interface InputFormStyleProps {
-    error:boolean;
-}
-
-export const InputFormStyle = styled.div<InputFormStyleProps>`
-    height: 50px;
-    width: 100%;
-    position: relative;
-    border-radius:8px;
-    background-color: #f2f2f2;
-    border: 1px solid ${props => props.error ? "var(--negative)" : "transparent"};
-
+  border: 1px solid
+    ${(props) => (props.error ? "var(--negative)" : "transparent")};
 
   input {
     width: 100%;
@@ -52,21 +43,19 @@ export const InputFormStyle = styled.div<InputFormStyleProps>`
     color: var(--grey-300);
     font-size: 16px;
   }
+
+  label {
+    border-radius: 5px;
+    background-color: inherit;
+    padding: 3px 5px;
+    top: 50%;
+    left: 16px;
+    position: absolute;
+    z-index: 10;
+    transform: translate(0, -50%);
+    transition: all 0.3s;
+    color: var(--grey-300);
+    font-size: 16px;
+    cursor: text;
+  }
 `;
-
-    label{
-        border-radius: 5px;
-        background-color: inherit;
-        padding: 3px 5px;
-        top:50%;
-        left:16px;
-        position: absolute;
-        z-index:10;
-        transform: translate(0,-50%);
-        transition: all 0.3s;
-        color: var(--grey-300);
-        font-size: 16px;
-        cursor: text;
-    }
-`
-
