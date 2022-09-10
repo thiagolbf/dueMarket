@@ -3,16 +3,20 @@ import { forwardRef,
     InputHTMLAttributes, } from "react";
 import { InputFormStyle } from "./style";
 
+
 interface InputFormProps extends InputHTMLAttributes<HTMLInputElement>{
     label: string;
     error: boolean;
    
+
 }
 
 /* Instrução do label
 Quando for usar este input no formulário, o modo como deve ser input é o seguinte:
 <InputForm label="<o nome do label que se deseja colocar>"/>
 */
+
+
 
 /* Instrução do Error
 O "error" está com boolean de modo que no styled se ele for true, aparece a borda vermelha.
@@ -34,3 +38,4 @@ return(
 }
 
 export const InputForm = forwardRef(InputBase);
+
