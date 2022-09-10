@@ -24,20 +24,23 @@ export const ProductsContext = createContext<ProductsProviderData>({} as Product
 
 export const ProductsProvider = ({ children }: ProductsProviderProps) => {
   const [products, setProducts] = useState<Products[]>([] as Products[])
-  const [productsCategory, setProductsCategory] = useState<Products[]>([] as Products[])
-  const [productsName, setProductsName] = useState<Products[]>([] as Products[])
-  const [productsMarket, setProductsMarket] = useState<Products[]>([] as Products[])
+  const [filtredProducts, setFiltredProducts] = useState<Products[]>([] as Products[])
 
-  useEffect(()=>{
-    getProduct()
-  },[])
-
-  const getProduct = () => {
-    dueMarketApi.get('/products')
-    .then((res)=>setProducts(res.data))
+  const getProductByMarket = async (userId: number) => {
+    return dueMarketApi.get(`/products?userId=${userId}`)
+    .then((res)=> res.data)
     .catch((error)=>console.log(error))
   }
 
+  const createProduct = (userId: number, token: string, data: Products) => {
+    const product = {...data, userId}
+    dueMarketApi.post(`/products`, product, {headers: {Authorization: `Bearer ${token}`}})
+    .then((res)=>res.data)
+    .catch((error)=>console.log(error))
+  }
+
+  getProductByMarket(1)
+  console.log(getProductByMarket(1))
   return <ProductsContext.Provider value={{products}}>
       {children}
     </ProductsContext.Provider>
