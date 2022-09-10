@@ -1,3 +1,9 @@
+
+import * as yup from "yup";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useEffect, useState } from "react";
+
 import {
   Container,
   BackgroundContainer,
@@ -6,6 +12,7 @@ import {
   TextContainer,
   HeaderBox,
 } from "./style";
+
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { FormMarket } from "../../components/FormMarket";
@@ -16,6 +23,12 @@ export const RegisterPage = () => {
 
   const [userType, setUserType] = useState<boolean>(false);
 
+
+
+
+  const registerSubmit = (userdata: UserData) => {
+    console.log(userdata);
+  };
   return (
     <Container>
       <BackgroundContainer>
@@ -28,12 +41,15 @@ export const RegisterPage = () => {
           </p>
         </TextContainer>
         <FormContainer>
+
           <HeaderBox>
             <button onClick={() => navigate("/login")}>Voltar</button>
             <h2>Cadastro</h2>
             <button></button>
           </HeaderBox>
           {userType ? <FormMarket /> : <FormUser />}
+
+        
         </FormContainer>
         <GreenBox />
       </BackgroundContainer>
