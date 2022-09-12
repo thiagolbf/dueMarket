@@ -1,10 +1,12 @@
 import { createContext, ReactNode } from "react";
 import { dueMarketApi } from "../../services";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 interface UsersProviderData {
   postUser: (data: UserSubmitData) => void;
   postUserMarket: (data: MarketSubmitData) => void;
+  postLogin: (data: SignInData) => void;
 }
 
 interface MarketSubmitData {
@@ -38,11 +40,18 @@ interface UsersProviderProps {
   children: ReactNode;
 }
 
+interface SignInData {
+  email: string;
+  password: string;
+}
+
 export const UsersContext = createContext<UsersProviderData>(
   {} as UsersProviderData
 );
 
 export const UsersProvider = ({ children }: UsersProviderProps) => {
+  const navigate = useNavigate();
+
   const postUserMarket = (data: MarketSubmitData) => {
     dueMarketApi
       .post("users", data)
@@ -69,8 +78,21 @@ export const UsersProvider = ({ children }: UsersProviderProps) => {
       });
   };
 
+  const postLogin = (data: SignInData) => {
+    dueMarketApi
+      .post("login", data)
+      .then((res) => {
+        toast.success("Login feito com sucesso!");
+        console.log(res);
+      })
+      .catch((res) => {
+        toast.error("Erro ao fazer login, tentar outro email!");
+        console.log(res);
+      });
+  };
+
   return (
-    <UsersContext.Provider value={{ postUserMarket, postUser }}>
+    <UsersContext.Provider value={{ postUserMarket, postUser, postLogin }}>
       {children}
     </UsersContext.Provider>
   );
