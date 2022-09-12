@@ -9,16 +9,21 @@ export const HeaderFix = createGlobalStyle`
         -webkit-tap-highlight-color: transparent;
     }
     body{
-        margin-top: 105px;
+        margin-top: 60px;
+    }
+    @media screen and (min-width: 720px) {
+        body{
+            margin-top: 105px;
+        }
     }
 `
 
 export const Header = styled.header`
     background-color: var(--green-800);
     color: var(--grey-0);
-    padding: 30px;
+    padding: 10px 20px;
     display: flex;
-    height: 105px;
+    height: 60px;
     position: fixed;
     top: 0;
     left: 0;
@@ -27,21 +32,28 @@ export const Header = styled.header`
     justify-content: space-between;
     align-items: center;
     h1{
-        font-size: 32px;
+        font-size: 1.25rem;
         font-weight: 700;
+        font-family: var(--font-inter);
+    }
+    @media screen and (min-width: 720px) {
+        height: 105px;
+        h1{
+            font-size: 2rem;
+        }
     }
 `
 export const Mobile = styled.div<MobileProps>`
     display: flex;
     flex-direction: column;
-    height: 40px;
-    width: 40px;
+    height: 20px;
+    width: 20px;
     position: relative;
     cursor: pointer;
     span{
         background-color: var(--grey-0);
-        height: 9px;
-        width: 40px;
+        height: 4px;
+        width: 20px;
         position: absolute;
         left: 0;
         border-radius: 10px;
@@ -53,10 +65,10 @@ export const Mobile = styled.div<MobileProps>`
                 top: 0%;
             }
             span:nth-child(2){
-                top: calc(50% - 4px);
+                top: calc(50% - 2px);
             }
             span:nth-child(3){
-                top: calc(100% - 10px);
+                top: calc(100% - 4px);
             }
         ` 
         : 
@@ -82,11 +94,11 @@ export const Mobile = styled.div<MobileProps>`
 
 export const Nav = styled.nav<MobileProps>`
     background-color: inherit;
-    height: ${props=>props.active ? 0 : '108px'};
+    height: ${props=>props.active ? 0 : '99px'};
     width: 100vw;
     overflow: hidden;
     position: fixed;
-    top: 105px;
+    top: 60px;
     left: 0;
     transition: all .5s;
     div{
@@ -96,28 +108,27 @@ export const Nav = styled.nav<MobileProps>`
         justify-content: center;
         button{
             padding: 5px;
-            color: #f5f5f5;
+            color: var(--grey-0);
             cursor: pointer;
             font-weight: 600;
-            font-size: 20px;
+            font-size: 1rem;
             background-color: inherit;
             border: none;
             display: flex;
             flex-direction: column;
             align-items: center;
+            font-family: var(--font-inter);
             ::after{
                 content: '';
                 height: 3px;
                 transition: all .2s;
                 border-radius: 10px;
                 width: 0;
-                background-color: #f5f5f5;
+                background-color: var(--grey-0);
                 
             }
-            :hover{
-                ::after{
-                    width: 100%;
-                }
+            :hover::after{
+                width: 100%;
             }
         }
     }
