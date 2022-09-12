@@ -4,6 +4,9 @@ import { toast } from "react-toastify"
 
 interface ProductsProviderData {
   products: Products[]
+  getProductByMarket: (userId: number) => void 
+  createProduct: (userId: number, token: string, data: Products) => void 
+  deleteProduct: (toekn: string, id: number) => void 
 }
 
 interface ProductsProviderProps {
@@ -25,11 +28,10 @@ export const ProductsContext = createContext<ProductsProviderData>({} as Product
 
 export const ProductsProvider = ({ children }: ProductsProviderProps) => {
   const [products, setProducts] = useState<Products[]>([] as Products[])
-  const [filtredProducts, setFiltredProducts] = useState<Products[]>([] as Products[])
-
-  const getProductByMarket = async (userId: number) => {
-    return dueMarketApi.get(`/products?userId=${userId}`)
-    .then((res)=> console.log(res.data))
+  
+  const getProductByMarket = (userId: number) => {
+    dueMarketApi.get(`/products?userId=${userId}`)
+    .then((res)=> setProducts(res.data))
     .catch((error)=>console.log(error))
   }
 
@@ -38,7 +40,7 @@ export const ProductsProvider = ({ children }: ProductsProviderProps) => {
     dueMarketApi.post(`/products`, product, {headers: {Authorization: `Bearer ${token}`}})
     .then((res)=>{
       toast.success("Adicionado com sucesso")
-      return res.data
+      setProducts(res.data)
     })
     .catch((error)=>toast.error("Erro ao adicionar o produto"))
   }
@@ -46,12 +48,18 @@ export const ProductsProvider = ({ children }: ProductsProviderProps) => {
   const deleteProduct = (token: string, id: number) => {
     dueMarketApi.delete(`/products/${id}`, 
     {headers: {Authorization: `Bearer ${token}`}})
-    .then(() => toast.success("Deletado com sucesso"))
+    .then((res) => {
+      setProducts(res.data)
+      toast.success("Deletado com sucesso")
+    })
     .catch(()=>toast.error("Erro ao deletar o produto"))
   }
-  getProductByMarket(1)
-  console.log(getProductByMarket(1))
-  return <ProductsContext.Provider value={{products}}>
+  return <ProductsContext.Provider value={{
+      products, 
+      getProductByMarket, 
+      deleteProduct, 
+      createProduct
+    }}>
       {children}
     </ProductsContext.Provider>
 };
