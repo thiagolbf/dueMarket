@@ -1,48 +1,21 @@
-import * as yup from "yup";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
 import {
   Container,
   BackgroundContainer,
-  Form,
   FormContainer,
   GreenBox,
   TextContainer,
+  HeaderBox,
 } from "./style";
 
-interface UserData {
-  name: string;
-  userType: string;
-  img: string;
-  document: string;
-  CEP: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-}
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { FormMarket } from "../../components/FormMarket";
+import { FormUser } from "../../components/FormUser";
 
 export const RegisterPage = () => {
-  const schema = yup.object().shape({
-    name: yup.string().required("Campo obrigatório"),
-    userType: yup.string().required("Campo obrigatório"),
-    img: yup.string().required("Campo obrigatório"),
-    document: yup.string().required("Campo obrigatório"),
-    CEP: yup.string().required("Campo obrigatório"),
-    email: yup.string().required("Campo obrigatório"),
-    password: yup.string().required("Campo obrigatório"),
-    passwordConfirm: yup
-      .string()
-      .oneOf([yup.ref("password")], "Senha diferentes")
-      .required("Campo obrigatório"),
-  });
+  const navigate = useNavigate();
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<UserData>({ resolver: yupResolver(schema) });
-
-  const registerSubmit = (userdata: UserData) => {};
+  const [userType, setUserType] = useState<boolean>(false);
 
   return (
     <Container>
@@ -56,27 +29,12 @@ export const RegisterPage = () => {
           </p>
         </TextContainer>
         <FormContainer>
-          <button>Voltar</button>
-          <h2>Cadastro</h2>
-          <Form onSubmit={handleSubmit(registerSubmit)}>
-            <input type="text" {...register("name")} placeholder="teste" />
-            <input type="text" {...register("userType")} placeholder="teste" />
-            <input type="text" {...register("img")} placeholder="teste" />
-            <input type="text" {...register("document")} placeholder="teste" />
-            <input type="text" {...register("CEP")} placeholder="teste" />
-            <input type="text" {...register("email")} placeholder="teste" />
-            <input
-              type="password"
-              {...register("password")}
-              placeholder="teste"
-            />
-            <input
-              type="password"
-              {...register("confirmPassword")}
-              placeholder="teste"
-            />
-            <button>Cadastrar</button>
-          </Form>
+          <HeaderBox>
+            <button onClick={() => navigate("/login")}>Voltar</button>
+            <h2>Cadastro</h2>
+            <button></button>
+          </HeaderBox>
+          {userType ? <FormMarket /> : <FormUser />}
         </FormContainer>
         <GreenBox />
       </BackgroundContainer>

@@ -1,3 +1,4 @@
+
 import { HeaderComponent } from "../../components/Header";
 import { InputSearch } from "../../components/InputSearch";
 import { Box, Container } from "./style";
@@ -37,4 +38,5 @@ export const HomePage = () => {
       </Container>
     </>
   );
-};
+
+
