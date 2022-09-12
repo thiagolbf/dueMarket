@@ -1,5 +1,6 @@
 import { createContext, ReactNode, useEffect, useState } from "react";
 import { dueMarketApi } from "../../services";
+import { toast } from "react-toastify"
 
 interface ProductsProviderData {
   products: Products[]
@@ -28,17 +29,26 @@ export const ProductsProvider = ({ children }: ProductsProviderProps) => {
 
   const getProductByMarket = async (userId: number) => {
     return dueMarketApi.get(`/products?userId=${userId}`)
-    .then((res)=> res.data)
+    .then((res)=> console.log(res.data))
     .catch((error)=>console.log(error))
   }
 
   const createProduct = (userId: number, token: string, data: Products) => {
     const product = {...data, userId}
     dueMarketApi.post(`/products`, product, {headers: {Authorization: `Bearer ${token}`}})
-    .then((res)=>res.data)
-    .catch((error)=>console.log(error))
+    .then((res)=>{
+      toast.success("Adicionado com sucesso")
+      return res.data
+    })
+    .catch((error)=>toast.error("Erro ao adicionar o produto"))
   }
 
+  const deleteProduct = (token: string, id: number) => {
+    dueMarketApi.delete(`/products/${id}`, 
+    {headers: {Authorization: `Bearer ${token}`}})
+    .then(() => toast.success("Deletado com sucesso"))
+    .catch(()=>toast.error("Erro ao deletar o produto"))
+  }
   getProductByMarket(1)
   console.log(getProductByMarket(1))
   return <ProductsContext.Provider value={{products}}>
