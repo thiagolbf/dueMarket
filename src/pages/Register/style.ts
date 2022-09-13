@@ -33,8 +33,10 @@ export const GreenBox = styled.div`
 `;
 
 export const FormContainer = styled.div`
-  width: 270px;
-  height: 450px;
+  min-width: 270px;
+  max-width: 500px;
+  width: 100%;
+  height: auto;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -42,22 +44,16 @@ export const FormContainer = styled.div`
   background-color: var(--blue-800);
   border-radius: 8px;
   z-index: 500;
-
-  @media (min-width: 480px) {
-    width: 340px;
-    height: 510px;
-  }
-
-  @media (min-width: 1080px) {
-    width: 410px;
-    height: 600px;
-  }
+  padding: 20px 0;
 `;
 
 export const TextContainer = styled.div`
   width: 300px;
+  min-height: 100px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   z-index: 500;
   text-align: center;
   color: var(--grey-0);
@@ -88,9 +84,8 @@ export const HeaderBox = styled.div`
   height: 15%;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   padding: 0 30px;
-  position: relative;
 
   h2 {
     color: var(--grey-0);
@@ -98,7 +93,19 @@ export const HeaderBox = styled.div`
   }
 
   button {
-    position: absolute;
-    left: 30px;
+    padding: 5px;
+    border-radius: 8px;
+    color: var(--blue-500);
+    background-color: var(--grey-50);
+    font-weight: 500;
+    font-family: var(--font-inter);
+    font-size: 8px;
+  }
+
+  @media (min-width: 480px) {
+    button {
+      padding: 10px;
+      font-size: 12px;
+    }
   }
 `;

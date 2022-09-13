@@ -6,6 +6,8 @@ import { useContext } from "react";
 import { CepContext } from "../../providers/Cep";
 import { UsersContext } from "../../providers/Users";
 import { toast } from "react-toastify";
+import { InputForm } from "../InputForm";
+import { Button } from "../Button";
 
 interface UserData {
   name: string;
@@ -27,8 +29,8 @@ export const FormUser = () => {
     cpf: yup
       .string()
       .required("Campo obrigatório")
-      .min(9, "Colocar apenas números")
-      .max(9, "Colocar apenas números"),
+      .min(11, "Colocar apenas números")
+      .max(11, "Colocar apenas números"),
     cep: yup
       .string()
       .required("Campo obrigatório")
@@ -90,23 +92,51 @@ export const FormUser = () => {
 
   return (
     <Form onSubmit={handleSubmit(userSubmit)}>
-      <input type="text" {...register("name")} placeholder="Nome" />
+      <InputForm
+        type="text"
+        {...register("name")}
+        label="Nome"
+        error={!!errors.name}
+      />
       {errors.name?.message}
-      <input type="text" {...register("cpf")} placeholder="CPF" />
+      <InputForm
+        type="text"
+        {...register("cpf")}
+        label="CPF"
+        error={!!errors.cpf}
+      />
       {errors.cpf?.message}
-      <input type="text" {...register("cep")} placeholder="CEP" />
+      <InputForm
+        type="text"
+        {...register("cep")}
+        label="CEP"
+        error={!!errors.cep}
+      />
       {errors.cep?.message}
-      <input type="text" {...register("email")} placeholder="Email" />
+      <InputForm
+        type="text"
+        {...register("email")}
+        label="Email"
+        error={!!errors.email}
+      />
       {errors.email?.message}
-      <input type="password" {...register("password")} placeholder="Senha" />
+      <InputForm
+        type="password"
+        {...register("password")}
+        label="Senha"
+        error={!!errors.password}
+      />
       {errors.password?.message}
-      <input
+      <InputForm
         type="password"
         {...register("confirmPassword")}
-        placeholder="Confirmar Senha"
+        label="Confirmar Senha"
+        error={!!errors.confirmPassword}
       />
       {errors.confirmPassword?.message}
-      <button>Cadastrar</button>
+      <Button type="submit" blueForm>
+        Cadastrar
+      </Button>
     </Form>
   );
 };
