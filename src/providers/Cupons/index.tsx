@@ -58,7 +58,7 @@ export const CuponsProvider = ({ children }: CuponsProviderProps) => {
   const deleteCupom = (id: number, token: string) => {
     dueMarketApi
       .delete(`/cupons/${id}`, {
-        headers: { Authorization: `Beares ${token}` },
+        headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => {
         setCupons(res.data);
