@@ -15,7 +15,7 @@ import { FormUser } from "../../components/FormUser";
 export const RegisterPage = () => {
   const navigate = useNavigate();
 
-  const [userType, setUserType] = useState<boolean>(false);
+  const [userType, setUserType] = useState<boolean>(true);
 
   return (
     <Container>
@@ -32,7 +32,9 @@ export const RegisterPage = () => {
           <HeaderBox>
             <button onClick={() => navigate("/login")}>Voltar</button>
             <h2>Cadastro</h2>
-            <button></button>
+            <button onClick={() => setUserType(!userType)}>
+              Trocar formulario
+            </button>
           </HeaderBox>
           {userType ? <FormMarket /> : <FormUser />}
         </FormContainer>
