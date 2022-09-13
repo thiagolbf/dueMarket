@@ -15,6 +15,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useContext } from "react";
 import { UsersContext } from "../../providers/Users";
+import { Button } from "../../components/Button";
+import { InputForm } from "../../components/InputForm";
 
 interface SignInData {
   email: string;
@@ -59,19 +61,25 @@ export const LoginPage = () => {
             <h2>Login</h2>
           </HeaderBox>
           <Form onSubmit={handleSubmit(signIn)}>
-            <input type="text" {...register("email")} placeholder="Email" />
+            <InputForm
+              type="text"
+              {...register("email")}
+              label="Email"
+              error={!!errors.email}
+            />
             {errors.email?.message}
-            <input
+            <InputForm
               type="password"
               {...register("password")}
-              placeholder="Senha"
+              label="Senha"
+              error={!!errors.password}
             />
             {errors.password?.message}
-            <button>Entrar</button>
+            <Button type="submit">Entrar</Button>
           </Form>
           <FooterBox>
             <p>Não tem cadastro?</p>
-            <div onClick={() => navigate("/register")}>Cadastre-se</div>
+            <Button onClick={() => navigate("/register")}>Cadastre-se</Button>
           </FooterBox>
         </FormContainer>
         <GreenBox />

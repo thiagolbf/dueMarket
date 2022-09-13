@@ -1,9 +1,10 @@
 import { HeaderComponent } from "../../components/Header";
 import { InputSearch } from "../../components/InputSearch";
-import { Box, Container } from "./style";
-
-import { useContext } from "react";
+import { CardProductComponent } from "../../components/CardProducts";
+import { Box, Container, MarketContent, MarketName } from "./style";
 import { CepContext } from "../../providers/Cep";
+import { useContext } from "react";
+import { FaArrowRight } from "react-icons/fa";
 
 import { useState } from "react";
 
@@ -33,8 +34,15 @@ export const HomePage = () => {
         />
 
         <span>*apenas números</span>
-        <p>{city}</p>
       </Container>
+
+      <MarketContent>
+        <MarketName>
+          <p>Pão de Açucar</p>
+          <FaArrowRight />
+        </MarketName>
+        <div></div>
+      </MarketContent>
     </>
   );
 };
