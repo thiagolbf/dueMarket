@@ -9,7 +9,6 @@ import { useState } from "react";
 
 export const HomePage = () => {
   const { city } = useContext(CepContext);
-
   const [inputCep, setInputCep] = useState<string>("");
 
   return (
