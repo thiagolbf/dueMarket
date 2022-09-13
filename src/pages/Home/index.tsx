@@ -1,15 +1,13 @@
 import { HeaderComponent } from "../../components/Header";
 import { InputSearch } from "../../components/InputSearch";
-import { Box, Container } from "./style";
+import { CardProductComponent } from "../../components/CardProducts";
+import { Box, Container, MarketContent, MarketName } from "./style";
 
-import { useContext } from "react";
-import { CepContext } from "../../providers/Cep";
+import { FaArrowRight } from "react-icons/fa";
 
 import { useState } from "react";
 
 export const HomePage = () => {
-  const { city } = useContext(CepContext);
-
   const [inputCep, setInputCep] = useState<string>("");
 
   return (
@@ -33,8 +31,15 @@ export const HomePage = () => {
         />
 
         <span>*apenas números</span>
-        <p>{city}</p>
       </Container>
+
+      <MarketContent>
+        <MarketName>
+          <p>Pão de Açucar</p>
+          <FaArrowRight />
+        </MarketName>
+        <div></div>
+      </MarketContent>
     </>
   );
 };

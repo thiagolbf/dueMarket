@@ -36,10 +36,6 @@ export const Container = styled.div`
     margin-bottom: 25px;
   }
 
-  input {
-    border: 1px solid black;
-  }
-
   span {
     font-family: var(--font-noto-sans);
     font-size: 0.875rem;
@@ -48,4 +44,22 @@ export const Container = styled.div`
 
     margin-top: 10px;
   }
+`;
+
+export const MarketContent = styled.div`
+  margin: 0 30px;
+
+  p {
+    font-family: var(--font-inter);
+    font-size: 1.188rem;
+    font-weight: 700;
+    color: var(--grey-900);
+  }
+`;
+
+export const MarketName = styled.div`
+  display: flex;
+  align-items: baseline;
+
+  gap: 10px;
 `;
