@@ -1,4 +1,4 @@
-import { createContext, ReactNode } from "react";
+import { createContext, ReactNode, useEffect, useState } from "react";
 import { dueMarketApi } from "../../services";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
@@ -52,6 +52,26 @@ export const UsersContext = createContext<UsersProviderData>(
 export const UsersProvider = ({ children }: UsersProviderProps) => {
   const navigate = useNavigate();
 
+  const [user, setUser] = useState<object>({});
+  const [userId, setUserId] = useState(
+    localStorage.getItem("@dueMarket:token") || ""
+  );
+  const [token, setToken] = useState<string>(
+    localStorage.getItem("@dueMarket:token") || ""
+  );
+
+  const getUser = (id: number) => {
+    dueMarketApi.get(`user/${id}`).then((res) => {
+      setUser(res.data);
+    });
+  };
+
+  useEffect(() => {
+    if (token !== "") {
+      getUser(Number(userId));
+    }
+  }, [userId, token]);
+
   const postUserMarket = (data: MarketSubmitData) => {
     dueMarketApi
       .post("users", data)
@@ -69,11 +89,10 @@ export const UsersProvider = ({ children }: UsersProviderProps) => {
     dueMarketApi
       .post("users", data)
       .then((res) => {
-        console.log(res);
         toast.success("Cadastro feito com sucesso!");
+        navigate("/login");
       })
       .catch((err) => {
-        console.log(err);
         toast.error("Erro ao criar Conta, tentar outro email!");
       });
   };
@@ -82,8 +101,23 @@ export const UsersProvider = ({ children }: UsersProviderProps) => {
     dueMarketApi
       .post("login", data)
       .then((res) => {
+        localStorage.setItem(
+          "@dueMarket:userId",
+          JSON.stringify(res.data.user.id)
+        );
+        localStorage.setItem(
+          "@dueMarket:token",
+          JSON.stringify(res.data.accessToken)
+        );
+        setUserId(res.data.user.id);
+        setToken(res.data.accessToken);
         toast.success("Login feito com sucesso!");
-        console.log(res);
+
+        if (res.data.user.type === "user") {
+          navigate("/");
+        } else {
+          navigate("/user");
+        }
       })
       .catch((res) => {
         toast.error("Erro ao fazer login, tentar outro email!");

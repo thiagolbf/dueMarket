@@ -6,6 +6,8 @@ import { useContext } from "react";
 import { CepContext } from "../../providers/Cep";
 import { UsersContext } from "../../providers/Users";
 import { toast } from "react-toastify";
+import { InputForm } from "../InputForm";
+import { Button } from "../Button";
 
 interface MarketData {
   name: string;
@@ -29,8 +31,8 @@ export const FormMarket = () => {
     cnpj: yup
       .string()
       .required("Campo obrigatório")
-      .min(9, "Colocar apenas números")
-      .max(9, "Colocar apenas números"),
+      .min(14, "Colocar apenas números")
+      .max(14, "Colocar apenas números"),
     cep: yup
       .string()
       .required("Campo obrigatório")
@@ -102,25 +104,58 @@ export const FormMarket = () => {
 
   return (
     <Form onSubmit={handleSubmit(marketSubmit)}>
-      <input type="text" {...register("name")} placeholder="Nome" />
+      <InputForm
+        type="text"
+        {...register("name")}
+        label="Nome"
+        error={!!errors.name}
+      />
       {errors.name?.message}
-      <input type="text" {...register("img")} placeholder="Imagem do perfil" />
+      <InputForm
+        type="text"
+        {...register("img")}
+        label="Imagem do perfil"
+        error={!!errors.img}
+      />
       {errors.img?.message}
-      <input type="text" {...register("cnpj")} placeholder="CNPJ" />
+      <InputForm
+        type="text"
+        {...register("cnpj")}
+        label="CNPJ"
+        error={!!errors.cnpj}
+      />
       {errors.cnpj?.message}
-      <input type="text" {...register("cep")} placeholder="CEP" />
+      <InputForm
+        type="text"
+        {...register("cep")}
+        label="CEP"
+        error={!!errors.cep}
+      />
       {errors.cep?.message}
-      <input type="text" {...register("email")} placeholder="Email" />
+      <InputForm
+        type="text"
+        {...register("email")}
+        label="Email"
+        error={!!errors.email}
+      />
       {errors.email?.message}
-      <input type="password" {...register("password")} placeholder="Senha" />
+      <InputForm
+        type="password"
+        {...register("password")}
+        label="Senha"
+        error={!!errors.password}
+      />
       {errors.password?.message}
-      <input
+      <InputForm
         type="password"
         {...register("confirmPassword")}
-        placeholder="Confirmar Senha"
+        label="Confirmar Senha"
+        error={!!errors.confirmPassword}
       />
       {errors.confirmPassword?.message}
-      <button>Cadastrar</button>
+      <Button type="submit" blueForm>
+        Cadastrar
+      </Button>
     </Form>
   );
 };
