@@ -10,6 +10,8 @@ interface UsersProviderData {
   user: object;
   token: string;
   getUser: (id: number) => void;
+  nearProducts: MarketProducts[];
+  getNearProducts: (city: string) => void;
 }
 
 interface MarketSubmitData {
@@ -48,6 +50,33 @@ interface SignInData {
   password: string;
 }
 
+interface MarketProducts {
+  email: string;
+  password: string;
+  name: string;
+  type: string;
+  cnpj: string;
+  cep: string;
+  street: string;
+  district: string;
+  city: string;
+  state: string;
+  image: string;
+  id: number;
+  products: Products[];
+}
+
+interface Products {
+  title: string;
+  category: string;
+  duedate: string;
+  oldvalue: string;
+  newvalue: string;
+  image: string;
+  userId: number;
+  id: number;
+}
+
 export const UsersContext = createContext<UsersProviderData>(
   {} as UsersProviderData
 );
@@ -55,6 +84,9 @@ export const UsersContext = createContext<UsersProviderData>(
 export const UsersProvider = ({ children }: UsersProviderProps) => {
   const navigate = useNavigate();
 
+  const [nearProducts, setNearProducts] = useState<MarketProducts[]>(
+    [] as MarketProducts[]
+  );
   const [user, setUser] = useState<object>({});
   const [userId, setUserId] = useState(
     localStorage.getItem("@dueMarket:token") || ""
@@ -126,11 +158,28 @@ export const UsersProvider = ({ children }: UsersProviderProps) => {
         toast.error("Erro ao fazer login, tentar outro email!");
         console.log(res);
       });
+
+    //FUNÇÃO PARA VERIFICAR OS MERCADOS;
+  };
+  const getNearProducts = (cidade: string) => {
+    dueMarketApi
+      .get(`/users?_embed=products&type=mercado&city=${cidade}`)
+      .then((res) => setNearProducts(res.data))
+      .catch((error) => console.log(error));
   };
 
   return (
     <UsersContext.Provider
-      value={{ postUserMarket, postUser, postLogin, user, token, getUser }}
+      value={{
+        postUserMarket,
+        postUser,
+        postLogin,
+        user,
+        token,
+        getUser,
+        getNearProducts,
+        nearProducts,
+      }}
     >
       {children}
     </UsersContext.Provider>
