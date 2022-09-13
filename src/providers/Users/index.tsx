@@ -7,6 +7,9 @@ interface UsersProviderData {
   postUser: (data: UserSubmitData) => void;
   postUserMarket: (data: MarketSubmitData) => void;
   postLogin: (data: SignInData) => void;
+  user: object;
+  token: string;
+  getUser: (id: number) => void;
 }
 
 interface MarketSubmitData {
@@ -126,7 +129,9 @@ export const UsersProvider = ({ children }: UsersProviderProps) => {
   };
 
   return (
-    <UsersContext.Provider value={{ postUserMarket, postUser, postLogin }}>
+    <UsersContext.Provider
+      value={{ postUserMarket, postUser, postLogin, user, token, getUser }}
+    >
       {children}
     </UsersContext.Provider>
   );
