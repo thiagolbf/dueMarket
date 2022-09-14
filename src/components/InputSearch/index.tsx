@@ -18,7 +18,11 @@ export const InputSearch = ({ inputCep, ...rest }: InputSearchProps) => {
     <InputContainer>
       <input {...rest} />
 
-      <div onClick={() => getCep(inputCep)}>
+      <div
+        onClick={() => {
+          getCep(inputCep);
+        }}
+      >
         <FaSearch />
       </div>
     </InputContainer>
