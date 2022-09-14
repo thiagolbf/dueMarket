@@ -7,7 +7,7 @@ interface UsersProviderData {
   postUser: (data: UserSubmitData) => void;
   postUserMarket: (data: MarketSubmitData) => void;
   postLogin: (data: SignInData) => void;
-  user: object;
+  user: UserSubmitData | MarketSubmitData;
   token: string;
   getUser: (id: number) => void;
   nearProducts: MarketProducts[];
@@ -26,6 +26,7 @@ interface MarketSubmitData {
   city: string;
   state: string;
   image: string;
+  id?: number;
 }
 
 interface UserSubmitData {
@@ -39,6 +40,7 @@ interface UserSubmitData {
   district: string;
   city: string;
   state: string;
+  id?: number;
 }
 
 interface UsersProviderProps {
@@ -87,16 +89,18 @@ export const UsersProvider = ({ children }: UsersProviderProps) => {
   const [nearProducts, setNearProducts] = useState<MarketProducts[]>(
     [] as MarketProducts[]
   );
-  const [user, setUser] = useState<object>({});
+  const [user, setUser] = useState<MarketSubmitData | UserSubmitData>(
+    {} as MarketSubmitData | UserSubmitData
+  );
   const [userId, setUserId] = useState(
-    localStorage.getItem("@dueMarket:token") || ""
+    localStorage.getItem("@dueMarket:userId") || ""
   );
   const [token, setToken] = useState<string>(
     localStorage.getItem("@dueMarket:token") || ""
   );
 
   const getUser = (id: number) => {
-    dueMarketApi.get(`user/${id}`).then((res) => {
+    dueMarketApi.get(`users/${id}`).then((res) => {
       setUser(res.data);
     });
   };

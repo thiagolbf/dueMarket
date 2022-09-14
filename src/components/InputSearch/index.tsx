@@ -23,6 +23,7 @@ export const InputSearch = ({
     <InputContainer>
       <input {...rest} />
 
+
       {marketPage ? (
         <div onClick={() => getCep(inputCep)}>
           <FaSearch />
@@ -32,6 +33,9 @@ export const InputSearch = ({
           <FaSearch />
         </div>
       )}
+
+      
+
     </InputContainer>
   );
 };
