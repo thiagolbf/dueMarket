@@ -20,8 +20,7 @@ interface MarketData {
 }
 
 export const FormMarket = () => {
-  const { getCep, state, city, district, street, validCep } =
-    useContext(CepContext);
+  const { getCep } = useContext(CepContext);
 
   const { postUserMarket } = useContext(UsersContext);
 
@@ -61,7 +60,7 @@ export const FormMarket = () => {
     email,
     password,
   }: MarketData) => {
-    await getCep(cep);
+    const cepData = await getCep(cep);
 
     const objectData = {
       email,
@@ -70,14 +69,14 @@ export const FormMarket = () => {
       type: "market",
       cnpj,
       cep,
-      street,
-      district,
-      city,
-      state,
+      street: cepData.logradouro,
+      district: cepData.bairro,
+      city: cepData.localidade,
+      state: cepData.uf,
       image: img,
     };
 
-    if (validCep) {
+    if (cepData.logradouro) {
       reset({
         email: "",
         password: "",
@@ -88,7 +87,6 @@ export const FormMarket = () => {
         confirmPassword: "",
       });
       postUserMarket(objectData);
-      console.log("teste");
     } else {
       toast.error("CEP invalido");
       reset({
