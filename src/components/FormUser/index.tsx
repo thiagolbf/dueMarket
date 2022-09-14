@@ -19,8 +19,7 @@ interface UserData {
 }
 
 export const FormUser = () => {
-  const { getCep, state, city, district, street, validCep } =
-    useContext(CepContext);
+  const { getCep } = useContext(CepContext);
 
   const { postUser } = useContext(UsersContext);
 
@@ -52,8 +51,9 @@ export const FormUser = () => {
   } = useForm<UserData>({ resolver: yupResolver(schema) });
 
   const userSubmit = async ({ name, cpf, cep, email, password }: UserData) => {
-    await getCep(cep);
+    const cepData = await getCep(cep);
 
+    console.log(cepData);
     const objectData = {
       email,
       password,
@@ -61,13 +61,13 @@ export const FormUser = () => {
       type: "user",
       cpf,
       cep,
-      street,
-      district,
-      city,
-      state,
+      street: cepData.logradouro,
+      district: cepData.bairro,
+      city: cepData.localidade,
+      state: cepData.uf,
     };
 
-    if (validCep) {
+    if (cepData.logradouro) {
       reset({
         email: "",
         password: "",
@@ -77,7 +77,6 @@ export const FormUser = () => {
         confirmPassword: "",
       });
       postUser(objectData);
-      console.log("teste");
     } else {
       toast.error("CEP invalido");
       reset({
