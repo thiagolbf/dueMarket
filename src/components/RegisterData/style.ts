@@ -78,4 +78,7 @@ export const RegisterData = styled.div<RegisterProps>`
             }
         }
     }
+    @media screen and (max-width: 720px) {
+        height: calc(100vh - 60px);
+    }
 `
