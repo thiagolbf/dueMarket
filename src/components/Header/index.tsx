@@ -1,8 +1,12 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { HeaderFix, Header, Mobile, Nav } from "./style";
 
 export const HeaderComponent = () => {
   const [navMobile, setNavMobile] = useState(true);
+  const nav = useNavigate()
+  const isLogged = !!localStorage.getItem("@dueMarket:token")
+  
   return (
     <>
       <HeaderFix />
@@ -15,13 +19,17 @@ export const HeaderComponent = () => {
         </Mobile>
         <Nav active={navMobile}>
           <div>
-            <button>Usuário</button>
+            {isLogged ? 
+            <button onClick={()=>nav('/user')}>Usuário</button>
+            :
+            <button onClick={()=>nav('/login')}>Login</button> 
+            }
           </div>
           <div>
-            <button>Mercados Parceiros</button>
+            <button onClick={()=>nav('/markets')}>Mercados Parceiros</button>
           </div>
           <div>
-            <button>Sobre Nós</button>
+            <button onClick={()=>nav('/aboutus')}>Sobre Nós</button>
           </div>
         </Nav>
       </Header>
