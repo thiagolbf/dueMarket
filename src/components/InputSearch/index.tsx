@@ -2,6 +2,7 @@ import { InputHTMLAttributes, ReactNode } from "react";
 
 import { useContext } from "react";
 import { CepContext } from "../../providers/Cep";
+import { UsersContext } from "../../providers/Users";
 
 import { FaSearch } from "react-icons/fa";
 
@@ -18,24 +19,32 @@ export const InputSearch = ({
   ...rest
 }: InputSearchProps) => {
   const { getCep } = useContext(CepContext);
+  const { getNearProducts } = useContext(UsersContext);
+
+  const checkCep = async (cep: string) => {
+    const cepUser = await getCep(cep);
+
+    if (cepUser.localidade) {
+      getNearProducts(cepUser.localidade);
+      console.log(cepUser.localidade);
+    } else {
+      console.log("erro");
+    }
+  };
 
   return (
     <InputContainer>
       <input {...rest} />
 
-
       {marketPage ? (
-        <div onClick={() => getCep(inputCep)}>
+        <div onClick={() => checkCep(inputCep)}>
           <FaSearch />
         </div>
       ) : (
-        <div onClick={() => getCep(inputCep)}>
+        <div onClick={() => checkCep(inputCep)}>
           <FaSearch />
         </div>
       )}
-
-      
-
     </InputContainer>
   );
 };

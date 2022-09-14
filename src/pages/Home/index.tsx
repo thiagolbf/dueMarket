@@ -1,17 +1,21 @@
+import { Box, Container, MarketContent, MarketName } from "./style";
+
 import { HeaderComponent } from "../../components/Header";
 import { InputSearch } from "../../components/InputSearch";
-import { CardProductComponent } from "../../components/CardProducts";
-import { Box, Container, MarketContent, MarketName } from "./style";
-import { CepContext } from "../../providers/Cep";
-import { useContext } from "react";
+import { UsersContext } from "../../providers/Users";
+
 import { FaArrowRight } from "react-icons/fa";
 
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
 
 export const HomePage = () => {
-  const { city } = useContext(CepContext);
+  const { nearProducts } = useContext(UsersContext);
 
   const [inputCep, setInputCep] = useState<string>("");
+
+  useEffect(() => {
+    console.log(nearProducts);
+  }, [nearProducts]);
 
   return (
     <>
