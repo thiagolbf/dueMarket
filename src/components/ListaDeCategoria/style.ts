@@ -1,61 +1,45 @@
-import styled, { createGlobalStyle, css } from "styled-components";
+import styled, { css } from "styled-components";
 
 interface MobileProps {
   active: boolean;
 }
 
-export const HeaderFix = createGlobalStyle`
-    html{
-        -webkit-tap-highlight-color: transparent;
+/*export const ListaCategorias = styled.div`
+background-color: var(--grey-200);
+display: flex;
+    flex-direction: column;
+    //height: 20px;
+    width: 280px;
+    position: relative;
+    cursor: pointer;
+    span{
+        background-color: var(--grey-0);
+        height: 29px;
+        width: 256px;
+        position: absolute;
+        left: 0;
+        border-radius: 10px;
+        transition: all .5s;
     }
-    body{
-        margin-top: 60px;
-    }
-    @media screen and (min-width: 720px) {
-        body{
-            margin-top: 105px;
-        }
-    }
-`;
 
-export const Header = styled.header`
-  background-color: var(--green-800);
-  color: var(--grey-0);
-  padding: 10px 20px;
-  display: flex;
-  height: 60px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 100;
-  justify-content: space-between;
-  align-items: center;
-  h1 {
-    font-size: 1.25rem;
-    font-weight: 700;
-    font-family: var(--font-inter);
-  }
-  @media screen and (min-width: 720px) {
-    height: 105px;
-    h1 {
-      font-size: 2rem;
-    }
-  }
-`;
+`*/
+
 export const Mobile = styled.div<MobileProps>`
+  background-color: var(--grey-200);
   display: flex;
   flex-direction: column;
-  height: 20px;
-  width: 20px;
+  height: 36px;
+  width: 30px;
   position: relative;
   cursor: pointer;
+  padding-top: 8px;
+  padding-bottom: 8px;
   span {
-    background-color: var(--grey-0);
+    background-color: var(--grey-900);
     height: 4px;
     width: 20px;
     position: absolute;
-    left: 0;
+    left: 5px;
     border-radius: 10px;
     transition: all 0.5s;
   }
@@ -63,13 +47,13 @@ export const Mobile = styled.div<MobileProps>`
     props.active
       ? css`
           span:nth-child(1) {
-            top: 0%;
+            top: 15%;
           }
           span:nth-child(2) {
             top: calc(50% - 2px);
           }
           span:nth-child(3) {
-            top: calc(100% - 4px);
+            top: calc(85% - 4px);
           }
         `
       : css`
@@ -85,38 +69,54 @@ export const Mobile = styled.div<MobileProps>`
           span:nth-child(3) {
             transform: rotate(-45deg);
           }
-        `}
-  @media screen and (min-width: 720px) {
+        `}/* @media screen and (min-width: 720px) {
     display: none;
-  }
+  }*/
 `;
 
 export const Nav = styled.nav<MobileProps>`
-  background-color: inherit;
-  height: ${(props) => (props.active ? 0 : "99px")};
-  width: 100vw;
-  overflow: hidden;
-  position: fixed;
-  top: 60px;
+  background-color: var(--grey-200);
+  height: ${(props) => (props.active ? 0 : "295px")};
+  width: 280px;
+  overflow-y: scroll;
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+  ::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--blue-800);
+    border-radius: 5px;
+  }
+  //position: fixed;
+  //top: 60px;
   left: 0;
   transition: all 0.5s;
+  padding-top: ${(props) => (props.active ? 0 : "16px")};
+  border-radius: 5px;
   div {
     box-shadow: var(--drop-shadow) 0px 5px 10px;
-    width: 100%;
+    background-color: var(--grey-0);
+    width: 256px;
+    height: 29px;
+    margin-bottom: 10px;
+    margin-left: 12px;
+    border-radius: 5px;
     display: flex;
     justify-content: center;
     button {
       padding: 5px;
-      color: var(--grey-0);
+      color: var(--grey-300);
       cursor: pointer;
-      font-weight: 600;
+      //font-weight: 600;
       font-size: 1rem;
       background-color: inherit;
       border: none;
       display: flex;
       flex-direction: column;
       align-items: center;
-      font-family: var(--font-inter);
+      font-family: var(--font-noto-sans);
       ::after {
         content: "";
         height: 3px;
@@ -130,7 +130,7 @@ export const Nav = styled.nav<MobileProps>`
       }
     }
   }
-  @media screen and (min-width: 720px) {
+  /* @media screen and (min-width: 720px) {
     width: max-content;
     height: max-content;
     position: static;
@@ -140,5 +140,5 @@ export const Nav = styled.nav<MobileProps>`
       width: max-content;
       box-shadow: none;
     }
-  }
+  }*/
 `;
