@@ -2,6 +2,7 @@ import { ModalCupom } from "./style"
 import { RiAddFill } from "react-icons/ri"
 import { CardCupomComponent } from "../CardCupom"
 import { Dispatch, SetStateAction } from "react"
+import { HeaderModalComponent } from "../HeaderModal"
 
 interface ModalCupomComponentProps {
     modalCupom: boolean
@@ -26,15 +27,17 @@ export const ModalCupomComponent = ({modalCupom, setModalCupom}: ModalCupomCompo
         onClick={(e) => handleEvemt((e.target as TargetProps).id)}
     >
         <div>
+            <HeaderModalComponent setState={setModalCupom}>Cupons</HeaderModalComponent>
             <div>
-                <h3>Cupons</h3>
                 <button><RiAddFill/></button>
             </div>
-            <CardCupomComponent/>
-            <CardCupomComponent/>
-            <CardCupomComponent/>
-            <CardCupomComponent/>
-            <CardCupomComponent/>
+            <div>
+                <CardCupomComponent/>
+                <CardCupomComponent/>
+                <CardCupomComponent/>
+                <CardCupomComponent/>
+                <CardCupomComponent/>
+            </div>
         </div>
     </ModalCupom>
 }

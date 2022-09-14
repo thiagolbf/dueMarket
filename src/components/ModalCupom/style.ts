@@ -16,7 +16,6 @@ export const ModalCupom = styled.div<ModalCupomProps>`
     background-color: var(--drop-shadow);
     >div{
         background-color: var(--blue-800);
-        padding: 25px;
         max-width: 320px;
         height: max-content;
         border-radius: 10px;
@@ -35,7 +34,7 @@ export const ModalCupom = styled.div<ModalCupomProps>`
             border-radius: 10px;
             background-color: var(--blue-500);
         }
-        >div:nth-child(1){
+        >div:nth-child(2){
             display: flex;
             justify-content: center;
             align-items: center;
@@ -50,6 +49,12 @@ export const ModalCupom = styled.div<ModalCupomProps>`
                 font-size: 1.25rem;
                 border-radius: 5px;
             }
+        }
+        >div:nth-child(3){
+            gap: 10px;
+            display: flex;
+            flex-direction: column;
+            padding: 0 25px;
         }
     }
 `
