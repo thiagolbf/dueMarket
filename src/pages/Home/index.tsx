@@ -8,9 +8,11 @@ import { FaArrowRight } from "react-icons/fa";
 
 import { useState } from "react";
 
+import { ModalCriarProduto } from "../../components/ModalCriarProduto";
+
 export const HomePage = () => {
   const { city } = useContext(CepContext);
-
+  const [modalProduto, setModalProduto] = useState(true);
   const [inputCep, setInputCep] = useState<string>("");
 
   return (
@@ -43,6 +45,11 @@ export const HomePage = () => {
         </MarketName>
         <div></div>
       </MarketContent>
+
+      <ModalCriarProduto
+        modalProduto={modalProduto}
+        setModalProduto={setModalProduto}
+      />
     </>
   );
 };
