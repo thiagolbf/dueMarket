@@ -6,6 +6,7 @@ interface ModalProdutoProps {
 
 export const ModalProduto = styled.div<ModalProdutoProps>`
   display: ${({ modalProduto }) => (modalProduto ? "flex" : "none")};
+  //flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 100vh;
@@ -14,9 +15,10 @@ export const ModalProduto = styled.div<ModalProdutoProps>`
   top: 0;
   left: 0;
   background-color: var(--drop-shadow);
+
   > div {
     background-color: var(--blue-800);
-    padding: 25px;
+
     max-width: 320px;
     height: max-content;
     border-radius: 10px;
@@ -24,7 +26,10 @@ export const ModalProduto = styled.div<ModalProdutoProps>`
     display: flex;
     flex-direction: column;
     gap: 25px;
-    overflow-y: scroll;
+    //overflow-y: scroll;
+    align-items: stretch;
+    justify-content: space-between;
+
     ::-webkit-scrollbar {
       width: 10px;
     }
@@ -35,21 +40,38 @@ export const ModalProduto = styled.div<ModalProdutoProps>`
       border-radius: 10px;
       background-color: var(--blue-500);
     }
-    > div:nth-child(1) {
+
+    /* div {
       display: flex;
+      flex-direction: column;
+      gap: 25px;
+      padding: 0 25px;
+    }*/
+    > div:nth-child(2) {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
       justify-content: center;
-      align-items: center;
-      gap: 10px;
-      > h3 {
-        font-size: 1.375rem;
-        font-family: var(--font-noto-sans);
-      }
-      button {
-        display: flex;
-        padding: 2px;
-        font-size: 1.25rem;
-        border-radius: 5px;
-      }
+      align-items: stretch;
+      gap: 25px;
+      padding: 0 25px 10px 25px;
     }
+  }
+`;
+
+export const HeaderModalProduto = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 320px;
+  padding: 10px 25px;
+  font-family: var(--font-inter);
+  background-color: transparent;
+  justify-content: space-between;
+  //align-items: center;
+  box-shadow: 1px 5px 5px var(--drop-shadow);
+  color: white;
+  gap: 25px;
+  h2 {
+    font-size: 16px;
   }
 `;

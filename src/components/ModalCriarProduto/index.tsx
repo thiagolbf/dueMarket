@@ -1,8 +1,8 @@
-import { Dispatch, SetStateAction } from "react";
-import { RiAddFill } from "react-icons/ri";
+import { Dispatch, SetStateAction, useState } from "react";
 import { InputForm } from "../InputForm";
-import { ModalProduto } from "./style";
+import { ModalProduto, HeaderModalProduto } from "./style";
 import { Button } from "../Button";
+import { CloseButton } from "../CloseButton";
 
 interface ModalCriarProdutoProps {
   modalProduto: boolean;
@@ -30,18 +30,18 @@ export const ModalCriarProduto = ({
       onClick={(e) => handleEvent((e.target as TargetProps).id)}
     >
       <div>
+        <HeaderModalProduto>
+          <h2>Criar Produto</h2>
+          <CloseButton onClick={() => setModalProduto(false)} />
+        </HeaderModalProduto>
         <div>
-          <h3>Cadastrar Produto</h3>
-          <button>
-            <RiAddFill />
-          </button>
+          <InputForm error={false} label="Título" />
+          <InputForm error={false} label="Categoria" />
+          <InputForm error={false} label="Valor Antigo" />
+          <InputForm error={false} label="Valor Atual" />
+          <InputForm error={false} label="Imagem" />
+          <Button>Cadastrar</Button>
         </div>
-        <InputForm error={false} label="Título" />
-        <InputForm error={false} label="Categoria" />
-        <InputForm error={false} label="Valor Antigo" />
-        <InputForm error={false} label="Valor Atual" />
-        <InputForm error={false} label="Imagem" />
-        <Button>Cadastrar</Button>
       </div>
     </ModalProduto>
   );
