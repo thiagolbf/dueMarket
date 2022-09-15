@@ -9,8 +9,13 @@ import { FaArrowRight } from "react-icons/fa";
 
 import { useState, useEffect } from "react";
 
+
+
 export const HomePage = () => {
+
+
   const { nearProducts } = useContext(UsersContext);
+
   const [inputCep, setInputCep] = useState<string>("");
 
   useEffect(() => {
@@ -47,6 +52,8 @@ export const HomePage = () => {
         </MarketName>
         <div></div>
       </MarketContent>
+
+     
     </>
   );
 };
