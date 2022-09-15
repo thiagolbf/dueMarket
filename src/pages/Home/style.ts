@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const Box = styled.div`
@@ -18,12 +19,12 @@ export const Box = styled.div`
 `;
 
 export const Container = styled.div`
-  min-height: 50vh;
-
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  margin-top: 20px;
 
   p {
     font-family: var(--font-inter);
@@ -47,19 +48,28 @@ export const Container = styled.div`
 `;
 
 export const MarketContent = styled.div`
-  margin: 0 30px;
+  margin: 10px 0 0 20px;
 
   p {
     font-family: var(--font-inter);
     font-size: 1.188rem;
     font-weight: 700;
     color: var(--grey-900);
+    &:hover {
+      color: var(--information);
+    }
   }
 `;
 
-export const MarketName = styled.div`
+export const LinkToMarket = styled(Link)`
   display: flex;
   align-items: baseline;
 
+  color: var(--grey-900);
+  &:hover {
+    color: var(--information);
+  }
+
   gap: 10px;
+  margin-top: 10px;
 `;

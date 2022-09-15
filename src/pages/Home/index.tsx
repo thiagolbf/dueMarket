@@ -1,9 +1,9 @@
-import { Box, Container, MarketContent, MarketName } from "./style";
+import { Box, Container, MarketContent, LinkToMarket } from "./style";
 import { HeaderComponent } from "../../components/Header";
 import { InputSearch } from "../../components/InputSearch";
+import { CardProductComponent } from "../../components/CardProducts";
 import { UsersContext } from "../../providers/Users";
-import { CupomList } from "../../components/CupomList";
-import { CepContext } from "../../providers/Cep";
+
 import { useContext } from "react";
 import { FaArrowRight } from "react-icons/fa";
 
@@ -13,9 +13,7 @@ export const HomePage = () => {
   const { nearProducts } = useContext(UsersContext);
   const [inputCep, setInputCep] = useState<string>("");
 
-  useEffect(() => {
-    console.log(nearProducts);
-  }, [nearProducts]);
+  useEffect(() => {}, [nearProducts]);
 
   return (
     <>
@@ -41,11 +39,22 @@ export const HomePage = () => {
       </Container>
 
       <MarketContent>
-        <MarketName>
-          <p>Pão de Açucar</p>
-          <FaArrowRight />
-        </MarketName>
-        <div></div>
+        {nearProducts.map((market) => {
+          return (
+            <>
+              <LinkToMarket key={market.id} to={`market/:${market.id}`}>
+                <p>{market.name} </p>
+                <FaArrowRight />
+              </LinkToMarket>
+              {market.products.map((product) => {
+                return <p>{product.title}</p>;
+              })}
+              {/* {market.products.map((product) => {
+                return <CardProductComponent key={product.id} date={product.duedate} img={product.image} newValue={product.newvalue} previusValue={product.oldvalue} title={product.title} type={product.category} user={undefined} />
+              })} */}
+            </>
+          );
+        })}
       </MarketContent>
     </>
   );
