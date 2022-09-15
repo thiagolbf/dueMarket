@@ -54,7 +54,7 @@ export const ModalCupom = styled.div<ModalCupomProps>`
             gap: 10px;
             display: flex;
             flex-direction: column;
-            padding: 0 25px;
+            padding: 0 25px 10px;
         }
     }
 `
