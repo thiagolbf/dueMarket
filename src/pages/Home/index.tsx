@@ -1,19 +1,26 @@
+import { Box, Container, MarketContent, MarketName } from "./style";
 import { HeaderComponent } from "../../components/Header";
 import { InputSearch } from "../../components/InputSearch";
-import { CardProductComponent } from "../../components/CardProducts";
-import { Box, Container, MarketContent, MarketName } from "./style";
+import { UsersContext } from "../../providers/Users";
+import { CupomList } from "../../components/CupomList";
 import { CepContext } from "../../providers/Cep";
 import { useContext } from "react";
 import { FaArrowRight } from "react-icons/fa";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-import { ModalCriarProduto } from "../../components/ModalCriarProduto";
+
 
 export const HomePage = () => {
-  const { city } = useContext(CepContext);
-  const [modalProduto, setModalProduto] = useState(true);
+
+
+  const { nearProducts } = useContext(UsersContext);
+
   const [inputCep, setInputCep] = useState<string>("");
+
+  useEffect(() => {
+    console.log(nearProducts);
+  }, [nearProducts]);
 
   return (
     <>
@@ -46,10 +53,7 @@ export const HomePage = () => {
         <div></div>
       </MarketContent>
 
-      <ModalCriarProduto
-        modalProduto={modalProduto}
-        setModalProduto={setModalProduto}
-      />
+     
     </>
   );
 };
