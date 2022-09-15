@@ -1,8 +1,9 @@
-import { RiAddFill } from "react-icons/ri";
+
 import { ModalConfirmation } from "./style";
 import { Dispatch, SetStateAction } from "react";
 import { HeaderModalComponent } from "../HeaderModal";
-import { CloseButton } from "../CloseButton";
+import { Button } from "../Button";
+
 interface ModalConfirmationComponentProps {
   modalConfirmation: boolean;
   setModalConfirmation: Dispatch<SetStateAction<boolean>>;
@@ -12,11 +13,18 @@ interface TargetProps extends EventTarget {
   id: string;
 }
 
+
+// TESTAR COM O BOTÃO DE EXCLUIR PRODUTOS - TANTO PARA MERCADO TANTO PARA WISHLIST DO USUÁRIO
+
+
+
 export const ModalConfirmationComponent = ({
   modalConfirmation,
   setModalConfirmation,
 }: ModalConfirmationComponentProps) => {
+
   const handleEvent = (id: string) => {
+
     if (id === "modalConfirmation") {
       setModalConfirmation(false);
     }
@@ -25,12 +33,22 @@ export const ModalConfirmationComponent = ({
   return (
     <ModalConfirmation
       id="modalConfirmation"
-      onClick={(e) => handleEvent((e.target as TargetProps).id)}
+
+      onClick={(e) => handleEvemt((e.target as TargetProps).id)}
     >
       <div>
-        <div>
-          <p>Deseja concluir a ação?</p>
-          <CloseButton onClick={() => setModalConfirmation(false)} />
+        <HeaderModalComponent setState={setModalConfirmation}>
+          Deseja concluir a ação?
+        </HeaderModalComponent>
+        <div className="modalConfirmationButtons">
+          <Button lightGreyForm onClick={() => console.log("SIM")}>
+            Sim
+          </Button>
+          <Button blueForm onClick={() => setModalConfirmation(false)}>
+            Não
+          </Button>
+
+
         </div>
       </div>
     </ModalConfirmation>
