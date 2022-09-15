@@ -1,6 +1,6 @@
 import { HeaderComponent } from "../../components/Header";
 import { InputSearch } from "../../components/InputSearch";
-import { CardProductComponent } from "../../components/CardProducts";
+import { CupomList } from "../../components/CupomList";
 import { Box, Container, MarketContent, MarketName } from "./style";
 import { CepContext } from "../../providers/Cep";
 import { useContext } from "react";
@@ -9,8 +9,6 @@ import { FaArrowRight } from "react-icons/fa";
 import { useState } from "react";
 
 export const HomePage = () => {
-  const { city } = useContext(CepContext);
-
   const [inputCep, setInputCep] = useState<string>("");
 
   return (
