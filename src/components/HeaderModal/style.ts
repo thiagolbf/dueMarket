@@ -8,6 +8,6 @@ export const HeaderModal = styled.div`
     background-color: transparent;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 1px 5px 5px var(--drop-shadow);
     color: white;
+    box-shadow: 1px 5px 5px var(--drop-shadow);
 `

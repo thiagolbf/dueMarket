@@ -1,5 +1,6 @@
 import { CartProduct } from "./style";
 import { MdClose } from "react-icons/md";
+
 import { TbHeartMinus, TbHeartPlus } from "react-icons/tb";
 
 interface Market {
@@ -73,6 +74,9 @@ export const CardProductComponent = ({
               <TbHeartPlus />
             </button>
           )}
+
+
+
         </div>
         <h3>Data de vencimento: {date}</h3>
         <h3>{type}</h3>

@@ -50,11 +50,11 @@ export const ModalCupom = styled.div<ModalCupomProps>`
                 border-radius: 5px;
             }
         }
-        >div:nth-child(3){
+        >div:nth-child(3) {
             gap: 10px;
             display: flex;
             flex-direction: column;
-            padding: 0 25px;
+            padding: 0 25px 10px;
         }
     }
 `
