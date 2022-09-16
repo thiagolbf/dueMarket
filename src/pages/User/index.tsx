@@ -8,11 +8,9 @@ import { UsersContext } from "../../providers/Users"
 import { useNavigate } from "react-router-dom"
 import { ProductsContext } from "../../providers/Products"
 import { WhishListContext } from "../../providers/Wishlist"
-import { ModalCupom } from "../../components/ModalCupom/style"
 import { ModalCupomComponent } from "../../components/ModalCupom"
 import { ModalCriarProduto } from "../../components/ModalCriarProduto"
 import { toast } from "react-toastify"
-import { ModalConfirmation } from "../../components/ModalConfirmation/style"
 import { ModalConfirmationComponent } from "../../components/ModalConfirmation"
 
 export const UserPage = () => {
@@ -37,7 +35,6 @@ export const UserPage = () => {
       getWhishListByUser(Number(localStorage.getItem('@dueMarket:userId')), token)
     }
   },[user])
-  console.log(user)
   return <>
     <HeaderComponent/>
     <UserMain>
@@ -83,6 +80,7 @@ export const UserPage = () => {
               previusValue={product.oldvalue}
               type={product.category}
               key={product.id}
+              setModalConfirmation={setModalConfirmation}
             />)
             :
             whishlist.map((product) => <CardProductComponent
@@ -94,12 +92,14 @@ export const UserPage = () => {
               previusValue={product.oldvalue}
               type={product.category}  
               wishlist={true}
+              idProduct={product.id}
+              userId={product.userId}
               key={product.id}
             />)
           }
         </div>
         {
-          user !== undefined &&
+          user.name &&
           <RegisterDataComponent 
             setActiveRD={setActiveRD} 
             activeRD={activeRD}
@@ -120,6 +120,6 @@ export const UserPage = () => {
     </UserMain>
     <ModalCupomComponent modalCupom={modalCupom} setModalCupom={setModalCupom}></ModalCupomComponent>
     <ModalCriarProduto modalProduto={modalProduct} setModalProduto={setModalProduct}></ModalCriarProduto>
-    {/* <ModalConfirmationComponent modalConfirmation={modalConfirmation} setModalConfirmation={setModalConfirmation}/> */}
+    <ModalConfirmationComponent modalConfirmation={modalConfirmation} setModalConfirmation={setModalConfirmation}/>
   </>
 }

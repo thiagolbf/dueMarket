@@ -26,6 +26,7 @@ export const ModalConfirmationComponent = ({
 
   return (
     <ModalConfirmation
+      active={modalConfirmation}
       id="modalConfirmation"
       onClick={(e) => handleEvent((e.target as TargetProps).id)}
     >

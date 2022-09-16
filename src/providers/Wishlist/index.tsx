@@ -5,8 +5,8 @@ import { toast } from "react-toastify";
 interface WhishListProviderData {
   whishlist: WhishList[];
   getWhishListByUser: (userId: number, token: string) => void;
-  addProductWhishList: (userId: number, token: string, data: WhishList) => void;
-  deletProductWhishlist: (id: number, token: string) => void;
+  addProductWhishList: (userId: number | undefined, token: string, data: WhishList) => void;
+  deletProductWhishlist: (id: number | undefined, token: string) => void;
 }
 
 interface WishListProviderProps {
@@ -20,8 +20,8 @@ interface WhishList {
   oldvalue: string;
   newvalue: string;
   image: string;
-  userId: number;
-  id: number;
+  userId?: number;
+  id?: number;
 }
 
 export const WhishListContext = createContext<WhishListProviderData>(
@@ -41,7 +41,7 @@ export const WhishListProvider = ({ children }: WishListProviderProps) => {
   };
 
   const addProductWhishList = (
-    userId: number,
+    userId: number | undefined,
     token: string,
     data: WhishList
   ) => {
@@ -60,7 +60,7 @@ export const WhishListProvider = ({ children }: WishListProviderProps) => {
       });
   };
 
-  const deletProductWhishlist = (id: number, token: string) => {
+  const deletProductWhishlist = (id: number | undefined, token: string) => {
     dueMarketApi
       .delete(`/whishlist/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
