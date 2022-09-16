@@ -43,7 +43,7 @@ export const HomePage = () => {
         {nearProducts.map((market) => {
           return (
             <>
-              <LinkToMarket key={market.id} to={`market/:${market.id}`}>
+              <LinkToMarket key={market.id} to={`markets/${market.id}`}>
                 <p>{market.name} </p>
                 <FaArrowRight />
               </LinkToMarket>
