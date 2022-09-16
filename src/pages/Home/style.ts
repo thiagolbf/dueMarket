@@ -71,5 +71,12 @@ export const LinkToMarket = styled(Link)`
   }
 
   gap: 10px;
-  margin-top: 10px;
+  margin: 10px 0;
+`;
+
+export const CardContainer = styled.div`
+  display: flex;
+  gap: 60px;
+  margin-bottom: 20px;
+  overflow-x: auto;
 `;
