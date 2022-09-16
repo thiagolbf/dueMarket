@@ -11,23 +11,30 @@ import { WhishListContext } from "../../providers/Wishlist"
 import { ModalCupom } from "../../components/ModalCupom/style"
 import { ModalCupomComponent } from "../../components/ModalCupom"
 import { ModalCriarProduto } from "../../components/ModalCriarProduto"
+import { toast } from "react-toastify"
+import { ModalConfirmation } from "../../components/ModalConfirmation/style"
+import { ModalConfirmationComponent } from "../../components/ModalConfirmation"
 
 export const UserPage = () => {
   const [activeRD, setActiveRD] = useState(false)
   const [modalCupom, setModalCupom] = useState(false)
   const [modalProduct, setModalProduct] = useState(false)
-  const { user } = useContext(UsersContext)
+  const [modalConfirmation, setModalConfirmation] = useState(false)
+  const { user, token } = useContext(UsersContext)
   const { products, getProductByMarket } = useContext(ProductsContext)
   const { whishlist, getWhishListByUser } = useContext(WhishListContext)
   const nav = useNavigate()
-  if(!localStorage.getItem('@dueMarket:token')){
-    nav('/login')
-  }
+  useEffect(()=>{
+    if(!localStorage.getItem('@dueMarket:token')){
+      nav('/login')
+      toast.error('Faça login para acessar essa pagina')
+    }
+  }, [])
   useEffect(()=>{
     if(user.type==="mercado"){
       getProductByMarket(Number(localStorage.getItem('@dueMarket:userId')))
     }else if(user.type==="cliente"){
-      getWhishListByUser(Number(localStorage.getItem('@dueMarket:userId')), String(localStorage.getItem("@dueMarket:token")))
+      getWhishListByUser(Number(localStorage.getItem('@dueMarket:userId')), token)
     }
   },[user])
   console.log(user)
@@ -37,8 +44,12 @@ export const UserPage = () => {
       <div>
         <p>Lorem ipsum dolor sit amet.</p>
         <div>
-          <button onClick={()=>setModalCupom(true)}>Cupom</button>
-          <button onClick={()=>setModalProduct(true)}>Cadastrar produto</button>
+          {user.type === 'mercado' &&
+            <>
+              <button onClick={()=>setModalCupom(true)}>Cupom</button>
+              <button onClick={()=>setModalProduct(true)}>Cadastrar produto</button>
+            </>
+          }
           <button onClick={()=>setActiveRD(true)}>
             <FaPencilAlt/>
           </button>
@@ -70,8 +81,8 @@ export const UserPage = () => {
               img={product.image} 
               newValue={product.newvalue}
               previusValue={product.oldvalue}
-              type={product.category}  
-              wishlist={true}
+              type={product.category}
+              key={product.id}
             />)
             :
             whishlist.map((product) => <CardProductComponent
@@ -82,13 +93,33 @@ export const UserPage = () => {
               newValue={product.newvalue}
               previusValue={product.oldvalue}
               type={product.category}  
+              wishlist={true}
+              key={product.id}
             />)
           }
         </div>
-        <RegisterDataComponent setActiveRD={setActiveRD} activeRD={activeRD}/>
+        {
+          user !== undefined &&
+          <RegisterDataComponent 
+            setActiveRD={setActiveRD} 
+            activeRD={activeRD}
+            cpf={user.cpf ? user.cpf : undefined}
+            cnpj={user.cnpj ? user.cnpj : undefined}
+            cep={user.cep}
+            city={user.city}
+            district={user.district}
+            email={user.email}
+            name={user.name}
+            state={user.state}
+            street={user.street}
+            userType={user.type}
+            image={user.image ? user.image : undefined}
+          />
+        }
       </div>
     </UserMain>
     <ModalCupomComponent modalCupom={modalCupom} setModalCupom={setModalCupom}></ModalCupomComponent>
     <ModalCriarProduto modalProduto={modalProduct} setModalProduto={setModalProduct}></ModalCriarProduto>
+    {/* <ModalConfirmationComponent modalConfirmation={modalConfirmation} setModalConfirmation={setModalConfirmation}/> */}
   </>
 }
