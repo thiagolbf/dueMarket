@@ -62,6 +62,8 @@ export const MarketContent = styled.div`
 `;
 
 export const LinkToMarket = styled(Link)`
+  width: 220px;
+
   display: flex;
   align-items: baseline;
 
@@ -78,5 +80,4 @@ export const CardContainer = styled.div`
   display: flex;
   gap: 60px;
   margin-bottom: 20px;
-  overflow-x: auto;
 `;
