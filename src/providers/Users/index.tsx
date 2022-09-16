@@ -13,7 +13,7 @@ interface UsersProviderData {
   getUserMarket: () => void;
   nearProducts: MarketProducts[];
   getNearProducts: (city: string) => void;
-  markets: MarketSubmitData[];
+  markets: UserSubmitData[];
 }
 
 interface UserSubmitData {
@@ -78,11 +78,9 @@ export const UsersProvider = ({ children }: UsersProviderProps) => {
   const [nearProducts, setNearProducts] = useState<MarketProducts[]>(
     [] as MarketProducts[]
   );
-  const [user, setUser] = useState<UserSubmitData>(
-    {} as UserSubmitData
-  );
-  const [markets, setMarkets] = useState<MarketSubmitData[]>(
-    [] as MarketSubmitData[]
+  const [user, setUser] = useState<UserSubmitData>({} as UserSubmitData);
+  const [markets, setMarkets] = useState<UserSubmitData[]>(
+    [] as UserSubmitData[]
   );
   const [userId, setUserId] = useState(
     localStorage.getItem("@dueMarket:userId") || ""
@@ -142,10 +140,7 @@ export const UsersProvider = ({ children }: UsersProviderProps) => {
           "@dueMarket:userId",
           JSON.stringify(res.data.user.id)
         );
-        localStorage.setItem(
-          "@dueMarket:token",
-          res.data.accessToken
-        );
+        localStorage.setItem("@dueMarket:token", res.data.accessToken);
         setUserId(res.data.user.id);
         setToken(res.data.accessToken);
         toast.success("Login feito com sucesso!");
