@@ -16,7 +16,7 @@ export const ModalProduto = styled.div<ModalProdutoProps>`
   left: 0;
   background-color: var(--drop-shadow);
 
-  > div {
+  > form {
     background-color: var(--blue-800);
 
     max-width: 320px;
