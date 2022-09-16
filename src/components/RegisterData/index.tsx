@@ -20,8 +20,41 @@ interface RegisterDataComponentProps {
     userType: string
 }
 
+interface RegisterDataPros {
+    name: string
+    email: string
+    cpf?: string
+    cnpj?: string
+    cep: string
+    image: string
+}
+
 export const RegisterDataComponent = ({setActiveRD, activeRD, cnpj, cpf, name, email, street, city, district, state, cep, userType, image}: RegisterDataComponentProps) => {
     const [edit, setEdit] = useState(false)
+    const [nameForm, setNameForm] = useState(name)
+    const [cpfCnpjForm, setCpfCnpfForm] = useState(cpf ? cpf : cnpj)
+    const [emailForm, setEmailForm] = useState(email)
+    const [cepForm, setCepForm] = useState(cep)
+    const [imageForm, setImageForm] = useState(image)
+    const handleEvent = () => {
+        const objComun = {
+            name: nameForm,
+            email: emailForm,
+            cep: cepForm
+        }
+        const objUser = userType === "cliente" ? 
+        {cpf: cpfCnpjForm} 
+        : 
+        {
+            cnpj: cpfCnpjForm,
+            image: imageForm
+        }
+        console.log({
+            ...objComun,
+            ...objUser
+        })
+    }
+
     return <RegisterData active={activeRD} edit={edit}>
         <div>
             <button onClick={()=>setActiveRD(false)}><GrFormNext/></button>
@@ -46,14 +79,38 @@ export const RegisterDataComponent = ({setActiveRD, activeRD, cnpj, cpf, name, e
             {userType === "mercado" && <img src={image} alt={name} />}
         </div>
         <div>
-            <input type="text" placeholder={name}/>
-            <input type="email" placeholder={email}/>
-            <input type="text" placeholder={cep}/>
-            <input type="text" placeholder={userType === 'cliente' ? cpf : cnpj}/>
-            {userType === "mercado" && <input type='text' placeholder={image}/>}
+            <input 
+                type="text" 
+                placeholder={name}
+                onChange={({target})=>setNameForm(target.value === "" ? name : target.value)}
+            />
+            <input 
+                type="email" 
+                placeholder={email}
+                onChange={({target})=>setEmailForm(target.value === "" ? email : target.value)}
+            />
+            <input 
+                type="text" 
+                placeholder={cep}
+                onChange={({target})=>setCepForm(target.value === "" ? name : target.value)}
+            />
+            <input 
+                type="text" 
+                placeholder={userType === 'cliente' ? cpf : cnpj}
+                onChange={({target})=>setCpfCnpfForm(target.value === "" ? userType === 'cliente' ? cpf : cnpj : target.value)}
+            />
+            {userType === "mercado" && <input 
+                type='text' 
+                placeholder={image}
+                onChange={({target})=>setImageForm(target.value === "" ? image : target.value)}
+            />}
             <div>
-                <Button dataBlue >Salvar</Button>
-                <button onClick={()=>setEdit(false)}>Cancelar</button>
+                <Button dataBlue onClick={handleEvent}>
+                    Salvar
+                </Button>
+                <Button dataGrey onClick={()=>setEdit(false)}>
+                    Cancelar
+                </Button>
             </div>
         </div>
     </RegisterData>

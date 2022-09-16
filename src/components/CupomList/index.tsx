@@ -28,7 +28,7 @@ export const CupomList = () => {
       </button>
 
       <CupomContainer open={open}>
-        <CardCupomComponent />
+        {/* <CardCupomComponent /> */}
       </CupomContainer>
     </Container>
   );

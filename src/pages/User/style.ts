@@ -28,7 +28,7 @@ export const UserMain = styled.main`
                 background-color: #D9D9D9;
                 box-shadow: 2px 2px 10px #0d0d0da0;
             }
-            button:nth-child(3){
+            button:last-child{
                 color: #10796F;
             }
         }

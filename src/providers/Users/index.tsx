@@ -135,13 +135,14 @@ export const UsersProvider = ({ children }: UsersProviderProps) => {
     setUserId(0);
     setToken("");
     setUser({} as UserSubmitData);
+    navigate("/")
   };
 
   const postUserMarket = (data: UserSubmitData) => {
     dueMarketApi
       .post("users", data)
       .then((res) => {
-        console.log(res);
+        navigate("/login");
         toast.success("Cadastro feito com sucesso!");
       })
       .catch((err) => {
@@ -175,7 +176,7 @@ export const UsersProvider = ({ children }: UsersProviderProps) => {
         setToken(res.data.accessToken);
         toast.success("Login feito com sucesso!");
 
-        if (res.data.user.type === "user") {
+        if (res.data.user.type === "cliente") {
           navigate("/");
         } else {
           navigate("/user");

@@ -35,6 +35,7 @@ export const Header = styled.header`
     font-size: 1.25rem;
     font-weight: 700;
     font-family: var(--font-inter);
+    cursor: pointer;
   }
   @media screen and (min-width: 720px) {
     height: 105px;

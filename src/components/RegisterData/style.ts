@@ -13,6 +13,7 @@ export const RegisterData = styled.div<RegisterProps>`
     height: calc(100vh - 105px);
     max-width: 410px;
     z-index: 50;
+    box-shadow: -5px 0px 10px var(--drop-shadow);
     display: block;
     padding: 20px 10px;
     background-color: var(--grey-100);
