@@ -58,7 +58,7 @@ export const FormUser = () => {
       email,
       password,
       name,
-      type: "user",
+      type: "cliente",
       cpf,
       cep,
       street: cepData.logradouro,
