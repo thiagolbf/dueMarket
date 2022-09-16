@@ -1,7 +1,7 @@
 import { HeaderComponent } from "../../components/Header";
 import { CardMarketComponent } from "../../components/CardMarket";
 import { InputSearch } from "../../components/InputSearch";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { UsersContext } from "../../providers/Users";
 
 export const MarketsPage = () => {
