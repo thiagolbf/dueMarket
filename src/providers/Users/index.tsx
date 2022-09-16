@@ -10,8 +10,10 @@ interface UsersProviderData {
   user: UserSubmitData;
   token: string;
   getUser: (id: number) => void;
+  getUserMarket: () => void;
   nearProducts: MarketProducts[];
   getNearProducts: (city: string) => void;
+  markets: MarketSubmitData[];
 }
 
 interface UserSubmitData {
@@ -79,6 +81,9 @@ export const UsersProvider = ({ children }: UsersProviderProps) => {
   const [user, setUser] = useState<UserSubmitData>(
     {} as UserSubmitData
   );
+  const [markets, setMarkets] = useState<MarketSubmitData[]>(
+    [] as MarketSubmitData[]
+  );
   const [userId, setUserId] = useState(
     localStorage.getItem("@dueMarket:userId") || ""
   );
@@ -89,6 +94,12 @@ export const UsersProvider = ({ children }: UsersProviderProps) => {
   const getUser = (id: number) => {
     dueMarketApi.get(`users/${id}`).then((res) => {
       setUser(res.data);
+    });
+  };
+
+  const getUserMarket = () => {
+    dueMarketApi.get("users?type=mercado").then((res) => {
+      setMarkets(res.data);
     });
   };
 
@@ -168,8 +179,10 @@ export const UsersProvider = ({ children }: UsersProviderProps) => {
         user,
         token,
         getUser,
+        getUserMarket,
         getNearProducts,
         nearProducts,
+        markets,
       }}
     >
       {children}

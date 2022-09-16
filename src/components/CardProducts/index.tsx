@@ -1,7 +1,6 @@
 import { CartProduct } from "./style";
 import { MdClose } from "react-icons/md";
 import { TbHeartMinus, TbHeartPlus } from "react-icons/tb"
-
 interface CardProductComponentProps {
     img: string
     title: string
@@ -9,10 +8,9 @@ interface CardProductComponentProps {
     type: string
     previusValue: string
     newValue: string
-    userType?: "mercado" | "cliente" 
+    userType?: "mercado" | "cliente"
     wishlist?: boolean
 }
-
 export const CardProductComponent = ({img, title, date, type, previusValue, newValue, userType, wishlist}: CardProductComponentProps) => {
     return <CartProduct>
         <figure>
@@ -27,11 +25,11 @@ export const CardProductComponent = ({img, title, date, type, previusValue, newV
                 <h2>
                     {title}
                 </h2>
-                {userType === 'cliente' && 
+                {userType === 'cliente' &&
                     <button>
-                        {wishlist ? 
+                        {wishlist ?
                             <TbHeartMinus/>
-                        : 
+                        :
                             <TbHeartPlus/>
                         }
                     </button>

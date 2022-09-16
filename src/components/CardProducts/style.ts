@@ -46,7 +46,7 @@ export const CartProduct = styled.section`
             h2{
                 font-size: 1rem;
                 font-weight: 800;
-                color: #0d0d0d;
+                color: #0D0D0D;
             }
             button{
                 display: flex;
@@ -81,6 +81,5 @@ export const CartProduct = styled.section`
             font-weight: 500;
             text-decoration: line-through;
         }
-
     }
 `
