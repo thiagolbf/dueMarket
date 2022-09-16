@@ -14,6 +14,9 @@ interface UsersProviderData {
   nearProducts: MarketProducts[];
   getNearProducts: (city: string) => void;
   markets: UserSubmitData[];
+  userId: number;
+  patchUser: (data: NewUserData, token: string, userId: number) => void;
+  logout: () => void;
 }
 
 interface UserSubmitData {
@@ -68,6 +71,15 @@ interface Products {
   id: number;
 }
 
+interface NewUserData {
+  email: string;
+  password: string;
+  cep: string;
+  cpf?: string;
+  cnpj?: string;
+  image?: string;
+}
+
 export const UsersContext = createContext<UsersProviderData>(
   {} as UsersProviderData
 );
@@ -83,7 +95,7 @@ export const UsersProvider = ({ children }: UsersProviderProps) => {
     [] as UserSubmitData[]
   );
   const [userId, setUserId] = useState(
-    localStorage.getItem("@dueMarket:userId") || ""
+    Number(localStorage.getItem("@dueMarket:userId")) || 0
   );
   const [token, setToken] = useState<string>(
     localStorage.getItem("@dueMarket:token") || ""
@@ -106,6 +118,24 @@ export const UsersProvider = ({ children }: UsersProviderProps) => {
       getUser(Number(userId));
     }
   }, [userId, token]);
+
+  const patchUser = (data: NewUserData, token: string, userId: number) => {
+    dueMarketApi
+      .patch(`users/${userId}`, data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  };
+
+  const logout = () => {
+    localStorage.clear();
+    setUserId(0);
+    setToken("");
+    setUser({} as UserSubmitData);
+  };
 
   const postUserMarket = (data: UserSubmitData) => {
     dueMarketApi
@@ -178,6 +208,9 @@ export const UsersProvider = ({ children }: UsersProviderProps) => {
         getNearProducts,
         nearProducts,
         markets,
+        userId,
+        patchUser,
+        logout,
       }}
     >
       {children}
