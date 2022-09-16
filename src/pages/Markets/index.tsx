@@ -5,6 +5,7 @@ import { useContext } from "react";
 import { UsersContext } from "../../providers/Users";
 
 export const MarketsPage = () => {
+  const { getUserMarket, markets } = useContext(UsersContext);
   return (
     <>
       <HeaderComponent />
