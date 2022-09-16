@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 
 interface WhishListProviderData {
   whishlist: WhishList[];
-  getWhishListByUser: (userId: number, token: string, data: WhishList) => void;
+  getWhishListByUser: (userId: number, token: string) => void;
   addProductWhishList: (userId: number, token: string, data: WhishList) => void;
   deletProductWhishlist: (id: number, token: string) => void;
 }

@@ -15,7 +15,7 @@ import { FormUser } from "../../components/FormUser";
 export const RegisterPage = () => {
   const navigate = useNavigate();
 
-  const [userType, setUserType] = useState<boolean>(true);
+  const [userType, setUserType] = useState<boolean>(false);
 
   return (
     <Container>

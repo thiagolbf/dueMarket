@@ -5,8 +5,21 @@ interface CepProviderData {
   city: string;
   district: string;
   street: string;
-  getCep: (cep: string) => void;
+  getCep: (cep: string) => Promise<GetCep>;
   validCep: boolean;
+}
+
+interface GetCep {
+  bairro: string;
+  cep: string;
+  complemento: string;
+  ddd: string;
+  gia: string;
+  ibge: string;
+  localidade: string;
+  logradouro: string;
+  siafi: string;
+  uf: string;
 }
 
 interface CepProviderProps {
@@ -22,20 +35,25 @@ export const CepProvider = ({ children }: CepProviderProps) => {
   const [street, setStreet] = useState("");
   const [validCep, setValidCep] = useState(false);
 
-  const getCep = (cep: string) => {
-    viaCepApi
-      .get(`${cep}/json`)
-      .then((res) => {
-        setState(res.data.uf);
-        setCity(res.data.localidade);
-        setDistrict(res.data.bairro);
-        setStreet(res.data.logradouro);
-        setValidCep(true);
-      })
-      .catch((err) => {
-        console.log(err);
-        setValidCep(false);
-      });
+  const getCep = async (cep: string) => {
+    const cepData = await viaCepApi.get(`${cep}/json`);
+
+    // viaCepApi
+    //   .get(`${cep}/json`)
+    //   .then((res) => {
+    //     // setState(res.data);
+    //     // setCity(res.data.localidade);
+    //     // setDistrict(res.data.bairro);
+    //     // setStreet(res.data.logradouro);
+    //     // setValidCep(true);
+
+    //     cepData = res.data;
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //     setValidCep(false);
+    //   });
+    return cepData.data;
   };
 
   return (
