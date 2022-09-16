@@ -9,11 +9,7 @@ import { FaArrowRight } from "react-icons/fa";
 
 import { useState, useEffect } from "react";
 
-
-
 export const HomePage = () => {
-
-
   const { nearProducts } = useContext(UsersContext);
 
   const [inputCep, setInputCep] = useState<string>("");
@@ -47,22 +43,27 @@ export const HomePage = () => {
         {nearProducts.map((market) => {
           return (
             <>
-              <LinkToMarket key={market.id} to={`market/:${market.id}`}>
+              <LinkToMarket key={market.id} to={`markets/${market.id}`}>
                 <p>{market.name} </p>
                 <FaArrowRight />
               </LinkToMarket>
               {market.products.map((product) => {
-                return <p>{product.title}</p>;
+                return (
+                  <CardProductComponent
+                    key={product.id}
+                    date={product.duedate}
+                    img={product.image}
+                    newValue={product.newvalue}
+                    previusValue={product.oldvalue}
+                    title={product.title}
+                    type={product.category}
+                  />
+                );
               })}
-              {/* {market.products.map((product) => {
-                return <CardProductComponent key={product.id} date={product.duedate} img={product.image} newValue={product.newvalue} previusValue={product.oldvalue} title={product.title} type={product.category} user={undefined} />
-              })} */}
             </>
           );
         })}
       </MarketContent>
-
-     
     </>
   );
 };

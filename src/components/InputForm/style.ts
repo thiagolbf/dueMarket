@@ -2,16 +2,19 @@ import styled from "styled-components";
 
 interface InputFormStyleProps {
   error: boolean;
+  modal: boolean;
 }
 
 export const InputFormStyle = styled.div<InputFormStyleProps>`
-  height: 50px;
-  width: 100%;
+  height: ${(props) => (props.modal ? "51px" : "50px")};
+  width: ${(props) => (props.modal ? "270px" : "100%")};
   position: relative;
   border-radius: 8px;
   background-color: #f2f2f2;
   border: 1px solid
     ${(props) => (props.error ? "var(--negative)" : "transparent")};
+
+  margin-bottom: ${(props) => (props.modal ? "15px" : "none")};
 
   input {
     width: 100%;

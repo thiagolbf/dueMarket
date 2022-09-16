@@ -70,10 +70,8 @@ export const Container = styled.button<ButtonProps>`
   box-shadow: ${(props) => (props.shadow ? "var(--drop-shadow)" : "none")};
 
   svg {
-    display: ${(props) => (props.pencilButton ? "block" : "none")};
-    color: var(--green-800);
-    width: 25px;
-    height: 25px;
+    color: ${(props) =>
+      props.pencilButton ? "var(--green-800)" : "var(--grey-900)"};
   }
 
   &:hover {

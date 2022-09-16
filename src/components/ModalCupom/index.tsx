@@ -1,8 +1,10 @@
 import { ModalCupom } from "./style"
 import { RiAddFill } from "react-icons/ri"
 import { CardCupomComponent } from "../CardCupom"
-import { Dispatch, SetStateAction } from "react"
+import { Dispatch, SetStateAction, useContext, useEffect } from "react"
 import { HeaderModalComponent } from "../HeaderModal"
+import { CuponsContext } from "../../providers/Cupons"
+import { UsersContext } from "../../providers/Users"
 
 interface ModalCupomComponentProps {
     modalCupom: boolean
@@ -21,6 +23,13 @@ export const ModalCupomComponent = ({modalCupom, setModalCupom}: ModalCupomCompo
         }
     }
 
+    const { getCuponsByMarket, cupons } = useContext(CuponsContext)
+    const { userId, token,  } = useContext(UsersContext)
+
+    useEffect(() => {
+        getCuponsByMarket(userId, token) 
+    }, [])
+
     return <ModalCupom 
         modalCupom={modalCupom}
         id="modalCupom"
@@ -32,11 +41,7 @@ export const ModalCupomComponent = ({modalCupom, setModalCupom}: ModalCupomCompo
                 <button><RiAddFill/></button>
             </div>
             <div>
-                <CardCupomComponent/>
-                <CardCupomComponent/>
-                <CardCupomComponent/>
-                <CardCupomComponent/>
-                <CardCupomComponent/>
+                {cupons.map(cupom => <CardCupomComponent key={cupom.id} category={cupom.category} value={cupom.value}/>)}
             </div>
         </div>
     </ModalCupom>

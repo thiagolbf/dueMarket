@@ -5,30 +5,18 @@ import { useNavigate } from "react-router-dom";
 
 interface UsersProviderData {
   postUser: (data: UserSubmitData) => void;
-  postUserMarket: (data: MarketSubmitData) => void;
+  postUserMarket: (data: UserSubmitData) => void;
   postLogin: (data: SignInData) => void;
-  user: UserSubmitData | MarketSubmitData;
+  user: UserSubmitData;
   token: string;
   getUser: (id: number) => void;
   getUserMarket: () => void;
   nearProducts: MarketProducts[];
   getNearProducts: (city: string) => void;
-  markets: MarketSubmitData[];
-}
-
-interface MarketSubmitData {
-  email: string;
-  password: string;
-  name: string;
-  type: string;
-  cnpj: string;
-  cep: string;
-  street: string;
-  district: string;
-  city: string;
-  state: string;
-  image: string;
-  id?: number;
+  markets: UserSubmitData[];
+  userId: number;
+  patchUser: (data: NewUserData, token: string, userId: number) => void;
+  logout: () => void;
 }
 
 interface UserSubmitData {
@@ -36,12 +24,14 @@ interface UserSubmitData {
   password: string;
   name: string;
   type: string;
-  cpf: string;
+  cnpj?: string;
+  cpf?: string;
   cep: string;
   street: string;
   district: string;
   city: string;
   state: string;
+  image?: string;
   id?: number;
 }
 
@@ -81,6 +71,15 @@ interface Products {
   id: number;
 }
 
+interface NewUserData {
+  email: string;
+  password: string;
+  cep: string;
+  cpf?: string;
+  cnpj?: string;
+  image?: string;
+}
+
 export const UsersContext = createContext<UsersProviderData>(
   {} as UsersProviderData
 );
@@ -91,14 +90,12 @@ export const UsersProvider = ({ children }: UsersProviderProps) => {
   const [nearProducts, setNearProducts] = useState<MarketProducts[]>(
     [] as MarketProducts[]
   );
-  const [user, setUser] = useState<MarketSubmitData | UserSubmitData>(
-    {} as MarketSubmitData | UserSubmitData
-  );
-  const [markets, setMarkets] = useState<MarketSubmitData[]>(
-    [] as MarketSubmitData[]
+  const [user, setUser] = useState<UserSubmitData>({} as UserSubmitData);
+  const [markets, setMarkets] = useState<UserSubmitData[]>(
+    [] as UserSubmitData[]
   );
   const [userId, setUserId] = useState(
-    localStorage.getItem("@dueMarket:userId") || ""
+    Number(localStorage.getItem("@dueMarket:userId")) || 0
   );
   const [token, setToken] = useState<string>(
     localStorage.getItem("@dueMarket:token") || ""
@@ -122,11 +119,30 @@ export const UsersProvider = ({ children }: UsersProviderProps) => {
     }
   }, [userId, token]);
 
-  const postUserMarket = (data: MarketSubmitData) => {
+  const patchUser = (data: NewUserData, token: string, userId: number) => {
+    dueMarketApi
+      .patch(`users/${userId}`, data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  };
+
+  const logout = () => {
+    localStorage.clear();
+    setUserId(0);
+    setToken("");
+    setUser({} as UserSubmitData);
+    navigate("/")
+  };
+
+  const postUserMarket = (data: UserSubmitData) => {
     dueMarketApi
       .post("users", data)
       .then((res) => {
-        console.log(res);
+        navigate("/login");
         toast.success("Cadastro feito com sucesso!");
       })
       .catch((err) => {
@@ -155,15 +171,12 @@ export const UsersProvider = ({ children }: UsersProviderProps) => {
           "@dueMarket:userId",
           JSON.stringify(res.data.user.id)
         );
-        localStorage.setItem(
-          "@dueMarket:token",
-          JSON.stringify(res.data.accessToken)
-        );
+        localStorage.setItem("@dueMarket:token", res.data.accessToken);
         setUserId(res.data.user.id);
         setToken(res.data.accessToken);
         toast.success("Login feito com sucesso!");
 
-        if (res.data.user.type === "user") {
+        if (res.data.user.type === "cliente") {
           navigate("/");
         } else {
           navigate("/user");
@@ -196,6 +209,9 @@ export const UsersProvider = ({ children }: UsersProviderProps) => {
         getNearProducts,
         nearProducts,
         markets,
+        userId,
+        patchUser,
+        logout,
       }}
     >
       {children}
