@@ -5,28 +5,13 @@ import { useNavigate } from "react-router-dom";
 
 interface UsersProviderData {
   postUser: (data: UserSubmitData) => void;
-  postUserMarket: (data: MarketSubmitData) => void;
+  postUserMarket: (data: UserSubmitData) => void;
   postLogin: (data: SignInData) => void;
-  user: UserSubmitData | MarketSubmitData;
+  user: UserSubmitData;
   token: string;
   getUser: (id: number) => void;
   nearProducts: MarketProducts[];
   getNearProducts: (city: string) => void;
-}
-
-interface MarketSubmitData {
-  email: string;
-  password: string;
-  name: string;
-  type: string;
-  cnpj: string;
-  cep: string;
-  street: string;
-  district: string;
-  city: string;
-  state: string;
-  image: string;
-  id?: number;
 }
 
 interface UserSubmitData {
@@ -34,12 +19,14 @@ interface UserSubmitData {
   password: string;
   name: string;
   type: string;
-  cpf: string;
+  cnpj?: string;
+  cpf?: string;
   cep: string;
   street: string;
   district: string;
   city: string;
   state: string;
+  image?: string;
   id?: number;
 }
 
@@ -89,8 +76,8 @@ export const UsersProvider = ({ children }: UsersProviderProps) => {
   const [nearProducts, setNearProducts] = useState<MarketProducts[]>(
     [] as MarketProducts[]
   );
-  const [user, setUser] = useState<MarketSubmitData | UserSubmitData>(
-    {} as MarketSubmitData | UserSubmitData
+  const [user, setUser] = useState<UserSubmitData>(
+    {} as UserSubmitData
   );
   const [userId, setUserId] = useState(
     localStorage.getItem("@dueMarket:userId") || ""
@@ -111,7 +98,7 @@ export const UsersProvider = ({ children }: UsersProviderProps) => {
     }
   }, [userId, token]);
 
-  const postUserMarket = (data: MarketSubmitData) => {
+  const postUserMarket = (data: UserSubmitData) => {
     dueMarketApi
       .post("users", data)
       .then((res) => {
@@ -146,7 +133,7 @@ export const UsersProvider = ({ children }: UsersProviderProps) => {
         );
         localStorage.setItem(
           "@dueMarket:token",
-          JSON.stringify(res.data.accessToken)
+          res.data.accessToken
         );
         setUserId(res.data.user.id);
         setToken(res.data.accessToken);

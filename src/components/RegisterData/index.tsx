@@ -2,13 +2,25 @@ import { Dispatch, SetStateAction, useState } from "react"
 import { RegisterData } from "./style"
 import { FaPencilAlt } from 'react-icons/fa'
 import { GrFormNext, GrFormClose } from 'react-icons/gr'
+import { Button } from "../Button"
 
 interface RegisterDataComponentProps {
-    setActiveRD: Dispatch<SetStateAction<boolean>>
     activeRD: boolean
+    setActiveRD: Dispatch<SetStateAction<boolean>>
+    cep: string
+    city: string
+    street: string
+    name: string
+    email: string
+    cpf?: string
+    cnpj?: string
+    state: string
+    district: string
+    image?: string
+    userType: string
 }
 
-export const RegisterDataComponent = ({setActiveRD, activeRD}: RegisterDataComponentProps) => {
+export const RegisterDataComponent = ({setActiveRD, activeRD, cnpj, cpf, name, email, street, city, district, state, cep, userType, image}: RegisterDataComponentProps) => {
     const [edit, setEdit] = useState(false)
     return <RegisterData active={activeRD} edit={edit}>
         <div>
@@ -23,22 +35,24 @@ export const RegisterDataComponent = ({setActiveRD, activeRD}: RegisterDataCompo
             </button>
         </div>
         <div>
-            <p>Maria Joana</p>
-            <p>maria@kenzie.com</p>
-            <p>123.456.789-10</p>
+            <p>{name}</p>
+            <p>{email}</p>
+            <p>{userType === 'cliente' ? cpf : cnpj}</p>
             <p>
-                Av. John Sanford,<br />
-                Junco, Sobral - CE<br />
-                62030-975<br />
+                {street},<br />
+                {district}, {city} - {state}<br />
+                {cep}<br />
             </p>
+            {userType === "mercado" && <img src={image} alt={name} />}
         </div>
         <div>
-            <input type="text" placeholder="Maria Joana"/>
-            <input type="email" placeholder="maria@kenzie.com"/>
-            <input type="text" placeholder="123.456.789-10"/>
-            <input type="text" placeholder="62030-975"/>
+            <input type="text" placeholder={name}/>
+            <input type="email" placeholder={email}/>
+            <input type="text" placeholder={cep}/>
+            <input type="text" placeholder={userType === 'cliente' ? cpf : cnpj}/>
+            {userType === "mercado" && <input type='text' placeholder={image}/>}
             <div>
-                <button>Salvar</button>
+                <Button dataBlue >Salvar</Button>
                 <button onClick={()=>setEdit(false)}>Cancelar</button>
             </div>
         </div>

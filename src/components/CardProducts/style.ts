@@ -3,8 +3,8 @@ export const CartProduct = styled.section`
     width: 300px;
     background-color: var(--grey-100);
     border: 2px solid var(--grey-300);
-    border-radius: 10px;
     transition: all .5s;
+    border-radius: 10px;
     &:hover{
         transform: scale(1.025);
         border-color: var(--green-800);

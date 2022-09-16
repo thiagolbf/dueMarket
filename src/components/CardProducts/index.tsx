@@ -24,7 +24,9 @@ export const CardProductComponent = ({img, title, date, type, previusValue, newV
         </figure>
         <div>
             <div>
-                <h2>{title}</h2>
+                <h2>
+                    {title}
+                </h2>
                 {userType === 'cliente' && 
                     <button>
                         {wishlist ? 
