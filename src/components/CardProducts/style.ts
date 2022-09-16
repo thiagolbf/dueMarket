@@ -1,5 +1,6 @@
 import styled from "styled-components";
 export const CartProduct = styled.section`
+
   width: 300px;
   height: max-content;
   border: 2px solid var(--grey-300);
@@ -30,6 +31,9 @@ export const CartProduct = styled.section`
         filter: brightness(1.5);
         transform: scale(1.2);
       }
+
+   
+
     }
     img {
       max-width: 100%;
@@ -50,6 +54,7 @@ export const CartProduct = styled.section`
       }
       button {
         display: flex;
+
         background-color: transparent;
         border: var(--blue-500) 1px solid;
         color: var(--blue-500);
@@ -60,6 +65,7 @@ export const CartProduct = styled.section`
         &:hover {
           filter: brightness(1.5);
           transform: scale(1.1);
+
         }
       }
     }
