@@ -66,7 +66,7 @@ export const FormMarket = () => {
       email,
       password,
       name,
-      type: "market",
+      type: "mercado",
       cnpj,
       cep,
       street: cepData.logradouro,
