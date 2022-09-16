@@ -1,3 +1,16 @@
+import { HeaderComponent } from "../../components/Header";
+import { CardMarketComponent } from "../../components/CardMarket";
+import { InputSearch } from "../../components/InputSearch";
+import { useContext } from "react";
+import { UsersContext } from "../../providers/Users";
+
 export const MarketsPage = () => {
-  return <div>MERCADOS</div>;
+  return (
+    <>
+      <HeaderComponent />
+      <CardMarketComponent />
+    </>
+  );
 };
+
+//<CardMarketComponent />
