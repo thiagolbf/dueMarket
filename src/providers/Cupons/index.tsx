@@ -4,7 +4,11 @@ import { toast } from "react-toastify";
 interface CuponsProviderData {
   cupons: Cupons[];
   getCuponsByMarket: (userId: number, token: string) => void;
-  createCupom: (userId: number, token: string, data: Cupons) => void;
+  createCupom: (
+    userId: number | undefined,
+    token: string,
+    data: Cupons
+  ) => void;
   deleteCupom: (id: number, token: string) => void;
 }
 
@@ -16,8 +20,8 @@ interface Cupons {
   category: string;
   name: string;
   value: string;
-  userId: number;
-  id: number;
+  userId?: number;
+  id?: number;
 }
 
 export const CuponsContext = createContext<CuponsProviderData>(
@@ -40,7 +44,11 @@ export const CuponsProvider = ({ children }: CuponsProviderProps) => {
   };
 
   //Função para criar um cupom;
-  const createCupom = (userId: number, token: string, data: Cupons) => {
+  const createCupom = (
+    userId: number | undefined,
+    token: string,
+    data: Cupons
+  ) => {
     const cupon = { ...data, userId };
     dueMarketApi
       .post(`/cupons`, cupon, { headers: { Authorization: `Bearer ${token}` } })
