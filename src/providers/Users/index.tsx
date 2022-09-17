@@ -75,6 +75,10 @@ interface NewUserData {
   name: string
   email: string;
   cep: string;
+  street: string;
+  district: string;
+  city: string;
+  state: string;
   cpf?: string;
   cnpj?: string;
   image?: string;
