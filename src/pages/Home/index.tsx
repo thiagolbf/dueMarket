@@ -10,15 +10,29 @@ import { InputSearch } from "../../components/InputSearch";
 import { CardProductComponent } from "../../components/CardProducts";
 import { UsersContext } from "../../providers/Users";
 
+import { KeyboardEvent } from "react";
 import { useContext } from "react";
 import { FaArrowRight } from "react-icons/fa";
 
 import { useState, useEffect } from "react";
+import { CepContext } from "../../providers/Cep";
 
 export const HomePage = () => {
-  const { nearProducts, user } = useContext(UsersContext);
+  const { nearProducts, user, getNearProducts } = useContext(UsersContext);
+  const { getCep } = useContext(CepContext);
 
   const [inputCep, setInputCep] = useState<string>("");
+
+  const checkCep = async (cep: string) => {
+    const cepUser = await getCep(cep);
+
+    if (cepUser.localidade) {
+      getNearProducts(cepUser.localidade);
+      console.log(cepUser.localidade);
+    } else {
+      console.log("erro");
+    }
+  };
 
   useEffect(() => {}, [nearProducts]);
 
@@ -36,10 +50,14 @@ export const HomePage = () => {
           type="text"
           placeholder="Digite seu CEP"
           value={inputCep}
+          onKeyDown={(e: KeyboardEvent<HTMLDivElement>) =>
+            e.key === "Enter" && checkCep(inputCep)
+          }
           onChange={(e) => {
             setInputCep(e.target.value);
           }}
           inputCep={inputCep}
+          checkCep={checkCep}
         />
 
         <span>*apenas números</span>
