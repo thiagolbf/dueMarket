@@ -2,22 +2,25 @@ import { HeaderComponent } from "../../components/Header";
 import { CardMarketComponent } from "../../components/CardMarket";
 import { InputSearch } from "../../components/InputSearch";
 import { useContext, useEffect, useState } from "react";
-
+import { CepContext } from "../../providers/Cep";
 import { UsersContext } from "../../providers/Users";
 import { MarketList, Box, MarketCard, MarketListComponent } from "./style";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 interface MarketSearchProps {
   name: string;
   image: string;
   city: string;
-  district: string;
+  state: string;
   cep: string;
+  id: number;
 }
 
 export const MarketsPage = () => {
   const { getUserMarket, nearProducts, getNearProducts, setNearProducts } =
     useContext(UsersContext);
+  const { getCep } = useContext(CepContext);
   const { markets } = useContext(UsersContext);
   const [inputCep, setInputCep] = useState<string>("");
 
@@ -30,15 +33,17 @@ export const MarketsPage = () => {
 
     if (cepUser.localidade) {
       getNearProducts(cepUser.localidade);
-      console.log(cepUser.localidade);
     } else {
-      console.log("erro");
+      toast.error("CEP invalido");
     }
   };
 
   useEffect(() => {
     getUserMarket();
-  }, []);
+    if (inputCep.length > 0) {
+      setNearMarket(nearProducts);
+    }
+  }, [nearProducts]);
 
   return (
     <>
@@ -53,24 +58,39 @@ export const MarketsPage = () => {
           onChange={(e) => {
             setInputCep(e.target.value);
           }}
+          checkCep={checkCep}
           inputCep={inputCep}
         />
       </Box>
       <MarketListComponent>
         <MarketList>
-          {markets.map((value) => (
-            <MarketCard key={value.id}>
-              <Link to={`/markets/${value.id}`}>
-                <CardMarketComponent
-                  name={value.name}
-                  image={value.image}
-                  city={value.city}
-                  state={value.state}
-                  cep={value.cep}
-                />
-              </Link>
-            </MarketCard>
-          ))}
+          {nearMarket.length <= 0
+            ? markets.map((value) => (
+                <MarketCard key={value.id}>
+                  <Link to={`/markets/${value.id}`}>
+                    <CardMarketComponent
+                      name={value.name}
+                      image={value.image}
+                      city={value.city}
+                      state={value.state}
+                      cep={value.cep}
+                    />
+                  </Link>
+                </MarketCard>
+              ))
+            : nearMarket.map((value) => (
+                <MarketCard key={value.id}>
+                  <Link to={`/markets/${value.id}`}>
+                    <CardMarketComponent
+                      name={value.name}
+                      image={value.image}
+                      city={value.city}
+                      state={value.state}
+                      cep={value.cep}
+                    />
+                  </Link>
+                </MarketCard>
+              ))}
         </MarketList>
       </MarketListComponent>
     </>
