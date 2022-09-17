@@ -52,7 +52,9 @@ export const ModalCreateCupom = ({
 
   const handleCreateCupom = (data: CupomData) => {
     const newData = { userId: user.id, ...data };
+    console.log("passei");
     createCupom(user.id, token, newData);
+    setModalCreateCupom(false);
   };
 
   return (
@@ -87,7 +89,7 @@ export const ModalCreateCupom = ({
               label="Nome do produto"
               error={!!errors.name}
             />
-            <Button blueForm fInter fSize18>
+            <Button blueForm fInter fSize18 type="submit">
               Gerar cupom
             </Button>
           </form>
