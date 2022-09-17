@@ -4,13 +4,38 @@ import { InputSearch } from "../../components/InputSearch";
 import { useContext, useEffect, useState } from "react";
 
 import { UsersContext } from "../../providers/Users";
-import { MarketList, Box } from "./style";
+import { MarketList, Box, MarketCard, MarketListComponent } from "./style";
 import { Link } from "react-router-dom";
 
+interface MarketSearchProps {
+  name: string;
+  image: string;
+  city: string;
+  district: string;
+  cep: string;
+}
+
 export const MarketsPage = () => {
-  const { getUserMarket } = useContext(UsersContext);
+  const { getUserMarket, nearProducts, getNearProducts, setNearProducts } =
+    useContext(UsersContext);
   const { markets } = useContext(UsersContext);
   const [inputCep, setInputCep] = useState<string>("");
+
+  const [nearMarket, setNearMarket] = useState<MarketSearchProps[]>(
+    [] as MarketSearchProps[]
+  );
+
+  const checkCep = async (cep: string) => {
+    const cepUser = await getCep(cep);
+
+    if (cepUser.localidade) {
+      getNearProducts(cepUser.localidade);
+      console.log(cepUser.localidade);
+    } else {
+      console.log("erro");
+    }
+  };
+
   useEffect(() => {
     getUserMarket();
   }, []);
@@ -31,10 +56,10 @@ export const MarketsPage = () => {
           inputCep={inputCep}
         />
       </Box>
-
-      {markets.length > 0
-        ? markets.map((value) => (
-            <MarketList key={value.id}>
+      <MarketListComponent>
+        <MarketList>
+          {markets.map((value) => (
+            <MarketCard key={value.id}>
               <Link to={`/markets/${value.id}`}>
                 <CardMarketComponent
                   name={value.name}
@@ -44,9 +69,10 @@ export const MarketsPage = () => {
                   cep={value.cep}
                 />
               </Link>
-            </MarketList>
-          ))
-        : null}
+            </MarketCard>
+          ))}
+        </MarketList>
+      </MarketListComponent>
     </>
   );
 };
