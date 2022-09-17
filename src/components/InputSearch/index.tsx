@@ -11,37 +11,25 @@ import { InputContainer } from "./style";
 interface InputSearchProps extends InputHTMLAttributes<HTMLInputElement> {
   inputCep: string;
   marketPage?: boolean;
+  checkCep?: (cep: string) => void;
 }
 
 export const InputSearch = ({
   inputCep,
   marketPage,
+  checkCep,
   ...rest
 }: InputSearchProps) => {
-  const { getCep } = useContext(CepContext);
-  const { getNearProducts } = useContext(UsersContext);
-
-  const checkCep = async (cep: string) => {
-    const cepUser = await getCep(cep);
-
-    if (cepUser.localidade) {
-      getNearProducts(cepUser.localidade);
-      console.log(cepUser.localidade);
-    } else {
-      console.log("erro");
-    }
-  };
-
   return (
     <InputContainer>
       <input {...rest} />
 
       {marketPage ? (
-        <div onClick={() => checkCep(inputCep)}>
+        <div onClick={() => checkCep?.(inputCep)}>
           <FaSearch />
         </div>
       ) : (
-        <div onClick={() => checkCep(inputCep)}>
+        <div onClick={() => checkCep?.(inputCep)}>
           <FaSearch />
         </div>
       )}

@@ -49,20 +49,14 @@ export const RegisterData = styled.div<RegisterProps>`
         display: ${props => !props.edit ? 'none' : 'flex'};
         flex-direction: column;
         gap: 20px;
-        input{
-            height: 50px;
-            background-color: var(--grey-50);
-            border: 2px solid var(--grey-600);
-            font-size: 1.25rem;
-            border-radius: 10px;
-            color: var(--grey-900);
-
-            padding: 0 10px;
-            &::placeholder{
-                color: var(--grey-300);
+        >div{
+            p{
+                margin-top: 5px;
+                margin-left: 5px;
+                color: var(--negative);
             }
         }
-        div{
+        >div:last-child{
             display: flex;
             gap: 1%;
             button{
