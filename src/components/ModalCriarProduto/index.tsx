@@ -16,8 +16,9 @@ interface ModalCriarProdutoProps {
   setModalProduto: Dispatch<SetStateAction<boolean>>;
   title: string;
   category: string;
-  oldPrice: string;
-  newPrice: string;
+  duedate: string;
+  oldvalue: string;
+  newvalue: string;
   image: string;
 }
 
@@ -35,8 +36,9 @@ export const ModalCriarProduto = ({
   const schema = yup.object().shape({
     title: yup.string().required("Campo obrigatório"),
     category: yup.string().required("Campo obrigatório"),
-    oldPrice: yup.string().required("Campo obrigatório"),
-    newPrice: yup.string().required("Campo obrigatório"),
+    oldvalue: yup.string().required("Campo obrigatório"),
+    newvalue: yup.string().required("Campo obrigatório"),
+    duedate: yup.string().required("Campo obrigatório"),
     image: yup.string().required("Campo obrigatório"),
   });
 
@@ -50,16 +52,19 @@ export const ModalCriarProduto = ({
   const productSubmit = async ({
     title,
     category,
-    oldPrice,
-    newPrice,
+    oldvalue,
+    newvalue,
+    duedate,
     image,
   }: ModalCriarProdutoProps) => {
     const objectProduct = {
       title,
       category,
-      oldPrice,
-      newPrice,
+      oldvalue,
+      newvalue,
+      duedate,
       image,
+      userId,
     };
 
     createProduct(userId, token, objectProduct);
@@ -97,15 +102,21 @@ export const ModalCriarProduto = ({
           />
           <InputForm
             type="text"
-            {...register("oldPrice")}
-            error={!!errors.oldPrice}
+            {...register("oldvalue")}
+            error={!!errors.oldvalue}
             label="Valor Antigo"
           />
           <InputForm
             type="text"
-            {...register("newPrice")}
-            error={!!errors.newPrice}
+            {...register("newvalue")}
+            error={!!errors.newvalue}
             label="Valor Atual"
+          />
+          <InputForm
+            type="text"
+            {...register("duedate")}
+            error={!!errors.duedate}
+            label="Data de validade"
           />
           <InputForm
             type="text"
