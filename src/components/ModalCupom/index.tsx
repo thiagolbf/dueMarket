@@ -37,7 +37,7 @@ export const ModalCupomComponent = ({
 
   useEffect(() => {
     getCuponsByMarket(userId, token);
-  }, [cupons]);
+  }, []);
 
   return (
     <>
@@ -51,29 +51,29 @@ export const ModalCupomComponent = ({
             Cupons
           </HeaderModalComponent>
           <div>
-            <button onClick={() => setModalCreateCupom?.(true)}>
+            <button onClick={() => {
+              setModalCupom(false)
+              setModalCreateCupom?.(true)
+            }}>
               <RiAddFill />
             </button>
           </div>
           <div>
-            {cupons.length > 0
-              ? cupons.map((cupom) => (
-                  <CardCupomComponent
-                    key={cupom.id}
-                    category={cupom.category}
-                    value={cupom.value}
-                  />
-                ))
-              : null}
+            {cupons.map((cupom) => (
+              <CardCupomComponent
+                key={cupom.id}
+                category={cupom.category}
+                value={cupom.value}
+              />
+            ))}
           </div>
         </div>
       </ModalCupom>
-      {modalCreateCupom ? (
-        <ModalCreateCupom
-          modalCreate={modalCreateCupom}
-          setModalCreateCupom={setModalCreateCupom}
-        />
-      ) : null}
+      <ModalCreateCupom
+        modalCreate={modalCreateCupom}
+        setModalCreateCupom={setModalCreateCupom}
+        setModalCupom={setModalCupom}
+      />
     </>
   );
 };

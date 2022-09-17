@@ -1,7 +1,11 @@
 import styled from "styled-components";
 
-export const Modal = styled.div`
-  display: flex;
+interface ModalProps {
+  active: boolean
+}
+
+export const Modal = styled.div<ModalProps>`
+  display: ${({active})=> active ? 'flex' : 'none'};
   align-items: center;
   justify-content: center;
   height: 100vh;
@@ -12,12 +16,15 @@ export const Modal = styled.div`
   background-color: var(--drop-shadow);
 `;
 
-export const Container = styled.div``;
+export const Container = styled.div`
+  background-color: var(--blue-800);
+  border-radius: 10px;
+  overflow: hidden;
+`;
 
 export const Content = styled.div`
   width: 320px;
   height: 300px;
-  background-color: var(--blue-800);
   border-radius: 0 0 5px 5px;
 
   display: flex;
