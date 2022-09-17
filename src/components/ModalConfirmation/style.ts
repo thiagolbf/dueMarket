@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
 interface ModalConfirmationProps {
-  active: boolean
+  active: boolean;
 }
 
 export const ModalConfirmation = styled.div<ModalConfirmationProps>`
-  display: ${({active}) => active ? "flex" : "none"};
+  display: ${({ active }) => (active ? "flex" : "none")};
   align-items: center;
   justify-content: center;
   height: 100vh;
