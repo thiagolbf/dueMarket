@@ -14,12 +14,15 @@ import { toast } from "react-toastify";
 interface ModalCriarProdutoProps {
   modalProduto: boolean;
   setModalProduto: Dispatch<SetStateAction<boolean>>;
+}
+
+interface NewProduct {
   title: string;
   category: string;
   duedate: string;
   oldvalue: string;
   newvalue: string;
-  image: string;
+  image: string;  
 }
 
 interface TargetProps extends EventTarget {
@@ -47,7 +50,7 @@ export const ModalCriarProduto = ({
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<ModalCriarProdutoProps>({ resolver: yupResolver(schema) });
+  } = useForm<NewProduct>({ resolver: yupResolver(schema) });
 
   const productSubmit = async ({
     title,
@@ -56,7 +59,7 @@ export const ModalCriarProduto = ({
     newvalue,
     duedate,
     image,
-  }: ModalCriarProdutoProps) => {
+  }: NewProduct) => {
     const objectProduct = {
       title,
       category,
@@ -68,6 +71,7 @@ export const ModalCriarProduto = ({
     };
 
     createProduct(userId, token, objectProduct);
+    setModalProduto(false);
   };
 
   const handleEvent = (id: string) => {

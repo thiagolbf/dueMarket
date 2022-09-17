@@ -4,11 +4,12 @@ import { HeaderModalComponent } from "../HeaderModal";
 import { Button } from "../Button";
 import { useContext } from "react";
 import { ProductsContext } from "../../providers/Products";
+import { UsersContext } from "../../providers/Users";
 
 interface ModalConfirmationComponentProps {
   modalConfirmation: boolean;
   setModalConfirmation: Dispatch<SetStateAction<boolean>>;
-  productId: number;
+  productId?: number;
   token: string;
 }
 
@@ -22,9 +23,10 @@ export const ModalConfirmationComponent = ({
   modalConfirmation,
   setModalConfirmation,
   productId,
-  token,
 }: ModalConfirmationComponentProps) => {
   const { deleteProduct } = useContext(ProductsContext);
+
+  const { token, userId } = useContext(UsersContext)
 
   const handleEvent = (id: string) => {
     if (id === "modalConfirmation") {
@@ -43,7 +45,7 @@ export const ModalConfirmationComponent = ({
           Deseja concluir a ação?
         </HeaderModalComponent>
         <div className="modalConfirmationButtons">
-          <Button lightGreyForm onClick={() => deleteProduct(token, productId)}>
+          <Button lightGreyForm onClick={() => deleteProduct(token, productId, userId)}>
             Sim
           </Button>
           <Button blueForm onClick={() => setModalConfirmation(false)}>

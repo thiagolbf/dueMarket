@@ -76,7 +76,19 @@ export const LinkToMarket = styled(Link)`
 
 export const CardContainer = styled.div`
   display: flex;
-  gap: 60px;
+  gap: 30px;
   margin-bottom: 20px;
-  overflow-x: auto;
+  height: max-content;
+  overflow-x: scroll;
+  padding: 5px;
+  ::-webkit-scrollbar{
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track{
+    background-color: transparent;
+  }
+  ::-webkit-scrollbar-thumb{
+    border-radius: 10px;
+    background-color: var(--blue-500);
+  }
 `;
