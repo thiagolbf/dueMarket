@@ -94,7 +94,7 @@ export const Mobile = styled.div<MobileProps>`
 
 export const Nav = styled.nav<MobileProps>`
   background-color: inherit;
-  height: ${(props) => (props.active ? 0 : "99px")};
+  height: ${(props) => (props.active ? 0 : "132px")};
   width: 100vw;
   overflow: hidden;
   position: fixed;
