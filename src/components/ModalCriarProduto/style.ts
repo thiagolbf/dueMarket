@@ -26,7 +26,7 @@ export const ModalProduto = styled.div<ModalProdutoProps>`
     display: flex;
     flex-direction: column;
     gap: 25px;
-    //overflow-y: scroll;
+    overflow-y: scroll;
     align-items: stretch;
     justify-content: space-between;
 
