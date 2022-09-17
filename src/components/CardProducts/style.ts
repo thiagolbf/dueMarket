@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 export const CartProduct = styled.section`
-    width: 300px;
+    min-width: 300px;
+    max-width: 300px;
     background-color: var(--grey-100);
     border: 2px solid var(--grey-300);
     transition: all .5s;

@@ -45,7 +45,7 @@ export const RegisterData = styled.div<RegisterProps>`
             text-align: center;
         }
     }
-    >div:nth-child(3){
+    >form:nth-child(3){
         display: ${props => !props.edit ? 'none' : 'flex'};
         flex-direction: column;
         gap: 20px;

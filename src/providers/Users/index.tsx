@@ -72,8 +72,8 @@ interface Products {
 }
 
 interface NewUserData {
+  name: string
   email: string;
-  password: string;
   cep: string;
   cpf?: string;
   cnpj?: string;
@@ -126,8 +126,11 @@ export const UsersProvider = ({ children }: UsersProviderProps) => {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+      .then((res) => {
+        toast.success('Usuario atualizado com sucesso')
+        setUser(res.data)
+      })
+      .catch((err) => toast.error('Não foi possivel atualizar o seu usuario'));
   };
 
   const logout = () => {

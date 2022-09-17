@@ -1,8 +1,12 @@
-import { Dispatch, SetStateAction, useState } from "react"
+import { Dispatch, SetStateAction, useContext, useState } from "react"
 import { RegisterData } from "./style"
 import { FaPencilAlt } from 'react-icons/fa'
 import { GrFormNext, GrFormClose } from 'react-icons/gr'
 import { Button } from "../Button"
+import { UsersContext } from "../../providers/Users"
+import * as yup from 'yup'
+import { yupResolver } from "@hookform/resolvers/yup"
+import { useForm } from "react-hook-form"
 
 interface RegisterDataComponentProps {
     activeRD: boolean
@@ -20,38 +24,71 @@ interface RegisterDataComponentProps {
     userType: string
 }
 
-interface RegisterDataPros {
-    name: string
-    email: string
-    cpf?: string
-    cnpj?: string
-    cep: string
-    image: string
+interface NewUser {
+    name: string,
+    email: string,
+    cep: string,
+    cpf?: string,
+    cnpj?: string,
+    image?: string
 }
 
 export const RegisterDataComponent = ({setActiveRD, activeRD, cnpj, cpf, name, email, street, city, district, state, cep, userType, image}: RegisterDataComponentProps) => {
     const [edit, setEdit] = useState(false)
-    const [nameForm, setNameForm] = useState(name)
-    const [cpfCnpjForm, setCpfCnpfForm] = useState(cpf ? cpf : cnpj)
-    const [emailForm, setEmailForm] = useState(email)
-    const [cepForm, setCepForm] = useState(cep)
-    const [imageForm, setImageForm] = useState(image)
-    const handleEvent = () => {
-        const objComun = {
-            name: nameForm,
-            email: emailForm,
-            cep: cepForm
-        }
-        const objUser = userType === "cliente" ? 
-        {cpf: cpfCnpjForm} 
-        : 
-        {
-            cnpj: cpfCnpjForm,
-            image: imageForm
-        }
-        console.log({
-            ...objComun,
-            ...objUser
+    const { patchUser, token, userId } = useContext(UsersContext)
+
+    const userSchema = yup.object().shape({
+        name: yup.string().transform((value)=>value ? value : name),
+        cpf: yup
+            .string()
+            .transform((value)=>value ? value : cpf)
+            .min(11, "Minimo de 11 números")
+            .max(11, "Colocar apenas 11 números"),
+        cep: yup
+            .string()
+            .transform((value)=>value ? value : cep)
+            .min(8, "Minimo de 8 números")
+            .max(8, "Colocar apenas 8 números"),
+        email: yup.string().transform((value)=>value ? value : name).email("Email invalido"),
+    });
+
+    const marketSchema = yup.object().shape({
+        name: yup.string()
+        .transform((value)=>value ? value : name),
+        cnpj: yup
+            .string()
+            .transform((value)=>value ? value : cnpj)
+            .min(14, "Minimo de 14 números")
+            .max(14, "Colocar apenas 14 números"),
+        cep: yup
+            .string()
+            .transform((value)=>value ? value : cpf)
+            .min(8, "Colocar apenas 8 números")
+            .max(8, "Colocar apenas 8 números"),
+        email: yup.string()
+        .transform((value)=>value ? value : cpf)
+        .email("Email invalido"),
+        image: yup.string()
+        .transform((value)=>value ? value : cpf)
+    });
+
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+        reset
+    } = useForm<NewUser>({ resolver: yupResolver(userType === "cliente" ? userSchema : marketSchema) });
+
+    const handleEvent = (data: NewUser) => {
+        patchUser(data, token, userId)
+        setEdit(false)
+        reset({
+            email: "",
+            name: "",
+            cpf: "",
+            cep: "",
+            image: "",
+            cnpj: ""
         })
     }
 
@@ -78,40 +115,40 @@ export const RegisterDataComponent = ({setActiveRD, activeRD, cnpj, cpf, name, e
             </p>
             {userType === "mercado" && <img src={image} alt={name} />}
         </div>
-        <div>
+        <form onSubmit={handleSubmit(handleEvent)}>
             <input 
                 type="text" 
                 placeholder={name}
-                onChange={({target})=>setNameForm(target.value === "" ? name : target.value)}
+                {...register("name")}
             />
             <input 
                 type="email" 
                 placeholder={email}
-                onChange={({target})=>setEmailForm(target.value === "" ? email : target.value)}
+                {...register("email")}
             />
             <input 
                 type="text" 
                 placeholder={cep}
-                onChange={({target})=>setCepForm(target.value === "" ? name : target.value)}
+                {...register("cep")}
             />
             <input 
                 type="text" 
                 placeholder={userType === 'cliente' ? cpf : cnpj}
-                onChange={({target})=>setCpfCnpfForm(target.value === "" ? userType === 'cliente' ? cpf : cnpj : target.value)}
+                {...register(userType === "cliente" ? "cpf" : "cnpj")}
             />
             {userType === "mercado" && <input 
                 type='text' 
                 placeholder={image}
-                onChange={({target})=>setImageForm(target.value === "" ? image : target.value)}
+                {...register("image")}
             />}
             <div>
-                <Button dataBlue onClick={handleEvent}>
+                <Button dataBlue type="submit" onSubmit={handleSubmit(handleEvent)}>
                     Salvar
                 </Button>
                 <Button dataGrey onClick={()=>setEdit(false)}>
                     Cancelar
                 </Button>
             </div>
-        </div>
+        </form>
     </RegisterData>
 }

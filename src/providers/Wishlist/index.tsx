@@ -5,8 +5,8 @@ import { toast } from "react-toastify";
 interface WhishListProviderData {
   whishlist: WhishList[];
   getWhishListByUser: (userId: number, token: string) => void;
-  addProductWhishList: (userId: number | undefined, token: string, data: WhishList) => void;
-  deletProductWhishlist: (id: number | undefined, token: string) => void;
+  addProductWhishList: (userId: number, token: string, data: WhishList) => void;
+  deletProductWhishlist: (id: number | undefined, token: string, userId: number) => void;
 }
 
 interface WishListProviderProps {
@@ -41,18 +41,19 @@ export const WhishListProvider = ({ children }: WishListProviderProps) => {
   };
 
   const addProductWhishList = (
-    userId: number | undefined,
+    userId: number,
     token: string,
     data: WhishList
   ) => {
     const whishlist = { ...data, userId };
+    console.log(whishlist, token)
     dueMarketApi
       .post(`/whishlist`, whishlist, {
-        headers: { Authorization: `Beares ${token}` },
+        headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => {
         toast.success("Adicionado produto a lista de desejos");
-        setWishList(res.data);
+        getWhishListByUser(userId, token)
       })
       .catch((err) => {
         toast.error("Não foi possível adicionar produto a lista de desejos");
@@ -60,13 +61,13 @@ export const WhishListProvider = ({ children }: WishListProviderProps) => {
       });
   };
 
-  const deletProductWhishlist = (id: number | undefined, token: string) => {
+  const deletProductWhishlist = (id: number | undefined, token: string, userId: number) => {
     dueMarketApi
       .delete(`/whishlist/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => {
-        setWishList(res.data);
+        getWhishListByUser(userId, token)
         toast.success("Produto deletado da lista de desejos");
       })
       .catch((err) => {
