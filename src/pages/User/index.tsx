@@ -55,7 +55,7 @@ export const UserPage = () => {
       <div>
           <h2>
             {
-            user === undefined ?
+            user.type === undefined ?
             '' 
             :
             user.type === "cliente" ?
@@ -70,6 +70,9 @@ export const UserPage = () => {
             '' 
             :
             user.type === "mercado" ?
+            products.length < 0 ? 
+              <h1></h1>
+            :
             products.map(product => <CardProductComponent
               userType="mercado"
               date={product.duedate} 
