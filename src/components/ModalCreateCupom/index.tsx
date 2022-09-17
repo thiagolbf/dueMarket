@@ -14,6 +14,7 @@ import { UsersContext } from "../../providers/Users";
 interface ModalCreateCupomProps {
   modalCreate: boolean;
   setModalCreateCupom: Dispatch<SetStateAction<boolean>>;
+  setModalCupom: Dispatch<SetStateAction<boolean>>
 }
 
 interface TargetProps extends EventTarget {
@@ -26,16 +27,16 @@ interface CupomData {
   value: string;
 }
 
-export const ModalCreateCupom = ({
-  setModalCreateCupom,
-}: ModalCreateCupomProps) => {
+export const ModalCreateCupom = ({ setModalCreateCupom, modalCreate, setModalCupom }: ModalCreateCupomProps) => {
+
   const handleEvent = (id: string) => {
     if (id === "modalCreate") {
       setModalCreateCupom(false);
+      setModalCupom(true)
     }
   };
 
-  const { createCupom, cupons } = useContext(CuponsContext);
+  const { createCupom } = useContext(CuponsContext);
   const { user, token } = useContext(UsersContext);
 
   const cupomSchema = yup.object().shape({
@@ -55,15 +56,20 @@ export const ModalCreateCupom = ({
     console.log("passei");
     createCupom(user.id, token, newData);
     setModalCreateCupom(false);
+    setModalCupom(true)
   };
 
   return (
     <Modal
+      active={modalCreate}
       id="modalCreate"
       onClick={(e) => handleEvent((e.target as TargetProps).id)}
     >
       <Container>
-        <HeaderModalComponent setState={setModalCreateCupom}>
+        <HeaderModalComponent setState={()=>{
+          setModalCreateCupom(false)
+          setModalCupom(true)
+        }}>
           Cadastrar cupom
         </HeaderModalComponent>
         <Content>

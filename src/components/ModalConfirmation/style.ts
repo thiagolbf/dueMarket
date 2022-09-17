@@ -13,6 +13,7 @@ export const ModalConfirmation = styled.div<ModalConfirmationProps>`
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 1000;
   background-color: var(--drop-shadow);
   font-size: 12px;
   > div {

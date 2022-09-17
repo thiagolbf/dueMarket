@@ -3,13 +3,13 @@ import { dueMarketApi } from "../../services";
 import { toast } from "react-toastify";
 interface CuponsProviderData {
   cupons: Cupons[];
-  getCuponsByMarket: (userId: number, token: string) => void;
+  getCuponsByMarket: (userId: number | undefined, token: string) => void;
   createCupom: (
     userId: number | undefined,
     token: string,
     data: Cupons
   ) => void;
-  deleteCupom: (id: number, token: string) => void;
+  deleteCupom: (id: number, token: string, userId: number | undefined) => void;
 }
 
 interface CuponsProviderProps {
@@ -32,7 +32,7 @@ export const CuponsProvider = ({ children }: CuponsProviderProps) => {
   const [cupons, setCupons] = useState<Cupons[]>([] as Cupons[]);
 
   //Função para pegar os cupons de um mercado específico;
-  const getCuponsByMarket = (userId: number, token: string) => {
+  const getCuponsByMarket = (userId: number | undefined, token: string) => {
     dueMarketApi
       .get(`/cupons?userId=${userId}`, {
         headers: { Authorization: `Bearer ${token}` },
@@ -53,7 +53,7 @@ export const CuponsProvider = ({ children }: CuponsProviderProps) => {
     dueMarketApi
       .post(`/cupons`, cupon, { headers: { Authorization: `Bearer ${token}` } })
       .then((res) => {
-        setCupons(res.data);
+        getCuponsByMarket(userId, token)
         toast.success("Cupom adicionado com sucesso");
       })
       .catch((err) => {
@@ -63,13 +63,13 @@ export const CuponsProvider = ({ children }: CuponsProviderProps) => {
   };
 
   //Função para deletar cupom;
-  const deleteCupom = (id: number, token: string) => {
+  const deleteCupom = (id: number, token: string, userId: number | undefined) => {
     dueMarketApi
       .delete(`/cupons/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => {
-        setCupons(res.data);
+        getCuponsByMarket(userId, token)
         toast.success("Cupom deletado com sucesso");
       })
       .catch((err) => {
