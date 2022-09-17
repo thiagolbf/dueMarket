@@ -1,4 +1,10 @@
-import { Box, Container, MarketContent, LinkToMarket } from "./style";
+import {
+  Box,
+  Container,
+  MarketContent,
+  LinkToMarket,
+  CardContainer,
+} from "./style";
 import { HeaderComponent } from "../../components/Header";
 import { InputSearch } from "../../components/InputSearch";
 import { CardProductComponent } from "../../components/CardProducts";
@@ -10,7 +16,7 @@ import { FaArrowRight } from "react-icons/fa";
 import { useState, useEffect } from "react";
 
 export const HomePage = () => {
-  const { nearProducts } = useContext(UsersContext);
+  const { nearProducts, user } = useContext(UsersContext);
 
   const [inputCep, setInputCep] = useState<string>("");
 
@@ -47,19 +53,22 @@ export const HomePage = () => {
                 <p>{market.name} </p>
                 <FaArrowRight />
               </LinkToMarket>
-              {market.products.map((product) => {
-                return (
-                  <CardProductComponent
-                    key={product.id}
-                    date={product.duedate}
-                    img={product.image}
-                    newValue={product.newvalue}
-                    previusValue={product.oldvalue}
-                    title={product.title}
-                    type={product.category}
-                  />
-                );
-              })}
+              <CardContainer>
+                {market.products.map((product) => {
+                  return (
+                    <CardProductComponent
+                      key={product.id}
+                      date={product.duedate}
+                      img={product.image}
+                      newValue={product.newvalue}
+                      previusValue={product.oldvalue}
+                      title={product.title}
+                      type={product.category}
+                      userType={user.type === "cliente" ? "cliente" : undefined}
+                    />
+                  );
+                })}
+              </CardContainer>
             </>
           );
         })}
