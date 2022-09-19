@@ -11,11 +11,13 @@ import { InputContainer } from "./style";
 interface InputSearchProps extends InputHTMLAttributes<HTMLInputElement> {
   inputCep: string;
   marketPage?: boolean;
+  fn?: (value: string) => void;
 }
 
 export const InputSearch = ({
   inputCep,
   marketPage,
+  fn,
   ...rest
 }: InputSearchProps) => {
   const { getCep } = useContext(CepContext);
@@ -37,7 +39,13 @@ export const InputSearch = ({
       <input {...rest} />
 
       {marketPage ? (
-        <div onClick={() => checkCep(inputCep)}>
+        <div
+          onClick={() => {
+            if (fn !== undefined) {
+              fn(inputCep);
+            }
+          }}
+        >
           <FaSearch />
         </div>
       ) : (
