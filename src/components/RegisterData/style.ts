@@ -44,6 +44,16 @@ export const RegisterData = styled.div<RegisterProps>`
             font-weight: 600;
             text-align: center;
         }
+        figure{
+            height: 250px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            img{
+                max-width: 100%;
+                height: 100%;
+            }
+        }
     }
     >form:nth-child(3){
         display: ${props => !props.edit ? 'none' : 'flex'};
