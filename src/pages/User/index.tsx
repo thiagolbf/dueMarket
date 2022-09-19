@@ -17,7 +17,6 @@ export const UserPage = () => {
   const [activeRD, setActiveRD] = useState(false)
   const [modalCupom, setModalCupom] = useState(false)
   const [modalProduct, setModalProduct] = useState(false)
-  const [modalConfirmation, setModalConfirmation] = useState(false)
   const { user, token } = useContext(UsersContext)
   const { products, getProductByMarket } = useContext(ProductsContext)
   const { whishlist, getWhishListByUser } = useContext(WhishListContext)
@@ -56,7 +55,7 @@ export const UserPage = () => {
       <div>
           <h2>
             {
-            user === undefined ?
+            user.type === undefined ?
             '' 
             :
             user.type === "cliente" ?
@@ -71,6 +70,9 @@ export const UserPage = () => {
             '' 
             :
             user.type === "mercado" ?
+            products.length < 0 ? 
+              <h1></h1>
+            :
             products.map(product => <CardProductComponent
               userType="mercado"
               date={product.duedate} 
@@ -80,7 +82,7 @@ export const UserPage = () => {
               previusValue={product.oldvalue}
               type={product.category}
               key={product.id}
-              setModalConfirmation={setModalConfirmation}
+              idProduct={product.id}
             />)
             :
             whishlist.map((product) => <CardProductComponent
@@ -93,7 +95,6 @@ export const UserPage = () => {
               type={product.category}  
               wishlist={true}
               idProduct={product.id}
-              userId={product.userId}
               key={product.id}
             />)
           }
@@ -120,6 +121,5 @@ export const UserPage = () => {
     </UserMain>
     <ModalCupomComponent modalCupom={modalCupom} setModalCupom={setModalCupom}></ModalCupomComponent>
     <ModalCriarProduto modalProduto={modalProduct} setModalProduto={setModalProduct}></ModalCriarProduto>
-    <ModalConfirmationComponent modalConfirmation={modalConfirmation} setModalConfirmation={setModalConfirmation}/>
   </>
 }

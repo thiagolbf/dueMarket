@@ -6,7 +6,6 @@ interface ModalProdutoProps {
 
 export const ModalProduto = styled.div<ModalProdutoProps>`
   display: ${({ modalProduto }) => (modalProduto ? "flex" : "none")};
-  //flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 100vh;
@@ -18,36 +17,21 @@ export const ModalProduto = styled.div<ModalProdutoProps>`
 
   > div {
     background-color: var(--blue-800);
-
     max-width: 320px;
     height: max-content;
     border-radius: 10px;
-    max-height: 515px;
     display: flex;
     flex-direction: column;
     gap: 25px;
-    //overflow-y: scroll;
     align-items: stretch;
     justify-content: space-between;
-
-    ::-webkit-scrollbar {
-      width: 10px;
-    }
-    ::-webkit-scrollbar-track {
-      background-color: transparent;
-    }
-    ::-webkit-scrollbar-thumb {
-      border-radius: 10px;
-      background-color: var(--blue-500);
-    }
-
     /* div {
       display: flex;
       flex-direction: column;
       gap: 25px;
       padding: 0 25px;
-    }*/
-    > div:nth-child(2) {
+    } */
+    > form {
       width: 100%;
       display: flex;
       flex-direction: column;

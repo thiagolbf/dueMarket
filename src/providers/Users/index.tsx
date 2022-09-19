@@ -1,4 +1,11 @@
-import { createContext, ReactNode, useEffect, useState } from "react";
+import {
+  createContext,
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+  useEffect,
+  useState,
+} from "react";
 import { dueMarketApi } from "../../services";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
@@ -13,6 +20,7 @@ interface UsersProviderData {
   getUserMarket: () => void;
   nearProducts: MarketProducts[];
   getNearProducts: (city: string) => void;
+  setNearProducts: Dispatch<SetStateAction<MarketProducts[]>>;
   markets: UserSubmitData[];
   userId: number;
   patchUser: (data: NewUserData, token: string, userId: number) => void;
@@ -72,9 +80,13 @@ interface Products {
 }
 
 interface NewUserData {
+  name: string;
   email: string;
-  password: string;
   cep: string;
+  street: string;
+  district: string;
+  city: string;
+  state: string;
   cpf?: string;
   cnpj?: string;
   image?: string;
@@ -126,8 +138,11 @@ export const UsersProvider = ({ children }: UsersProviderProps) => {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+      .then((res) => {
+        toast.success("Usuario atualizado com sucesso");
+        setUser(res.data);
+      })
+      .catch((err) => toast.error("Não foi possivel atualizar o seu usuario"));
   };
 
   const logout = () => {
@@ -135,7 +150,7 @@ export const UsersProvider = ({ children }: UsersProviderProps) => {
     setUserId(0);
     setToken("");
     setUser({} as UserSubmitData);
-    navigate("/")
+    navigate("/");
   };
 
   const postUserMarket = (data: UserSubmitData) => {
@@ -199,6 +214,7 @@ export const UsersProvider = ({ children }: UsersProviderProps) => {
   return (
     <UsersContext.Provider
       value={{
+        setNearProducts,
         postUserMarket,
         postUser,
         postLogin,
