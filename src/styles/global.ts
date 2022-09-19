@@ -42,7 +42,7 @@ export const GlobalStyle = createGlobalStyle`
 
     --drop-shadow: rgba(0, 0, 0, 0.25);
 
-     /*fonts*/
+    /*fonts*/
 
     --font-noto-sans:  'Noto Sans', sans-serif;
     --font-inter: 'inter', sans-serif;
