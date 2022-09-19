@@ -143,7 +143,9 @@ export const RegisterDataComponent = ({setActiveRD, activeRD, cnpj, cpf, name, e
                 {district}, {city} - {state}<br />
                 {cep}<br />
             </p>
-            {userType === "mercado" && <img src={image} alt={name} />}
+            {userType === "mercado" && <figure>
+                <img src={image} alt={name} />
+            </figure>}
         </div>
         <form onSubmit={handleSubmit(handleEvent)}>
             <div>

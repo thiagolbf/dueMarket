@@ -3,6 +3,8 @@ import {
   Box,
   Container,
   MainBox,
+  MarketDataBox,
+  ProductList,
   SearchBox,
   Section,
   SectionProducts,
@@ -10,58 +12,31 @@ import {
 import { FaBars } from "react-icons/fa";
 import { Button } from "../../components/Button";
 import { InputSearch } from "../../components/InputSearch";
-import { ModalCupomComponent } from "../../components/ModalCupom";
 import { CardProductComponent } from "../../components/CardProducts";
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { dueMarketApi } from "../../services";
-
-interface MarketProducts {
-  email: string;
-  password: string;
-  name: string;
-  type: string;
-  cnpj: string;
-  cep: string;
-  street: string;
-  district: string;
-  city: string;
-  state: string;
-  image: string;
-  id: number;
-  products: Products[];
-}
-
-interface Products {
-  title: string;
-  category: string;
-  duedate: string;
-  oldvalue: string;
-  newvalue: string;
-  image: string;
-  userId: number;
-  id: number;
-}
+import { CupomList } from "../../components/CupomList";
+import { UsersContext } from "../../providers/Users";
+import { ListaDeCategoria } from "../../components/ListaDeCategoria";
+import { MarketContext } from "../../providers/Market";
 
 export const MarketPage = () => {
-  const { id } = useParams();
-  const [market, setMarket] = useState<MarketProducts>({} as MarketProducts);
+  const { token } = useContext(UsersContext);
 
-  const getMarket = (id: string) => {
-    dueMarketApi
-      .get(`users/${id}?_embed=products`)
-      .then((res) => {
-        setMarket(res.data);
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  const { getMarket, filterProducts, market, productsMarket } =
+    useContext(MarketContext);
+
+  const { id } = useParams();
+
+  const [marketId, setMarketId] = useState<string>("");
+
+  const [inputValue, setInputValue] = useState<string>("");
 
   useEffect(() => {
     if (typeof id === "string") {
       getMarket(id);
+      setMarketId(id);
     }
   }, []);
 
@@ -73,7 +48,17 @@ export const MarketPage = () => {
         <h2>Lorem ipsum dolor sit amet.</h2>
 
         <SearchBox>
-          <InputSearch inputCep="" />
+          <InputSearch
+            inputCep={inputValue}
+            fn={filterProducts}
+            type="text"
+            placeholder="Digite o nome do produto"
+            value={inputValue}
+            onChange={(e) => {
+              setInputValue(e.target.value);
+            }}
+            marketPage={true}
+          />
           <Button>
             <FaBars />
             Todos
@@ -85,7 +70,7 @@ export const MarketPage = () => {
         <h1>{market.name}</h1>
 
         <Section>
-          <div>
+          <MarketDataBox>
             <figure>
               <img src={market.image} alt="" />
             </figure>
@@ -94,14 +79,16 @@ export const MarketPage = () => {
               <br />
               {market.cep}
             </p>
-          </div>
-          <div></div>
+          </MarketDataBox>
+
+          {token !== "" && <CupomList id={marketId} />}
+          <ListaDeCategoria />
         </Section>
 
         <SectionProducts>
           <h3>Produtos</h3>
-          <div>
-            {market.products?.map((value) => {
+          <ProductList>
+            {productsMarket.map((value) => {
               return (
                 <CardProductComponent
                   key={value.id}
@@ -114,7 +101,7 @@ export const MarketPage = () => {
                 />
               );
             })}
-          </div>
+          </ProductList>
         </SectionProducts>
       </MainBox>
     </Container>

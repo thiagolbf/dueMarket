@@ -74,6 +74,16 @@ export const Container = styled.button<ButtonProps>`
       props.pencilButton ? "var(--green-800)" : "var(--grey-900)"};
   }
 
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 5px;
+
+  padding: 5px;
+
   &:hover {
     opacity: 0.8;
     transition: 0.2s ease-out;

@@ -1,12 +1,20 @@
-import { useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { Container, CupomContainer } from "./style";
 import { CardCupomComponent } from "../CardCupom";
-
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
+import { CuponsContext } from "../../providers/Cupons";
+import { UsersContext } from "../../providers/Users";
 
-export const CupomList = () => {
+interface CupomListData {
+  id: string;
+}
+
+export const CupomList = ({ id }: CupomListData) => {
   const [open, setOpen] = useState<boolean>(false);
   const dropDownRef = useRef<HTMLButtonElement>(null);
+
+  const { getCuponsByMarket, cupons } = useContext(CuponsContext);
+  const { token } = useContext(UsersContext);
 
   const handleClick = (state: boolean) => {
     setOpen(!state);
@@ -18,6 +26,12 @@ export const CupomList = () => {
     }
   };
 
+  useEffect(() => {
+    if (token !== "") {
+      getCuponsByMarket(Number(id), token);
+    }
+  }, []);
+
   window.addEventListener("click", handleClickOutside);
 
   return (
@@ -28,7 +42,13 @@ export const CupomList = () => {
       </button>
 
       <CupomContainer open={open}>
-        {/* <CardCupomComponent /> */}
+        {cupons?.map((value) => (
+          <CardCupomComponent
+            key={value.id}
+            category={value.category}
+            value={value.value}
+          />
+        ))}
       </CupomContainer>
     </Container>
   );

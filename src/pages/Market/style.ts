@@ -3,10 +3,15 @@ import styled from "styled-components";
 export const Container = styled.div`
   width: 100%;
   height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 export const MainBox = styled.div`
   width: 100%;
+  max-width: 1600px;
+  min-width: 320px;
   padding: 0 10px;
 
   h1 {
@@ -23,7 +28,7 @@ export const Box = styled.div`
   width: 100%;
   height: 70px;
   display: flex;
-  padding: 0 30px;
+  padding: 5px 0;
   border-bottom: 1px solid var(--grey-600);
   align-items: center;
   justify-content: center;
@@ -34,6 +39,7 @@ export const Box = styled.div`
 
   @media (min-width: 1080px) {
     justify-content: space-between;
+    padding: 5px 30px;
     h2 {
       display: block;
     }
@@ -41,11 +47,12 @@ export const Box = styled.div`
 `;
 
 export const SearchBox = styled.div`
-  width: 280px;
+  width: 300px;
   height: 100%;
-  gap: 10px;
+  gap: 5px;
   display: flex;
   align-items: center;
+  justify-content: center;
 
   @media (min-width: 720px) {
     width: 350px;
@@ -60,26 +67,24 @@ export const SectionProducts = styled.div`
   align-items: center;
   justify-content: center;
 
-  h3 {
+  > h3 {
     text-align: center;
     font-size: 24px;
     padding: 20px;
   }
+`;
 
-  div {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 30px;
-    overflow-x: scroll;
-  }
+export const ProductList = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  gap: 30px;
+  overflow-x: scroll;
 
   @media (min-width: 720px) {
-    div {
-      overflow-x: visible;
-      padding: 5px;
-    }
+    overflow-x: visible;
+    padding: 5px;
   }
 `;
 
@@ -93,18 +98,10 @@ export const Section = styled.div`
   align-items: center;
   justify-content: space-between;
 
-  div {
-    width: 300px;
-    height: 200px;
-    background-color: var(--grey-100);
-    display: flex;
-    border-radius: 8px;
-    filter: drop-shadow(0 4px 4px var(--drop-shadow));
-  }
-
   figure {
     width: 60%;
     height: 100%;
+    padding: 5px;
   }
 
   p {
@@ -124,11 +121,20 @@ export const Section = styled.div`
 
   @media (min-width: 720px) {
     flex-direction: row;
-    padding: 10px 30px;
+    padding: 10px 0;
+  }
+`;
 
-    div {
-      width: 400px;
-      padding: 10px;
-    }
+export const MarketDataBox = styled.div`
+  width: 300px;
+  height: 200px;
+  background-color: var(--grey-100);
+  display: flex;
+  border-radius: 8px;
+  filter: drop-shadow(0 4px 4px var(--drop-shadow));
+
+  @media (min-width: 720px) {
+    width: 400px;
+    padding: 10px;
   }
 `;
