@@ -7,6 +7,7 @@ import { Button } from "../Button";
 import { InputForm } from "../InputForm";
 import { HeaderModalComponent } from "../HeaderModal";
 import { CuponsContext } from "../../providers/Cupons";
+import { SelectCategory } from "../SelectCategory";
 
 import { Content, Modal, Container } from "./style";
 import { UsersContext } from "../../providers/Users";
@@ -87,9 +88,8 @@ export const ModalCreateCupom = ({
         </HeaderModalComponent>
         <Content>
           <form onSubmit={handleSubmit(handleCreateCupom)}>
-            <InputForm
+            <SelectCategory
               modal
-              type="text"
               {...register("category")}
               label="Categoria do produto"
               error={!!errors.category}
