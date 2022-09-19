@@ -23,7 +23,7 @@ export const ModalCupom = styled.div<ModalCupomProps>`
         display: flex;
         flex-direction: column;
         gap: 25px;
-        overflow-y: scroll;
+        overflow-y: auto;
         ::-webkit-scrollbar{
             width: 10px;
         }
