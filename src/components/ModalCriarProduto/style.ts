@@ -4,6 +4,11 @@ interface ModalProdutoProps {
   modalProduto: boolean;
 }
 
+interface SelectStyleProps {
+  error: boolean;
+  modal: boolean;
+}
+
 export const ModalProduto = styled.div<ModalProdutoProps>`
   display: ${({ modalProduto }) => (modalProduto ? "flex" : "none")};
   align-items: center;

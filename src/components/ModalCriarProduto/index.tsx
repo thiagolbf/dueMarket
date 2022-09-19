@@ -1,4 +1,9 @@
-import { Dispatch, SetStateAction, useState } from "react";
+import {
+  Dispatch,
+  SelectHTMLAttributes,
+  SetStateAction,
+  useState,
+} from "react";
 import { InputForm } from "../InputForm";
 import { ModalProduto, HeaderModalProduto } from "./style";
 import { Button } from "../Button";
@@ -22,7 +27,7 @@ interface NewProduct {
   duedate: string;
   oldvalue: string;
   newvalue: string;
-  image: string;  
+  image: string;
 }
 
 interface TargetProps extends EventTarget {
@@ -41,7 +46,7 @@ export const ModalCriarProduto = ({
     category: yup.string().required("Campo obrigatório"),
     oldvalue: yup.string().required("Campo obrigatório"),
     newvalue: yup.string().required("Campo obrigatório"),
-    duedate: yup.string().required("Campo obrigatório"),
+    duedate: yup.date().required("Campo obrigatório"),
     image: yup.string().required("Campo obrigatório"),
   });
 
@@ -110,6 +115,7 @@ export const ModalCriarProduto = ({
             error={!!errors.oldvalue}
             label="Valor Antigo"
           />
+
           <InputForm
             type="text"
             {...register("newvalue")}
@@ -117,7 +123,7 @@ export const ModalCriarProduto = ({
             label="Valor Atual"
           />
           <InputForm
-            type="text"
+            type="date"
             {...register("duedate")}
             error={!!errors.duedate}
             label="Data de validade"
