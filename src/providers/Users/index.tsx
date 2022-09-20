@@ -25,6 +25,7 @@ interface UsersProviderData {
   userId: number;
   patchUser: (data: NewUserData, token: string, userId: number) => void;
   logout: () => void;
+  isLoading: boolean;
 }
 
 interface UserSubmitData {
@@ -112,6 +113,8 @@ export const UsersProvider = ({ children }: UsersProviderProps) => {
   const [token, setToken] = useState<string>(
     localStorage.getItem("@dueMarket:token") || ""
   );
+
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const getUser = (id: number) => {
     dueMarketApi.get(`users/${id}`).then((res) => {
@@ -207,7 +210,10 @@ export const UsersProvider = ({ children }: UsersProviderProps) => {
   const getNearProducts = (cidade: string) => {
     dueMarketApi
       .get(`/users?_embed=products&type=mercado&city=${cidade}`)
-      .then((res) => setNearProducts(res.data))
+      .then((res) => {
+        setNearProducts(res.data);
+        setIsLoading(false);
+      })
       .catch((error) => console.log(error));
   };
 
@@ -228,6 +234,7 @@ export const UsersProvider = ({ children }: UsersProviderProps) => {
         userId,
         patchUser,
         logout,
+        isLoading,
       }}
     >
       {children}
