@@ -8,5 +8,11 @@ export const Form = styled.form`
   align-items: center;
   justify-content: space-between;
   padding: 0 30px;
-  gap: 10px;
+
+  > span {
+    margin-bottom: 15px;
+    color: var(--negative);
+    height: 15px;
+    width: 100%;
+  }
 `;

@@ -67,19 +67,23 @@ export const LoginPage = () => {
               label="Email"
               error={!!errors.email}
             />
-            {errors.email?.message}
+            <span>{errors.email?.message}</span>
             <InputForm
               type="password"
               {...register("password")}
               label="Senha"
               error={!!errors.password}
             />
-            {errors.password?.message}
-            <Button type="submit">Entrar</Button>
+            <span>{errors.password?.message}</span>
+            <Button type="submit" blueForm>
+              Entrar
+            </Button>
           </Form>
           <FooterBox>
             <p>Não tem cadastro?</p>
-            <Button onClick={() => navigate("/register")}>Cadastre-se</Button>
+            <Button onClick={() => navigate("/register")} lightGreyForm>
+              Cadastre-se
+            </Button>
           </FooterBox>
         </FormContainer>
         <GreenBox />

@@ -97,42 +97,42 @@ export const FormUser = () => {
         label="Nome"
         error={!!errors.name}
       />
-      {errors.name?.message}
+      <span>{errors.name?.message}</span>
       <InputForm
         type="text"
         {...register("cpf")}
         label="CPF"
         error={!!errors.cpf}
       />
-      {errors.cpf?.message}
+      <span>{errors.cpf?.message}</span>
       <InputForm
         type="text"
         {...register("cep")}
         label="CEP"
         error={!!errors.cep}
       />
-      {errors.cep?.message}
+      <span>{errors.cep?.message}</span>
       <InputForm
         type="text"
         {...register("email")}
         label="Email"
         error={!!errors.email}
       />
-      {errors.email?.message}
+      <span>{errors.email?.message}</span>
       <InputForm
         type="password"
         {...register("password")}
         label="Senha"
         error={!!errors.password}
       />
-      {errors.password?.message}
+      <span>{errors.password?.message}</span>
       <InputForm
         type="password"
         {...register("confirmPassword")}
         label="Confirmar Senha"
         error={!!errors.confirmPassword}
       />
-      {errors.confirmPassword?.message}
+      <span>{errors.confirmPassword?.message}</span>
       <Button type="submit" blueForm>
         Cadastrar
       </Button>

@@ -13,7 +13,7 @@ export const BackgroundContainer = styled.div`
   background-size: 100% 100vh;
   background-attachment: fixed;
   display: flex;
-  justify-content: space-evenly;
+
   align-items: center;
   flex-direction: column;
   position: relative;
@@ -26,7 +26,6 @@ export const GreenBox = styled.div`
   background-color: var(--green-800);
   position: absolute;
   top: 0;
-
   @media (min-width: 1080px) {
     height: 300px;
   }
@@ -35,6 +34,7 @@ export const GreenBox = styled.div`
 export const FormContainer = styled.div`
   width: 270px;
   height: 400px;
+  margin-top: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -43,26 +43,31 @@ export const FormContainer = styled.div`
   border-radius: 8px;
   z-index: 500;
 
-  @media (min-width: 480px) {
+  @media (max-width: 1079px) {
     width: 340px;
-    height: 460px;
+    margin-top: 100px;
   }
 
   @media (min-width: 1080px) {
     width: 410px;
-    height: 550px;
   }
 `;
 
 export const Form = styled.form`
   width: 100%;
-  height: 60%;
+  height: 50%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-around;
+  justify-content: flex-start;
   padding: 0 30px;
-  gap: 10px;
+
+  > span {
+    margin-bottom: 15px;
+    color: var(--negative);
+    height: 15px;
+    width: 100%;
+  }
 `;
 
 export const FooterBox = styled.div`
@@ -72,6 +77,12 @@ export const FooterBox = styled.div`
   align-items: center;
   justify-content: space-around;
   flex-direction: column;
+  padding: 0 30px;
+
+  > p {
+    color: var(--grey-0);
+    font-family: var(--font-noto-sans);
+  }
 `;
 
 export const TextContainer = styled.div`
@@ -81,14 +92,15 @@ export const TextContainer = styled.div`
   z-index: 500;
   text-align: center;
   color: var(--grey-0);
+  margin-top: 50px;
 
-  h1 {
+  > h1 {
     font-family: var(--font-inter);
     font-weight: 400;
     filter: drop-shadow(0 4px 4px var(--drop-shadow));
   }
 
-  p {
+  > p {
     display: none;
     font-family: var(--font-noto-sans);
     filter: drop-shadow(0 4px 4px var(--drop-shadow));
@@ -97,7 +109,7 @@ export const TextContainer = styled.div`
   @media (min-width: 1080px) {
     width: 600px;
 
-    p {
+    > p {
       display: block;
     }
   }
@@ -112,12 +124,12 @@ export const HeaderBox = styled.div`
   padding: 0 30px;
   position: relative;
 
-  h2 {
+  > h2 {
     color: var(--grey-0);
     font-family: var(--font-inter);
   }
 
-  button {
+  > button {
     position: absolute;
     left: 30px;
   }
