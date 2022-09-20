@@ -30,11 +30,14 @@ export const RegisterPage = () => {
         </TextContainer>
         <FormContainer>
           <HeaderBox>
-            <button onClick={() => navigate("/login")}>Voltar</button>
+            <div>
+              <button onClick={() => navigate("/login")}>Voltar</button>
+              <button onClick={() => setUserType(!userType)}>
+                Trocar formulario
+              </button>
+            </div>
+
             <h2>Cadastro</h2>
-            <button onClick={() => setUserType(!userType)}>
-              Trocar formulario
-            </button>
           </HeaderBox>
           {userType ? <FormMarket /> : <FormUser />}
         </FormContainer>
