@@ -11,6 +11,7 @@ export const MarketList = styled.div`
   min-width: 260px;
   width: 600px;
   max-width: 900px;
+  max-height: 450px;
   padding: 10px 8px;
   background-color: var(--grey-100);
   border-radius: 5px;
@@ -18,6 +19,18 @@ export const MarketList = styled.div`
   margin-top: 17px;
   margin-right: 30px;
   margin-left: 30px;
+
+  overflow-y: scroll;
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+  ::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--blue-800);
+    border-radius: 5px;
+  }
 `;
 
 export const MarketCard = styled.div`

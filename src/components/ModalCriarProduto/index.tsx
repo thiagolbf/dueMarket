@@ -1,4 +1,9 @@
-import { Dispatch, SetStateAction, useState } from "react";
+import {
+  Dispatch,
+  SelectHTMLAttributes,
+  SetStateAction,
+  useState,
+} from "react";
 import { InputForm } from "../InputForm";
 import { ModalProduto, HeaderModalProduto } from "./style";
 import { Button } from "../Button";
@@ -10,6 +15,7 @@ import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { toast } from "react-toastify";
+import {SelectCategory} from "../SelectCategory"
 
 interface ModalCriarProdutoProps {
   modalProduto: boolean;
@@ -22,7 +28,7 @@ interface NewProduct {
   duedate: string;
   oldvalue: string;
   newvalue: string;
-  image: string;  
+  image: string;
 }
 
 interface TargetProps extends EventTarget {
@@ -60,18 +66,29 @@ export const ModalCriarProduto = ({
     duedate,
     image,
   }: NewProduct) => {
+
+    //duedate = duedate.split('-').reverse().join('/');
+    
     const objectProduct = {
       title,
       category,
       oldvalue,
       newvalue,
-      duedate,
+      duedate: duedate.split('-').reverse().join('/'),
       image,
       userId,
     };
 
     createProduct(userId, token, objectProduct);
     setModalProduto(false);
+    reset({
+      title: "",
+      category: "",
+      oldvalue: "",
+      newvalue: "",
+      duedate: "",
+      image: "",
+    });
   };
 
   const handleEvent = (id: string) => {
@@ -98,8 +115,8 @@ export const ModalCriarProduto = ({
             error={!!errors.title}
             label="Título"
           />
-          <InputForm
-            type="text"
+          <SelectCategory
+            
             {...register("category")}
             error={!!errors.category}
             label="Categoria"
@@ -110,6 +127,7 @@ export const ModalCriarProduto = ({
             error={!!errors.oldvalue}
             label="Valor Antigo"
           />
+
           <InputForm
             type="text"
             {...register("newvalue")}
@@ -117,7 +135,7 @@ export const ModalCriarProduto = ({
             label="Valor Atual"
           />
           <InputForm
-            type="text"
+            type="date"
             {...register("duedate")}
             error={!!errors.duedate}
             label="Data de validade"

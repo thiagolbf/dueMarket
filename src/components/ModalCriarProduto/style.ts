@@ -4,6 +4,11 @@ interface ModalProdutoProps {
   modalProduto: boolean;
 }
 
+interface SelectStyleProps {
+  error: boolean;
+  modal: boolean;
+}
+
 export const ModalProduto = styled.div<ModalProdutoProps>`
   display: ${({ modalProduto }) => (modalProduto ? "flex" : "none")};
   align-items: center;
@@ -14,6 +19,8 @@ export const ModalProduto = styled.div<ModalProdutoProps>`
   top: 0;
   left: 0;
   background-color: var(--drop-shadow);
+  position: fixed;
+  z-index: 100;
 
   > div {
     background-color: var(--blue-800);
