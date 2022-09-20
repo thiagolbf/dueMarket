@@ -15,7 +15,6 @@ import { InputSearch } from "../../components/InputSearch";
 import { CardProductComponent } from "../../components/CardProducts";
 import { useParams } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
-import { dueMarketApi } from "../../services";
 import { CupomList } from "../../components/CupomList";
 import { UsersContext } from "../../providers/Users";
 import { ListaDeCategoria } from "../../components/ListaDeCategoria";
@@ -40,6 +39,9 @@ export const MarketPage = () => {
     }
   }, []);
 
+  const [valueCategory, setValueCategory] = useState<string>("");
+  const [listCat, setListCat] = useState(true);
+
   return (
     <Container>
       <HeaderComponent />
@@ -59,10 +61,17 @@ export const MarketPage = () => {
             }}
             marketPage={true}
           />
-          <Button>
-            <FaBars />
-            Todos
-          </Button>
+          <div>
+            <Button onClick={() => setListCat(!listCat)}>
+              <FaBars />
+              {valueCategory === "" ? "Todos" : valueCategory}
+            </Button>
+            <ListaDeCategoria
+              listCat={listCat}
+              setValueCategory={setValueCategory}
+              setListCat={setListCat}
+            />
+          </div>
         </SearchBox>
       </Box>
 
@@ -82,7 +91,6 @@ export const MarketPage = () => {
           </MarketDataBox>
 
           {token !== "" && <CupomList id={marketId} />}
-          <ListaDeCategoria />
         </Section>
 
         <SectionProducts>

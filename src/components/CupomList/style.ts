@@ -35,11 +35,27 @@ interface CupomContainerProps {
 
 export const CupomContainer = styled.div<CupomContainerProps>`
   width: 100%;
-  height: ${(props) => (props.open ? "150%" : "0px")};
+  height: ${(props) => (props.open ? "150px" : "0px")};
   background-color: var(--grey-200);
   border-radius: 0px 0px 5px;
+  gap: 5px;
+  display: flex;
+  flex-direction: column;
+  padding: ${(props) => (props.open ? "10px" : "0px")};
 
   filter: drop-shadow(4px 4px 4px var(--drop-shadow));
   transition: all 0.5s;
-  overflow: hidden;
+  overflow: auto;
+  align-items: stretch;
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: var(--green-800);
+  }
 `;

@@ -27,10 +27,11 @@ export const CupomList = ({ id }: CupomListData) => {
   };
 
   useEffect(() => {
-    if (token !== "") {
+    if (token && Number(id) > 0) {
       getCuponsByMarket(Number(id), token);
     }
-  }, []);
+  }, [id]);
+  console.log(id);
 
   window.addEventListener("click", handleClickOutside);
 
@@ -42,7 +43,7 @@ export const CupomList = ({ id }: CupomListData) => {
       </button>
 
       <CupomContainer open={open}>
-        {cupons?.map((value) => (
+        {cupons.map((value) => (
           <CardCupomComponent
             key={value.id}
             category={value.category}

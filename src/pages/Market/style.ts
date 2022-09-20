@@ -54,6 +54,10 @@ export const SearchBox = styled.div`
   align-items: center;
   justify-content: center;
 
+  > div {
+    position: relative;
+  }
+
   @media (min-width: 720px) {
     width: 350px;
     gap: 20px;
@@ -78,7 +82,7 @@ export const ProductList = styled.div`
   width: 100%;
   display: flex;
   align-items: stretch;
-  justify-content: space-between;
+  justify-content: center;
   gap: 30px;
   overflow-x: scroll;
 
@@ -95,7 +99,7 @@ export const Section = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
-  align-items: center;
+  align-items: start;
   justify-content: space-between;
 
   figure {

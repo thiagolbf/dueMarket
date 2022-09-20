@@ -39,6 +39,7 @@ export const CuponsProvider = ({ children }: CuponsProviderProps) => {
       })
       .then((res) => {
         setCupons(res.data);
+        console.log(userId);
       })
       .catch((err) => console.log(err));
   };
@@ -53,7 +54,7 @@ export const CuponsProvider = ({ children }: CuponsProviderProps) => {
     dueMarketApi
       .post(`/cupons`, cupon, { headers: { Authorization: `Bearer ${token}` } })
       .then((res) => {
-        getCuponsByMarket(userId, token)
+        getCuponsByMarket(userId, token);
         toast.success("Cupom adicionado com sucesso");
       })
       .catch((err) => {
@@ -63,13 +64,17 @@ export const CuponsProvider = ({ children }: CuponsProviderProps) => {
   };
 
   //Função para deletar cupom;
-  const deleteCupom = (id: number, token: string, userId: number | undefined) => {
+  const deleteCupom = (
+    id: number,
+    token: string,
+    userId: number | undefined
+  ) => {
     dueMarketApi
       .delete(`/cupons/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => {
-        getCuponsByMarket(userId, token)
+        getCuponsByMarket(userId, token);
         toast.success("Cupom deletado com sucesso");
       })
       .catch((err) => {
