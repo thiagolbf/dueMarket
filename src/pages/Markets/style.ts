@@ -9,7 +9,7 @@ export const MarketListComponent = styled.div`
 
 export const MarketList = styled.div`
   min-width: 260px;
-  width: 600px;
+  width: 95%;
   max-width: 900px;
   max-height: 450px;
   padding: 10px 8px;
@@ -44,6 +44,7 @@ export const Box = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 0 30px;
 
   > p {
     font-family: var(--font-noto-sans);
