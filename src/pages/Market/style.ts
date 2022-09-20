@@ -27,7 +27,7 @@ export const MainBox = styled.div`
 
 export const Box = styled.div`
   width: 100%;
-  height: 70px;
+  height: 110px;
   display: flex;
   padding: 5px 0;
   border-bottom: 1px solid var(--grey-600);
@@ -48,6 +48,10 @@ export const Box = styled.div`
       display: block;
     }
   }
+
+  @media (min-width: 480px) {
+    height: 70px;
+  }
 `;
 
 export const SearchBox = styled.div`
@@ -57,6 +61,7 @@ export const SearchBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
 
   > div {
     position: relative;
@@ -65,6 +70,10 @@ export const SearchBox = styled.div`
   @media (min-width: 720px) {
     width: 350px;
     gap: 20px;
+  }
+
+  @media (min-width: 480px) {
+    flex-wrap: nowrap;
   }
 `;
 

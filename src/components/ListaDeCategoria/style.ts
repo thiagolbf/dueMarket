@@ -65,7 +65,7 @@ export const Nav = styled.nav<MobileProps>`
     }
 
     &:hover {
-      background-color: var(--grey-100)
+      background-color: var(--grey-100);
       transition: 0.2s ease-out;
     }
   }
