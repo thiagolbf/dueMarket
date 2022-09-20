@@ -67,7 +67,8 @@ export const Container = styled.button<ButtonProps>`
 
   border-radius: 5px;
 
-  box-shadow: ${(props) => (props.shadow ? "var(--drop-shadow)" : "none")};
+  filter: ${(props) =>
+    props.shadow ? "drop-shadow(0px 4px 4px var(--drop-shadow))" : "none"};
 
   svg {
     color: ${(props) =>
