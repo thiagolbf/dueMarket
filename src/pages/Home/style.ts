@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-export const Box = styled.div`
+export const HeaderBox = styled.div`
   width: 100%;
   height: 76px;
   border-bottom: 1px solid var(--grey-900);
@@ -81,14 +81,16 @@ export const CardContainer = styled.div`
   height: max-content;
   overflow-x: scroll;
   padding: 5px;
-  ::-webkit-scrollbar{
+  ::-webkit-scrollbar {
     height: 10px;
   }
-  ::-webkit-scrollbar-track{
+  ::-webkit-scrollbar-track {
     background-color: transparent;
   }
-  ::-webkit-scrollbar-thumb{
+  ::-webkit-scrollbar-thumb {
     border-radius: 10px;
     background-color: var(--blue-500);
   }
 `;
+
+export const NoProduct = styled.div``;
