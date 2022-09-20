@@ -1,18 +1,28 @@
-import { SelectHTMLAttributes, useContext, useState } from "react";
+import {
+  Dispatch,
+  SelectHTMLAttributes,
+  SetStateAction,
+  useContext,
+  useState,
+} from "react";
 import { MarketContext } from "../../providers/Market";
 //import { ListaSelect } from "./style";
-import { Mobile, Nav } from "./style";
+import { Nav } from "./style";
 
-interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
-  //option:string;
+interface SelectProps {
+  listCat: boolean;
+  setValueCategory: Dispatch<SetStateAction<string>>;
+  setListCat: Dispatch<SetStateAction<boolean>>;
 }
 
-export const ListaDeCategoria = ({ ...rest }: SelectProps) => {
-  const [listCat, setlistCat] = useState(true);
-
+export const ListaDeCategoria = ({
+  listCat,
+  setValueCategory,
+  setListCat,
+}: SelectProps) => {
   const { filterProductsByCategory } = useContext(MarketContext);
 
-  const [categoryList, setCategoryList] = useState<string[]>([
+  const categoryList = [
     "Confeitaria",
     "Enlatados",
     "Congelados",
@@ -29,31 +39,26 @@ export const ListaDeCategoria = ({ ...rest }: SelectProps) => {
     "doces",
     "salgadinho/snacks",
     "petshop",
-  ]);
+  ];
 
   return (
-    <div>
-      <Mobile onClick={() => setlistCat(!listCat)} active={listCat}>
-        <span />
-        <span />
-        <span />
-      </Mobile>
-      <Nav active={listCat}>
-        {categoryList.map((category) => {
-          return (
-            <div>
-              <button
-                onClick={() => {
-                  filterProductsByCategory(category);
-                }}
-              >
-                {category}
-              </button>
-            </div>
-          );
-        })}
-      </Nav>
-    </div>
+    <Nav active={listCat}>
+      {categoryList.map((category) => {
+        return (
+          <div key={category}>
+            <button
+              onClick={() => {
+                filterProductsByCategory(category);
+                setValueCategory(category);
+                setListCat(!listCat);
+              }}
+            >
+              {category}
+            </button>
+          </div>
+        );
+      })}
+    </Nav>
   );
 };
 
