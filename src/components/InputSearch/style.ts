@@ -6,6 +6,7 @@ export const InputContainer = styled.div`
   border-radius: 5px;
   padding: 0 10px;
   background-color: var(--grey-300);
+  filter: drop-shadow(0px 4px 4px var(--drop-shadow));
 
   display: flex;
   align-items: center;
