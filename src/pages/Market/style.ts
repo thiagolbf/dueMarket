@@ -129,7 +129,7 @@ export const Section = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
-  align-items: start;
+  align-items: center;
   justify-content: space-between;
 
   figure {
@@ -156,6 +156,7 @@ export const Section = styled.div`
   @media (min-width: 720px) {
     flex-direction: row;
     padding: 10px 0;
+    /* align-items: start; */
   }
 `;
 

@@ -7,7 +7,8 @@ interface MobileProps {
 export const Nav = styled.nav<MobileProps>`
   background-color: var(--grey-200);
   height: ${(props) => (props.active ? 0 : "295px")};
-  width: 280px;
+  max-width: 280px;
+  width: 95vw;
   overflow-y: scroll;
   ::-webkit-scrollbar {
     width: 5px;
@@ -21,7 +22,7 @@ export const Nav = styled.nav<MobileProps>`
   }
   position: absolute;
   top: 50px;
-  right: 0;
+  right: -100%;
   transition: all 0.5s;
   padding-top: ${(props) => (props.active ? 0 : "16px")};
   border-radius: 5px;
@@ -68,6 +69,10 @@ export const Nav = styled.nav<MobileProps>`
       background-color: var(--grey-100);
       transition: 0.2s ease-out;
     }
+  }
+
+  @media (min-width: 720px) {
+    right: 0;
   }
   /* @media screen and (min-width: 720px) {
     width: max-content;
