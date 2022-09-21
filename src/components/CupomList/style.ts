@@ -1,8 +1,9 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  width: 320px;
-  height: 40px;
+  width: 100%;
+  max-width: 320px;
+  height: max-content;
   background-color: var(--grey-200);
   border-radius: 5px 5px 0;
   filter: drop-shadow(4px 4px 4px var(--drop-shadow));
