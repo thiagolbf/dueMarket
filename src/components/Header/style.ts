@@ -2,6 +2,7 @@ import styled, { createGlobalStyle, css } from "styled-components";
 
 interface MobileProps {
   active: boolean;
+  logged?: boolean
 }
 
 export const HeaderFix = createGlobalStyle`
@@ -94,7 +95,7 @@ export const Mobile = styled.div<MobileProps>`
 
 export const Nav = styled.nav<MobileProps>`
   background-color: inherit;
-  height: ${(props) => (props.active ? 0 : "132px")};
+  height: ${(props) => (props.active ? 0 : props.logged? "132px" : "99px")};
   width: 100vw;
   overflow: hidden;
   position: fixed;

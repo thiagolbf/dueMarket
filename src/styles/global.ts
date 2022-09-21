@@ -30,9 +30,11 @@ export const GlobalStyle = createGlobalStyle`
     --grey-50: #F2F2F2;
     --grey-0: #F5F5F5;
 
+    /*links*/
+    --linkedin: #0e76a8 ;
+    --github: #171515 ;
 
-    /*red pallet*/
-
+    /*notification pallet*/
     --negative: #E60000;
     --warning: #FFCD07;
     --sucess: #168821;

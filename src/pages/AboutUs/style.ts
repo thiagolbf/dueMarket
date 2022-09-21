@@ -5,8 +5,8 @@ export const AboutUsMain = styled.main`
     padding-top: 10px;
     text-align: center;
     width: 100%;
-    max-width: 1272px;
-    margin: 0 auto;
+    max-width: 1600px;
+    margin: 0 auto 20px;
 
     >h2{
         font-family: var(--font-inter);
@@ -31,6 +31,7 @@ export const AboutUsMain = styled.main`
         justify-content: center;
         gap: 25px;
         align-items: stretch;
+        flex-wrap: wrap;
     }
 
     @media screen and (min-width: 720px) {
