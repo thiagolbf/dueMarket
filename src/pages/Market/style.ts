@@ -34,8 +34,9 @@ export const Box = styled.div`
   align-items: center;
   justify-content: center;
 
-  > h2 {
+  h2 {
     display: none;
+
     font-family: var(--font-noto-sans);
     font-size: 1.125rem;
     color: var(--grey-900);
@@ -69,6 +70,7 @@ export const SearchBox = styled.div`
 
   @media (min-width: 720px) {
     width: 350px;
+    height: 76px;
     gap: 20px;
   }
 

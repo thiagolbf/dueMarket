@@ -23,22 +23,21 @@ export const ListaDeCategoria = ({
   const { filterProductsByCategory } = useContext(MarketContext);
 
   const categoryList = [
-    "Confeitaria",
-    "Enlatados",
-    "Congelados",
-    "Frios",
+    "açougue",
     "bebidas",
     "bebidas alcoólicas",
-    "massas",
-    "higiene pessoal",
-    "material de limpeza",
     "biscoiteria",
-    "açougue",
-    "laticinios",
-    "temperos e condimentos",
+    "confeitaria",
+    "congelados",
     "doces",
-    "salgadinho/snacks",
+    "enlatados",
+    "frios",
+    "higiene pessoal",
+    "laticinios",
+    "massas",
+    "material de limpeza",
     "petshop",
+    "temperos e condimentos",
   ];
 
   return (

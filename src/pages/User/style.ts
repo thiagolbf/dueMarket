@@ -10,6 +10,7 @@ export const UserMain = styled.main`
       display: none;
       font-weight: bold;
       font-size: 18px;
+      font-family: var(--font-noto-sans);
     }
     > div {
       display: flex;
