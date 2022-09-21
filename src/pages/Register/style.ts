@@ -1,4 +1,16 @@
-import styled from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
+
+export const GlobalStyle = createGlobalStyle`
+
+body{
+  background: url("https://cdn.pixabay.com/photo/2016/10/17/14/31/background-1747777_1280.jpg");
+  background-repeat: no-repeat;
+  background-size: 100% 100vh;
+  background-attachment: fixed;
+}
+
+
+`;
 
 export const Container = styled.div`
   width: 100%;
@@ -8,10 +20,7 @@ export const Container = styled.div`
 export const BackgroundContainer = styled.div`
   width: 100%;
   height: 100%;
-  background: url("https://cdn.pixabay.com/photo/2016/10/17/14/31/background-1747777_1280.jpg");
-  background-repeat: no-repeat;
-  background-size: 100% 100vh;
-  background-attachment: fixed;
+
   display: flex;
 
   align-items: center;

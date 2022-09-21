@@ -42,7 +42,7 @@ export const UserPage = () => {
       <HeaderComponent />
       <UserMain>
         <div>
-          <p>Lorem ipsum dolor sit amet.</p>
+          <p>Mercados conscientes e consumidores atentos</p>
           <div>
             {user.type === "mercado" && (
               <>

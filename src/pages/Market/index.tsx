@@ -19,9 +19,10 @@ import { CupomList } from "../../components/CupomList";
 import { UsersContext } from "../../providers/Users";
 import { ListaDeCategoria } from "../../components/ListaDeCategoria";
 import { MarketContext } from "../../providers/Market";
+import userEvent from "@testing-library/user-event";
 
 export const MarketPage = () => {
-  const { token } = useContext(UsersContext);
+  const { token, user } = useContext(UsersContext);
 
   const { getMarket, filterProducts, market, productsMarket } =
     useContext(MarketContext);
@@ -47,7 +48,7 @@ export const MarketPage = () => {
       <HeaderComponent />
 
       <Box>
-        <h2>Lorem ipsum dolor sit amet.</h2>
+        <h2>Mercados conscientes e consumidores atentos</h2>
 
         <SearchBox>
           <InputSearch
@@ -106,6 +107,7 @@ export const MarketPage = () => {
                   type={value.category}
                   previusValue={value.oldvalue}
                   newValue={value.newvalue}
+                  userType={user.type === "cliente" ? "cliente" : undefined}
                 />
               );
             })}

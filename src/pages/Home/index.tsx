@@ -58,7 +58,7 @@ export const HomePage = () => {
       <HeaderComponent />
 
       <HeaderBox>
-        <p>Lorem ipsum dolor sit amet</p>
+        <p>Mercados conscientes e consumidores atentos</p>
       </HeaderBox>
 
       <Container>
