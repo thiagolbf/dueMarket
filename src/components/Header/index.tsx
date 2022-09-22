@@ -6,20 +6,20 @@ import { HeaderFix, Header, Mobile, Nav } from "./style";
 export const HeaderComponent = () => {
   const [navMobile, setNavMobile] = useState(true);
   const nav = useNavigate()
-  const { token, logout } = useContext(UsersContext)
+  const { token, logout, user } = useContext(UsersContext)
   const isLogged = !!token
 
   return (
     <>
       <HeaderFix />
-      <Header>
+      <Header >
         <h1 onClick={()=>nav('/')}>dueMarket</h1>
         <Mobile onClick={() => setNavMobile(!navMobile)} active={navMobile}>
           <span />
           <span />
           <span />
         </Mobile>
-        <Nav active={navMobile}>
+        <Nav active={navMobile} logged={!!user.cep}>
           <div>
             {isLogged ? <>
               <button onClick={()=>nav('/user')}>Usuário</button>
