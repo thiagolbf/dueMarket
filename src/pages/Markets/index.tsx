@@ -50,7 +50,7 @@ export const MarketsPage = () => {
       <HeaderComponent />
 
       <Box>
-        <p>Lorem ipsum dolor sit amet</p>
+        <p>Mercados conscientes e consumidores atentos</p>
         <InputSearch
           type="text"
           placeholder="Digite seu CEP"

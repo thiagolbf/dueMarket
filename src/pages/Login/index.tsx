@@ -51,9 +51,10 @@ export const LoginPage = () => {
         <TextContainer>
           <h1>dueMarket</h1>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-            vestibulum, libero venenatis cursus vestibulum, felis quam imperdiet
-            odio, quis consectetur quam risus ac urna. Aenean.
+            O Aplicativo voltado para mercados conscientes e consumidores
+            atentos Os consumidores monitoram seus produtos para promoções
+            especiais Os mercados terão mais uma via de acesso à diminuição de
+            desperdício
           </p>
         </TextContainer>
         <FormContainer>
@@ -75,14 +76,15 @@ export const LoginPage = () => {
               error={!!errors.password}
             />
             <span>{errors.password?.message}</span>
-            <Button type="submit" blueForm>
-              Entrar
-            </Button>
+            <Button type="submit">Entrar</Button>
           </Form>
           <FooterBox>
             <p>Não tem cadastro?</p>
             <Button onClick={() => navigate("/register")} lightGreyForm>
               Cadastre-se
+            </Button>
+            <Button onClick={() => navigate("/")} blueForm>
+              Voltar para Home
             </Button>
           </FooterBox>
         </FormContainer>

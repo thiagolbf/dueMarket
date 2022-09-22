@@ -9,7 +9,6 @@ import {
 import { dueMarketApi } from "../../services";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-
 interface UsersProviderData {
   postUser: (data: UserSubmitData) => void;
   postUserMarket: (data: UserSubmitData) => void;
@@ -25,8 +24,8 @@ interface UsersProviderData {
   userId: number;
   patchUser: (data: NewUserData, token: string, userId: number) => void;
   logout: () => void;
+  isLoading: boolean;
 }
-
 interface UserSubmitData {
   email: string;
   password: string;
@@ -42,16 +41,13 @@ interface UserSubmitData {
   image?: string;
   id?: number;
 }
-
 interface UsersProviderProps {
   children: ReactNode;
 }
-
 interface SignInData {
   email: string;
   password: string;
 }
-
 interface MarketProducts {
   email: string;
   password: string;
@@ -67,7 +63,6 @@ interface MarketProducts {
   id: number;
   products: Products[];
 }
-
 interface Products {
   title: string;
   category: string;
@@ -78,7 +73,6 @@ interface Products {
   userId: number;
   id: number;
 }
-
 interface NewUserData {
   name: string;
   email: string;
@@ -91,14 +85,11 @@ interface NewUserData {
   cnpj?: string;
   image?: string;
 }
-
 export const UsersContext = createContext<UsersProviderData>(
   {} as UsersProviderData
 );
-
 export const UsersProvider = ({ children }: UsersProviderProps) => {
   const navigate = useNavigate();
-
   const [nearProducts, setNearProducts] = useState<MarketProducts[]>(
     [] as MarketProducts[]
   );
@@ -112,25 +103,24 @@ export const UsersProvider = ({ children }: UsersProviderProps) => {
   const [token, setToken] = useState<string>(
     localStorage.getItem("@dueMarket:token") || ""
   );
-
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const getUser = (id: number) => {
     dueMarketApi.get(`users/${id}`).then((res) => {
       setUser(res.data);
     });
   };
-
   const getUserMarket = () => {
     dueMarketApi.get("users?type=mercado").then((res) => {
       setMarkets(res.data);
     });
   };
-
   useEffect(() => {
     if (token !== "") {
       getUser(Number(userId));
+    } else {
+      setIsLoading(false);
     }
   }, [userId, token]);
-
   const patchUser = (data: NewUserData, token: string, userId: number) => {
     dueMarketApi
       .patch(`users/${userId}`, data, {
@@ -144,7 +134,6 @@ export const UsersProvider = ({ children }: UsersProviderProps) => {
       })
       .catch((err) => toast.error("Não foi possivel atualizar o seu usuario"));
   };
-
   const logout = () => {
     localStorage.clear();
     setUserId(0);
@@ -152,7 +141,6 @@ export const UsersProvider = ({ children }: UsersProviderProps) => {
     setUser({} as UserSubmitData);
     navigate("/");
   };
-
   const postUserMarket = (data: UserSubmitData) => {
     dueMarketApi
       .post("users", data)
@@ -165,7 +153,6 @@ export const UsersProvider = ({ children }: UsersProviderProps) => {
         toast.error("Erro ao criar Conta, tentar outro email!");
       });
   };
-
   const postUser = (data: UserSubmitData) => {
     dueMarketApi
       .post("users", data)
@@ -177,7 +164,6 @@ export const UsersProvider = ({ children }: UsersProviderProps) => {
         toast.error("Erro ao criar Conta, tentar outro email!");
       });
   };
-
   const postLogin = (data: SignInData) => {
     dueMarketApi
       .post("login", data)
@@ -190,7 +176,6 @@ export const UsersProvider = ({ children }: UsersProviderProps) => {
         setUserId(res.data.user.id);
         setToken(res.data.accessToken);
         toast.success("Login feito com sucesso!");
-
         if (res.data.user.type === "cliente") {
           navigate("/");
         } else {
@@ -201,16 +186,18 @@ export const UsersProvider = ({ children }: UsersProviderProps) => {
         toast.error("Erro ao fazer login, tentar outro email!");
         console.log(res);
       });
-
     //FUNÇÃO PARA VERIFICAR OS MERCADOS;
   };
   const getNearProducts = (cidade: string) => {
+    setIsLoading(true);
     dueMarketApi
       .get(`/users?_embed=products&type=mercado&city=${cidade}`)
-      .then((res) => setNearProducts(res.data))
+      .then((res) => {
+        setNearProducts(res.data);
+        setIsLoading(false);
+      })
       .catch((error) => console.log(error));
   };
-
   return (
     <UsersContext.Provider
       value={{
@@ -228,6 +215,7 @@ export const UsersProvider = ({ children }: UsersProviderProps) => {
         userId,
         patchUser,
         logout,
+        isLoading,
       }}
     >
       {children}

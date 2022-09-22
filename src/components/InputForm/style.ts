@@ -45,20 +45,6 @@ export const InputFormStyle = styled.div<InputFormStyleProps>`
     transition: all 0.3s;
     color: var(--grey-300);
     font-size: 16px;
-  }
-
-  label {
-    border-radius: 5px;
-    background-color: inherit;
-    padding: 3px 5px;
-    top: 50%;
-    left: 16px;
-    position: absolute;
-    z-index: 10;
-    transform: translate(0, -50%);
-    transition: all 0.3s;
-    color: var(--grey-300);
-    font-size: 16px;
     cursor: text;
   }
 `;

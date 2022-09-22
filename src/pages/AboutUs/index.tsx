@@ -8,6 +8,7 @@ import vanagila from '../../assets/vanagila.png'
 import { CardDevsComponent } from "../../components/CardDevs";
 
 export const AboutUsPage = () => {
+
   const devs = [{
     id: 1,
     img: gui,
@@ -28,7 +29,7 @@ export const AboutUsPage = () => {
     id: 3,
     img: vanagila,
     name: 'Vanágila Xavier Rodrigues',
-    description: 'Carreira desenvolvida na área de Tecnologia da Informação, com ampla experiência em projetos Front-End, trabalho em equipe, versionamento de codigo e sempre tenta ajudar seus colegas de equipe.',
+    description: 'Desenvolvedora Front-End',
     linkedin: 'https://www.linkedin.com/in/vanagila/',
     github: 'https://github.com/vanagila'
   },
@@ -36,7 +37,7 @@ export const AboutUsPage = () => {
     id: 4,
     img: thiago,
     name: 'Thiago Barcelos',
-    description: 'Carreira desenvolvida na área de Tecnologia da Informação, com ampla experiência em projetos Front-End, trabalho em equipe, versionamento de codigo e sempre tenta ajudar seus colegas de equipe.',
+    description: 'Formado em Engenharia Mecatrônica com mais de 15 anos de experiência no mercado de automação, desenvolvendo projetos elétricos, programação de CLP e gerenciamento de projetos. Neste momento em transição de carreira para a área de desenvolvimento web',
     linkedin: 'http://www.linkedin.com/in/thiagolbf',
     github: 'https://github.com/thiagolbf'
   },
@@ -72,4 +73,5 @@ export const AboutUsPage = () => {
       </div>
     </AboutUsMain>
   </>;
+
 };

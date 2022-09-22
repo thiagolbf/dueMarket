@@ -11,8 +11,9 @@ export const Form = styled.form`
 
   > span {
     margin-bottom: 15px;
-    color: var(--negative);
+    color: var(--grey-0);
     height: 15px;
+    padding-left: 5px;
     width: 100%;
   }
 `;

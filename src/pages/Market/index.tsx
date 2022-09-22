@@ -15,14 +15,14 @@ import { InputSearch } from "../../components/InputSearch";
 import { CardProductComponent } from "../../components/CardProducts";
 import { useParams } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
-import { dueMarketApi } from "../../services";
 import { CupomList } from "../../components/CupomList";
 import { UsersContext } from "../../providers/Users";
 import { ListaDeCategoria } from "../../components/ListaDeCategoria";
 import { MarketContext } from "../../providers/Market";
+import userEvent from "@testing-library/user-event";
 
 export const MarketPage = () => {
-  const { token } = useContext(UsersContext);
+  const { token, user } = useContext(UsersContext);
 
   const { getMarket, filterProducts, market, productsMarket } =
     useContext(MarketContext);
@@ -40,12 +40,15 @@ export const MarketPage = () => {
     }
   }, []);
 
+  const [valueCategory, setValueCategory] = useState<string>("");
+  const [listCat, setListCat] = useState(true);
+
   return (
     <Container>
       <HeaderComponent />
 
       <Box>
-        <h2>Lorem ipsum dolor sit amet.</h2>
+        <h2>Mercados conscientes e consumidores atentos</h2>
 
         <SearchBox>
           <InputSearch
@@ -59,10 +62,17 @@ export const MarketPage = () => {
             }}
             marketPage={true}
           />
-          <Button>
-            <FaBars />
-            Todos
-          </Button>
+          <div>
+            <Button onClick={() => setListCat(!listCat)}>
+              <FaBars />
+              {valueCategory === "" ? "Todos" : valueCategory}
+            </Button>
+            <ListaDeCategoria
+              listCat={listCat}
+              setValueCategory={setValueCategory}
+              setListCat={setListCat}
+            />
+          </div>
         </SearchBox>
       </Box>
 
@@ -82,7 +92,6 @@ export const MarketPage = () => {
           </MarketDataBox>
 
           {token !== "" && <CupomList id={marketId} />}
-          <ListaDeCategoria />
         </Section>
 
         <SectionProducts>
@@ -98,6 +107,7 @@ export const MarketPage = () => {
                   type={value.category}
                   previusValue={value.oldvalue}
                   newValue={value.newvalue}
+                  userType={user.type === "cliente" ? "cliente" : undefined}
                 />
               );
             })}

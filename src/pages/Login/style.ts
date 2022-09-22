@@ -33,7 +33,7 @@ export const GreenBox = styled.div`
 
 export const FormContainer = styled.div`
   width: 270px;
-  height: 400px;
+  height: 450px;
   margin-top: 20px;
   display: flex;
   justify-content: center;
@@ -64,8 +64,9 @@ export const Form = styled.form`
 
   > span {
     margin-bottom: 15px;
-    color: var(--negative);
+    color: var(--grey-0);
     height: 15px;
+    padding-left: 5px;
     width: 100%;
   }
 `;
@@ -78,7 +79,7 @@ export const FooterBox = styled.div`
   justify-content: space-around;
   flex-direction: column;
   padding: 0 30px;
-
+  gap: 10px;
   > p {
     color: var(--grey-0);
     font-family: var(--font-noto-sans);

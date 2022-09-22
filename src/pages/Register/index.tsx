@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { FormMarket } from "../../components/FormMarket";
 import { FormUser } from "../../components/FormUser";
+import { GlobalStyle } from "./style";
 
 export const RegisterPage = () => {
   const navigate = useNavigate();
@@ -19,6 +20,7 @@ export const RegisterPage = () => {
 
   return (
     <Container>
+      <GlobalStyle />
       <BackgroundContainer>
         <TextContainer>
           <h1>dueMarket</h1>
