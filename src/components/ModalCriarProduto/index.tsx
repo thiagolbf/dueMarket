@@ -144,7 +144,7 @@ export const ModalCriarProduto = ({
             type="text"
             {...register("image")}
             error={!!errors.image}
-            label="Imagem"
+            label="Imagem (link)"
           />
           <Button type="submit">Cadastrar</Button>
         </form>

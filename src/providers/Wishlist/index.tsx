@@ -42,9 +42,13 @@ export const WhishListProvider = ({ children }: WishListProviderProps) => {
     token: string,
     data: WhishList
   ) => {
-    const whishlist = { ...data, userId };
+    const newWhishlist = { ...data, userId };
+    if(whishlist.filter((product)=>product.title === newWhishlist.title && product.image === newWhishlist.image).length > 0){
+      toast.error('Produto já adicionado')
+      return ''
+    }
     dueMarketApi
-      .post(`/whishlist`, whishlist, {
+      .post(`/whishlist`, newWhishlist, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => {

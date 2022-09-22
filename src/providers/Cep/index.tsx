@@ -37,22 +37,6 @@ export const CepProvider = ({ children }: CepProviderProps) => {
 
   const getCep = async (cep: string) => {
     const cepData = await viaCepApi.get(`${cep}/json`);
-
-    // viaCepApi
-    //   .get(`${cep}/json`)
-    //   .then((res) => {
-    //     // setState(res.data);
-    //     // setCity(res.data.localidade);
-    //     // setDistrict(res.data.bairro);
-    //     // setStreet(res.data.logradouro);
-    //     // setValidCep(true);
-
-    //     cepData = res.data;
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //     setValidCep(false);
-    //   });
     return cepData.data;
   };
 

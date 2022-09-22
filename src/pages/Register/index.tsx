@@ -25,9 +25,9 @@ export const RegisterPage = () => {
         <TextContainer>
           <h1>dueMarket</h1>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-            vestibulum, libero venenatis cursus vestibulum, felis quam imperdiet
-            odio, quis consectetur quam risus ac urna. Aenean.
+          O Aplicativo voltado para mercados conscientes e consumidores atentos
+          Os consumidores monitoram seus produtos para promoções especiais
+          Os mercados terão mais uma via de acesso à diminuição de desperdício
           </p>
         </TextContainer>
         <FormContainer>
@@ -35,7 +35,7 @@ export const RegisterPage = () => {
             <div>
               <button onClick={() => navigate("/login")}>Voltar</button>
               <button onClick={() => setUserType(!userType)}>
-                Trocar formulario
+                {!userType ? 'Trocar para CNPJ' : "Trocar para CPF"}
               </button>
             </div>
 

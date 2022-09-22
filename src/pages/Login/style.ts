@@ -13,6 +13,7 @@ export const BackgroundContainer = styled.div`
   background-size: 100% 100vh;
   background-attachment: fixed;
   display: flex;
+  align-items: center;
 
   align-items: center;
   flex-direction: column;
@@ -32,7 +33,7 @@ export const GreenBox = styled.div`
 `;
 
 export const FormContainer = styled.div`
-  width: 270px;
+  width: 300px;
   height: 450px;
   margin-top: 20px;
   display: flex;
@@ -43,8 +44,7 @@ export const FormContainer = styled.div`
   border-radius: 8px;
   z-index: 500;
 
-  @media (max-width: 1079px) {
-    width: 340px;
+  @media (min-width: 1079px) {
     margin-top: 100px;
   }
 

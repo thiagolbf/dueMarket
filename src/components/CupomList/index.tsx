@@ -36,10 +36,10 @@ export const CupomList = ({ id }: CupomListData) => {
   window.addEventListener("click", handleClickOutside);
 
   return (
-    <Container>
+    <Container open={open}>
       <button onClick={() => handleClick(open)} ref={dropDownRef}>
         Cupons
-        {open ? <FiChevronUp size={20} /> : <FiChevronDown size={20} />}
+        <FiChevronDown size={20} />
       </button>
 
       <CupomContainer open={open}>
