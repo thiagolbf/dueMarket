@@ -1,7 +1,6 @@
 import { createContext, ReactNode, useEffect, useState } from "react";
 import { dueMarketApi } from "../../services/index";
 import { toast } from "react-toastify";
-
 interface WhishListProviderData {
   whishlist: WhishList[];
   getWhishListByUser: (userId: number, token: string) => void;
@@ -12,11 +11,9 @@ interface WhishListProviderData {
     userId: number
   ) => void;
 }
-
 interface WishListProviderProps {
   children: ReactNode;
 }
-
 interface WhishList {
   title: string;
   category: string;
@@ -27,14 +24,11 @@ interface WhishList {
   userId?: number;
   id?: number;
 }
-
 export const WhishListContext = createContext<WhishListProviderData>(
   {} as WhishListProviderData
 );
-
 export const WhishListProvider = ({ children }: WishListProviderProps) => {
   const [whishlist, setWishList] = useState<WhishList[]>([] as WhishList[]);
-
   const getWhishListByUser = (userId: number, token: string) => {
     dueMarketApi
       .get(`/whishlist?userId=${userId}`, {
@@ -43,7 +37,6 @@ export const WhishListProvider = ({ children }: WishListProviderProps) => {
       .then((res) => setWishList(res.data))
       .catch((err) => console.log(err));
   };
-
   const addProductWhishList = (
     userId: number,
     token: string,
@@ -63,7 +56,6 @@ export const WhishListProvider = ({ children }: WishListProviderProps) => {
         console.log(err);
       });
   };
-
   const deletProductWhishlist = (
     id: number | undefined,
     token: string,
@@ -74,15 +66,17 @@ export const WhishListProvider = ({ children }: WishListProviderProps) => {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => {
-        console.log(id);
-        getWhishListByUser(userId, token);
+        if (whishlist.length > 1) {
+          getWhishListByUser(userId, token);
+        } else {
+          setWishList([]);
+        }
         toast.success("Produto deletado da lista de desejos");
       })
       .catch((err) => {
         toast.error("Não foi possível deletar o produto da lista de desejos");
       });
   };
-
   return (
     <WhishListContext.Provider
       value={{
