@@ -51,10 +51,9 @@ export const LoginPage = () => {
         <TextContainer>
           <h1>dueMarket</h1>
           <p>
-            O Aplicativo voltado para mercados conscientes e consumidores
-            atentos Os consumidores monitoram seus produtos para promoções
-            especiais Os mercados terão mais uma via de acesso à diminuição de
-            desperdício
+            Aplicativo voltado para mercados conscientes e consumidores atentos.
+            Os consumidores monitoram seus produtos para promoções especiais. Os
+            mercados terão mais uma via de acesso à diminuição de desperdício.
           </p>
         </TextContainer>
         <FormContainer>
