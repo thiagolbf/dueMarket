@@ -57,7 +57,7 @@ export const Box = styled.div`
 
 export const SearchBox = styled.div`
   width: 300px;
-  height: 100%;
+  height: 110%;
   gap: 5px;
   display: flex;
   align-items: center;
@@ -66,10 +66,11 @@ export const SearchBox = styled.div`
 
   > div {
     position: relative;
+    width: 95%;
   }
 
   @media (min-width: 720px) {
-    width: 350px;
+    width: 450px;
     height: 76px;
     gap: 20px;
   }
@@ -94,17 +95,6 @@ export const SectionProducts = styled.div`
 `;
 
 export const ProductList = styled.div`
-  /* width: 100%;
-  display: flex;
-  align-items: stretch;
-  justify-content: center;
-  gap: 30px;
-  overflow-x: scroll;
-
-  @media (min-width: 720px) {
-    overflow-x: visible;
-    padding: 5px;
-  } */
   display: flex;
   gap: 30px;
   width: 95vw;
@@ -141,13 +131,14 @@ export const Section = styled.div`
   }
 
   p {
-    width: 40%;
+    width: 95%;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
-    font-size: 16px;
+    font-size: 0.875rem;
     font-weight: 600;
+    font-family: var(--font-noto-sans);
   }
 
   img {
@@ -158,7 +149,6 @@ export const Section = styled.div`
   @media (min-width: 720px) {
     flex-direction: row;
     padding: 10px 0;
-    /* align-items: start; */
   }
 `;
 
@@ -172,6 +162,7 @@ export const MarketDataBox = styled.div`
   padding: 5px;
   border-radius: 8px;
   filter: drop-shadow(0 4px 4px var(--drop-shadow));
+
   @media (min-width: 480px) {
     flex-direction: row;
     height: 200px;

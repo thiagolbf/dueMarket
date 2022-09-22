@@ -18,6 +18,7 @@ export const RegisterData = styled.div<RegisterProps>`
   padding: 20px 10px;
   background-color: var(--grey-100);
   transition: all 0.5s;
+  font-family: var(--font-inter);
   > div:nth-child(1) {
     display: flex;
     justify-content: space-between;
@@ -26,6 +27,7 @@ export const RegisterData = styled.div<RegisterProps>`
     h2 {
       font-size: 1.5rem;
       font-family: bold;
+      font-family: var(--font-inter);
     }
     button {
       height: 24px;

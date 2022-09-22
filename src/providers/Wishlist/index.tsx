@@ -6,7 +6,11 @@ interface WhishListProviderData {
   whishlist: WhishList[];
   getWhishListByUser: (userId: number, token: string) => void;
   addProductWhishList: (userId: number, token: string, data: WhishList) => void;
-  deletProductWhishlist: (id: number | undefined, token: string, userId: number) => void;
+  deletProductWhishlist: (
+    id: number | undefined,
+    token: string,
+    userId: number
+  ) => void;
 }
 
 interface WishListProviderProps {
@@ -46,14 +50,13 @@ export const WhishListProvider = ({ children }: WishListProviderProps) => {
     data: WhishList
   ) => {
     const whishlist = { ...data, userId };
-    console.log(whishlist, token)
     dueMarketApi
       .post(`/whishlist`, whishlist, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => {
         toast.success("Adicionado produto a lista de desejos");
-        getWhishListByUser(userId, token)
+        getWhishListByUser(userId, token);
       })
       .catch((err) => {
         toast.error("Não foi possível adicionar produto a lista de desejos");
@@ -61,18 +64,22 @@ export const WhishListProvider = ({ children }: WishListProviderProps) => {
       });
   };
 
-  const deletProductWhishlist = (id: number | undefined, token: string, userId: number) => {
+  const deletProductWhishlist = (
+    id: number | undefined,
+    token: string,
+    userId: number
+  ) => {
     dueMarketApi
       .delete(`/whishlist/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => {
-        getWhishListByUser(userId, token)
+        console.log(id);
+        getWhishListByUser(userId, token);
         toast.success("Produto deletado da lista de desejos");
       })
       .catch((err) => {
         toast.error("Não foi possível deletar o produto da lista de desejos");
-        console.log(err);
       });
   };
 

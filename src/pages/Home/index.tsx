@@ -10,7 +10,6 @@ import { InputSearch } from "../../components/InputSearch";
 import { CardProductComponent } from "../../components/CardProducts";
 import { UsersContext } from "../../providers/Users";
 import { CepContext } from "../../providers/Cep";
-
 import {
   useContext,
   KeyboardEvent,
@@ -23,17 +22,13 @@ import { toast } from "react-toastify";
 import { LinearProgress, Box } from "@mui/material";
 import { teal } from "@mui/material/colors";
 import { createTheme } from "@mui/material/styles";
-
 export const HomePage = () => {
   const { nearProducts, user, getNearProducts, isLoading } =
     useContext(UsersContext);
   const { getCep } = useContext(CepContext);
-
   const [inputCep, setInputCep] = useState<string>("");
-
   const checkCep = async (cep: string) => {
     const cepUser = await getCep(cep);
-
     if (cepUser.localidade) {
       getNearProducts(cepUser.localidade);
       console.log(cepUser.cep);
@@ -42,7 +37,6 @@ export const HomePage = () => {
       setInputCep("");
     }
   };
-
   useEffect(() => {
     if (user.cep) {
       const get = async () => {
@@ -52,15 +46,12 @@ export const HomePage = () => {
       get();
     }
   }, [user]);
-
   return (
     <>
       <HeaderComponent />
-
       <HeaderBox>
         <p>Mercados conscientes e consumidores atentos</p>
       </HeaderBox>
-
       <Container>
         <p>Use seu CEP para visualizar mercados e produtos perto de você</p>
         <InputSearch
@@ -76,10 +67,8 @@ export const HomePage = () => {
           inputCep={inputCep}
           checkCep={checkCep}
         />
-
         <span>*apenas números</span>
       </Container>
-
       <MarketContent>
         {isLoading ? (
           <Box>

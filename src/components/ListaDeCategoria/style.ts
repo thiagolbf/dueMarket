@@ -22,7 +22,7 @@ export const Nav = styled.nav<MobileProps>`
   }
   position: absolute;
   top: 50px;
-  right: -100%;
+  /* right: -100%; */
   transition: all 0.5s;
   padding-top: ${(props) => (props.active ? 0 : "16px")};
   border-radius: 5px;

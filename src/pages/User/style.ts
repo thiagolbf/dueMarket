@@ -5,7 +5,7 @@ export const UserMain = styled.main`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 25px 10px;
+    padding: 25px 30px;
     p {
       display: none;
       font-weight: bold;
@@ -43,10 +43,10 @@ export const UserMain = styled.main`
     flex-direction: column;
     padding: 10px;
     > h2 {
-      font-size: 20px;
       color: #0d0d0d;
       text-align: center;
       margin-bottom: 10px;
+      font-family: var(--font-inter);
     }
     > div:nth-child(2) {
       display: flex;

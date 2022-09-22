@@ -38,7 +38,7 @@ const SelectBase: ForwardRefRenderFunction<
         <option value="Massas">Massas</option>
         <option value="Material de limpeza">Material de limpeza</option>
         <option value="Petshop">Petshop</option>
-        <option value="Salgadinho/Snacks">Salgadinho/Snacks</option>
+        <option value="Salgadinhos">Salgadinho</option>
         <option value="Temperos e Condimentos">Temperos e Condimentos</option>
       </select>
       <label htmlFor={label}>{label}</label>
