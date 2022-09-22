@@ -1,6 +1,10 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
+interface ContainerProps {
+  open: boolean
+}
+
+export const Container = styled.div<ContainerProps>`
   width: 100%;
   max-width: 320px;
   height: max-content;
@@ -26,6 +30,8 @@ export const Container = styled.div`
 
     svg {
       color: var(--grey-900);
+      transition: all 0.5s;
+      transform: ${({open})=>open ? 'rotate(540deg)' : ''};
     }
   }
 `;

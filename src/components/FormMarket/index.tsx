@@ -112,7 +112,7 @@ export const FormMarket = () => {
       <InputForm
         type="text"
         {...register("img")}
-        label="Imagem do perfil"
+        label="Imagem do perfil (link)"
         error={!!errors.img}
       />
       <span>{errors.img?.message}</span>

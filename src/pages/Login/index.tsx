@@ -75,7 +75,7 @@ export const LoginPage = () => {
               error={!!errors.password}
             />
             <span>{errors.password?.message}</span>
-            <Button type="submit">Entrar</Button>
+            <Button blueForm type="submit">Entrar</Button>
           </Form>
           <FooterBox>
             <p>Não tem cadastro?</p>

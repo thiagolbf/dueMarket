@@ -110,7 +110,7 @@ export const HeaderBox = styled.div`
     align-items: center;
     justify-content: space-between;
     button {
-      border-radius: 10px;
+      border-radius: 5px;
       color: var(--blue-500);
       background-color: var(--grey-50);
       font-weight: 500;

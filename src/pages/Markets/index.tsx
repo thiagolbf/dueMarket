@@ -29,8 +29,11 @@ export const MarketsPage = () => {
   );
 
   const checkCep = async (cep: string) => {
+    if(cep.length !== 8){
+      toast.error('O CEP deve ter 8 caracteres')
+      return ''
+    }
     const cepUser = await getCep(cep);
-
     if (cepUser.localidade) {
       getNearProducts(cepUser.localidade);
     } else {

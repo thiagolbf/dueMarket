@@ -20,20 +20,21 @@ import {
 import { FaArrowRight } from "react-icons/fa";
 import { toast } from "react-toastify";
 import { LinearProgress, Box } from "@mui/material";
-import { teal } from "@mui/material/colors";
-import { createTheme } from "@mui/material/styles";
 export const HomePage = () => {
   const { nearProducts, user, getNearProducts, isLoading } =
     useContext(UsersContext);
   const { getCep } = useContext(CepContext);
   const [inputCep, setInputCep] = useState<string>("");
   const checkCep = async (cep: string) => {
+    if(cep.length !== 8){
+      toast.error('O CEP deve ter 8 caracteres')
+      return ''
+    }
     const cepUser = await getCep(cep);
     if (cepUser.localidade) {
       getNearProducts(cepUser.localidade);
-      console.log(cepUser.cep);
     } else {
-      toast.error("Não existem mercardos cadastrados com esse CEP");
+      toast.error("CEP Inválido");
       setInputCep("");
     }
   };

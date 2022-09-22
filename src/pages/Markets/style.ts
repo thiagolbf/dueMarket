@@ -39,7 +39,7 @@ export const MarketCard = styled.div`
 
 export const Box = styled.div`
   width: 100%;
-  height: 76px;
+  height: 100px;
   border-bottom: 1px solid var(--grey-900);
   display: flex;
   justify-content: space-between;
@@ -50,6 +50,7 @@ export const Box = styled.div`
     font-family: var(--font-noto-sans);
     font-size: 1.125rem;
     font-weight: 600;
+    text-align: center;
     color: var(--grey-900);
   }
 
@@ -59,5 +60,9 @@ export const Box = styled.div`
     > div {
       margin-bottom: 5px;
     }
+  }
+
+  @media (min-width: 400px) {
+    height: 76px;
   }
 `;

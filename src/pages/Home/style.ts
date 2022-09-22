@@ -15,7 +15,9 @@ export const HeaderBox = styled.div`
     font-size: 1.125rem;
     font-weight: 600;
     color: var(--grey-900);
+    text-align: center;
   }
+  
 `;
 
 export const Container = styled.div`
