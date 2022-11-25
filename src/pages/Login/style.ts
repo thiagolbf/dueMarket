@@ -44,9 +44,9 @@ export const FormContainer = styled.div`
   border-radius: 8px;
   z-index: 500;
 
-  @media (min-width: 1079px) {
+  /* @media (min-width: 1079px) {
     margin-top: 100px;
-  }
+  } */
 
   @media (min-width: 1080px) {
     width: 410px;
